@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>RuS.Domain</RootNamespace>
+    <AssemblyName>RuS.Domain</AssemblyName>
+  </PropertyGroup>
+
+</Project>
