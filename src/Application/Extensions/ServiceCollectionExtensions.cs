@@ -11,6 +11,7 @@ using RuS.Application.Features.ExtendedAttributes.Queries.GetAllByEntityId;
 using RuS.Application.Features.ExtendedAttributes.Queries.GetById;
 using RuS.Domain.Contracts;
 using RuS.Shared.Wrapper;
+using RuS.Application.Behaviours;
 
 namespace RuS.Application.Extensions
 {
@@ -21,7 +22,7 @@ namespace RuS.Application.Extensions
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             //services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         }
 
         public static void AddExtendedAttributesHandlers(this IServiceCollection services)
