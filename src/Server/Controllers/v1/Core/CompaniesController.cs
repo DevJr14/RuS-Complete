@@ -24,7 +24,7 @@ namespace RuS.Server.Controllers.v1.Core
         /// </summary>
         /// </param>
         /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Brands.Create)]
+        [Authorize(Policy = Permissions.Companies.Create)]
         [HttpPost]
         public async Task<IActionResult> Post(AddEditCompanyCommand command)
         {
@@ -39,7 +39,7 @@ namespace RuS.Server.Controllers.v1.Core
         /// <param name="searchString"></param>
         /// <param name="orderBy"></param>
         /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Products.View)]
+        [Authorize(Policy = Permissions.Companies.View)]
         [HttpGet]
         public async Task<IActionResult> GetAll(int pageNumber, int pageSize, string searchString, string orderBy = null)
         {
@@ -52,7 +52,7 @@ namespace RuS.Server.Controllers.v1.Core
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Status 200 OK response</returns>
-        [Authorize(Policy = Permissions.Products.Delete)]
+        [Authorize(Policy = Permissions.Companies.Delete)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -64,7 +64,7 @@ namespace RuS.Server.Controllers.v1.Core
         /// </summary>
         /// <param name="searchString"></param>
         /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Products.Export)]
+        [Authorize(Policy = Permissions.Companies.Export)]
         [HttpGet("export")]
         public async Task<IActionResult> Export(string searchString = "")
         {
