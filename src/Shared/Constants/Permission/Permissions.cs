@@ -32,6 +32,7 @@ namespace RuS.Shared.Constants.Permission
             public const string Create = "Permissions.Companies.Create";
             public const string Edit = "Permissions.Companies.Edit";
             public const string Delete = "Permissions.Companies.Delete";
+            public const string Export = "Permissions.Companies.Export";
             public const string Search = "Permissions.Companies.Search";
         }
 
