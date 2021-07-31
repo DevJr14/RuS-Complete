@@ -410,6 +410,41 @@
             <param name="searchString"></param>
             <returns>Status 200 OK</returns>
         </member>
+        <member name="M:RuS.Server.Controllers.v1.Core.CompaniesController.Post(RuS.Application.Features.Companies.Commands.AddEdit.AddEditCompanyCommand)">
+            <summary>
+            Create/Update a Company
+            </summary>
+            <param name="command">
+            <summary>
+            Recieves input values
+            </summary>
+            </param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Core.CompaniesController.GetAll(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Companies
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <param name="orderBy"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Core.CompaniesController.Delete(System.Int32)">
+            <summary>
+            Delete a Company
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK response</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Core.CompaniesController.Export(System.String)">
+            <summary>
+            Search Companies and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns>Status 200 OK</returns>
+        </member>
         <member name="M:RuS.Server.Controllers.v1.DashboardController.GetDataAsync">
             <summary>
             Get Dashboard Data
