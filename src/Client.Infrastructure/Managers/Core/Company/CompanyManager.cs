@@ -30,7 +30,7 @@ namespace RuS.Client.Infrastructure.Managers.Core.Company
 
         public async Task<IResult<int>> DeleteAsync(int id)
         {
-            var response = await _httpClient.DeleteAsync($"{Routes.CompanyEndpoints.Delete}/{id}");
+            var response = await _httpClient.DeleteAsync($"{Routes.CompanyEndpoints.Delete}/{id}" );
             return await response.ToResult<int>();
         }
 
