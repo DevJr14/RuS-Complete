@@ -125,6 +125,6 @@
         _canViewChat = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Communication.Chat)).Succeeded;
         _canViewProducts = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Products.View)).Succeeded;
         _canViewBrands = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Brands.View)).Succeeded;
-        _canViewCompanies = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Comapnies.View)).Succeeded;
+        _canViewCompanies = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Companies.View)).Succeeded;
     }
 }
