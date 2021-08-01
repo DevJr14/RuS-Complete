@@ -16,5 +16,7 @@ namespace RuS.Domain.Entities.Core
         public string RegistrationNo { get; set; }
 
         public DateTime? RegistrationDate { get; set; }
+
+        public List<Site> Sites { get; set; } = new();
     }
 }
