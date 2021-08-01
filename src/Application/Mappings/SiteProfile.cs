@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RuS.Application.Features.Sites.Commands.AddEdit;
+using RuS.Application.Features.Sites.Queries.GetById;
 using RuS.Domain.Entities.Core;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace RuS.Application.Mappings
         public SiteProfile()
         {
             CreateMap<AddEditSiteCommand, Site>().ReverseMap();
+            CreateMap<GetSiteResponse, Site>().ReverseMap();
         }
     }
 }
