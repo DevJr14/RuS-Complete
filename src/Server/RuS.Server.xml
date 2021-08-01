@@ -431,6 +431,13 @@
             <param name="orderBy"></param>
             <returns>Status 200 OK</returns>
         </member>
+        <member name="M:RuS.Server.Controllers.v1.Core.CompaniesController.GetById(System.Int32)">
+            <summary>
+            Get a Company By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
         <member name="M:RuS.Server.Controllers.v1.Core.CompaniesController.Delete(System.Int32)">
             <summary>
             Delete a Company
@@ -465,6 +472,13 @@
             <param name="searchString"></param>
             <param name="orderBy"></param>
             <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Core.SitesController.GetById(System.Int32)">
+            <summary>
+            Get a Site By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
         </member>
         <member name="M:RuS.Server.Controllers.v1.Core.SitesController.Delete(System.Int32)">
             <summary>
