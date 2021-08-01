@@ -1,5 +1,6 @@
 ﻿using RuS.Application.Features.Companies.Commands.AddEdit;
 using RuS.Application.Features.Companies.Queries.GetAllPaged;
+using RuS.Application.Features.Companies.Queries.GetById;
 using RuS.Application.Requests.Core;
 using RuS.Client.Infrastructure.Extensions;
 using RuS.Shared.Wrapper;
@@ -48,6 +49,10 @@ namespace RuS.Client.Infrastructure.Managers.Core.Company
             return await response.ToResult<int>();
         }
 
-
+        public async Task<IResult<GetCompanyResponse>> GetByIdAsync(int id)
+        {
+            var response = await _httpClient.GetAsync(Routes.CompanyEndpoints.GetById(id));
+            return await response.ToResult<GetCompanyResponse>();
+        }
     }
 }

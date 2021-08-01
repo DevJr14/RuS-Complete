@@ -27,6 +27,11 @@ namespace RuS.Client.Infrastructure.Routes
             return $"{Export}?searchString={searchString}";
         }
 
+        public static string GetById(int id)
+        {
+            return $"api/v1/companies/{id}";
+        }
+
         public static string Save = "api/v1/companies";
         public static string Delete = "api/v1/companies";
         public static string Export = "api/v1/companies/export";

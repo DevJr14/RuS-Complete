@@ -1,5 +1,6 @@
 ﻿using RuS.Application.Features.Companies.Commands.AddEdit;
 using RuS.Application.Features.Companies.Queries.GetAllPaged;
+using RuS.Application.Features.Companies.Queries.GetById;
 using RuS.Application.Requests.Core;
 using RuS.Shared.Wrapper;
 using System;
@@ -19,5 +20,7 @@ namespace RuS.Client.Infrastructure.Managers.Core.Company
         Task<IResult<int>> DeleteAsync(int id);
 
         Task<IResult<string>> ExportToExcelAsync(string searchString = "");
+
+        Task<IResult<GetCompanyResponse>> GetByIdAsync(int id);
     }
 }
