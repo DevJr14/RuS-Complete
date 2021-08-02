@@ -30,7 +30,12 @@ namespace RuS.Client.Pages.Core.Company
 
         private GetCompanyResponse _company;
         private GetSiteResponse _site;
-        //private List<GetSiteResponse> _companySites;
+
+        [Parameter] public string Name { get; set; }
+        [Parameter] public string ShortTitle { get; set; }
+        [Parameter] public string RegistrationNo { get; set; }
+        [Parameter] public DateTime? RegistrationDate { get; set; }
+
         private string _searchString = "";
         private bool _dense = true;
         private bool _striped = true;
@@ -70,7 +75,10 @@ namespace RuS.Client.Pages.Core.Company
             if (response.Succeeded)
             {
                 _company = response.Data;
-                //_companySites = response.Data.Sites;
+                Name = _company.Name;
+                ShortTitle = _company.ShortTitle;
+                RegistrationNo = _company.RegistrationNo;
+                RegistrationDate = _company.RegistrationDate;
             }
             else
             {
@@ -89,7 +97,7 @@ namespace RuS.Client.Pages.Core.Company
                 _site = _company.Sites.FirstOrDefault(c => c.Id == id);
                 if (_site != null)
                 {
-                    parameters.Add(nameof(AddEditSiteModal.AddEditSiteModel), new AddEditSiteCommand
+                    parameters.Add(nameof(AddEditSiteModal.Command), new AddEditSiteCommand
                     {
                         Id = _site.Id,
                         Name = _site.Name,
@@ -97,6 +105,13 @@ namespace RuS.Client.Pages.Core.Company
                         CompanyId = _site.CompanyId
                     });
                 }
+            }
+            else
+            {
+                parameters.Add(nameof(AddEditSiteModal.Command), new AddEditSiteCommand
+                {
+                    CompanyId = Id
+                });
             }
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
             var dialog = _dialogService.Show<AddEditSiteModal>(id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
@@ -164,8 +179,7 @@ namespace RuS.Client.Pages.Core.Company
         private async Task Reset()
         {
             //Load only sites with companyId
-            //_brand = new GetAllBrandsResponse();
-            //await GetBrandsAsync();
+            await LoadData();
         }
 
         private bool Search(GetSiteResponse site)

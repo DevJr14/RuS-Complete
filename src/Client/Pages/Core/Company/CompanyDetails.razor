@@ -9,24 +9,50 @@
     }
 </style>
 
-<HeroTitle Title="@_localizer["Comapny"]" Description="@_localizer["Company Details"]" />
+<HeroTitle Title="@_localizer["Company"]" Description="@_localizer["Company Details"]" />
+
+<MudPaper Elevation="25">
+    <MudGrid Class="ma-2">
+        <MudItem xs="12" sm="6" md="4" >
+            <MudTextField @bind-Value="@Name"
+                            Label="@_localizer["Company"]"
+                            Variant="Variant.Outlined"
+                            Adornment="Adornment.End"
+                            ReadOnly="true"
+                            Margin="Margin.Dense"
+                            AdornmentIcon="@Icons.Filled.Business"/>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField @bind-Value="@ShortTitle"
+                            Label="@_localizer["Short Title"]"
+                            Variant="Variant.Outlined"
+                            Adornment="Adornment.End"
+                            ReadOnly="true"
+                            Margin="Margin.Dense"
+                            AdornmentIcon="@Icons.Filled.Business"/>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField @bind-Value="@RegistrationNo"
+                            Label="@_localizer["Registration No."]"
+                            Variant="Variant.Outlined"
+                            Adornment="Adornment.End"
+                            ReadOnly="true"
+                            Margin="Margin.Dense"
+                            AdornmentIcon="@Icons.Filled.Watch"/>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField @bind-Value="@RegistrationDate" 
+                          Label="@_localizer["Registration Date."]"
+                          Variant="Variant.Outlined"
+                          Adornment="Adornment.End"
+                          ReadOnly="true"
+                          Margin="Margin.Dense"
+                          AdornmentIcon="@Icons.Filled.CalendarToday" />
+        </MudItem>
+    </MudGrid>
+</MudPaper>
+
 <MudGrid Spacing="1">
-    <MudItem xs="12">
-        <MudPaper Elevation="1">
-            @*<MudItem xs="12" md="6">
-                <MudTextField ReadOnly="true" @bind-Value="@_company.Name" Label="@_localizer["Company"]" />
-            </MudItem>
-            <MudItem xs="12" md="6">
-                <MudTextField ReadOnly="true" @bind-Value="@_company.ShortTitle" Label="@_localizer["Short Title"]" />
-            </MudItem>
-            <MudItem xs="12" md="6">
-                <MudTextField ReadOnly="true" @bind-Value="@_company.RegistrationNo" Label="@_localizer["Registration No."]" />
-            </MudItem>
-            <MudItem xs="12" sm="6">
-                <MudDatePicker ReadOnly="true" PickerVariant="PickerVariant.Dialog" Label="@_localizer["Registration Date"]" DateFormat="dd/MM/yyyy" @bind-Date="@_company.RegistrationDate" />
-            </MudItem>*@
-        </MudPaper>
-    </MudItem>
     <MudItem xs="12">
         <MudPaper Elevation="0">
             @if (!_loaded)
@@ -40,26 +66,26 @@
                         <div class="justify-center mud-text-align-center">
                             @if (_canCreateSites)
                             {
-                                <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>
-                                <MudButton DisableElevation Variant="Variant.Filled" OnClick="LoadData" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+                                <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create Site"]</MudButton>
+                                <MudButton DisableElevation Variant="Variant.Filled" OnClick="LoadData" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload Sites"]</MudButton>
                                 @if (_canExportSites)
                                 {
-                                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export"]</MudButton>
+                                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export Sites"]</MudButton>
                                 }
                             }
                             else
                             {
-                                <MudButton DisableElevation Variant="Variant.Filled" OnClick="LoadData" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+                                <MudButton DisableElevation Variant="Variant.Filled" OnClick="LoadData" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload Sites"]</MudButton>
                                 @if (_canExportSites)
                                 {
-                                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export"]</MudButton>
+                                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export Sites"]</MudButton>
                                 }
                             }
                         </div>
                         <MudToolBarSpacer />
                         @if (_canSearchSites)
                         {
-                            <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="@_localizer["Search for Brands"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
+                            <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="@_localizer["Search for Sites"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
                         }
                     </ToolBarContent>
                     <HeaderContent>
@@ -116,4 +142,13 @@
         </MudPaper>
     </MudItem>
 </MudGrid>
+@code{
+    string _normalText;
+    string _immediateText;
+    string _debouncedText;
 
+    void HandleIntervalElapsed(string debouncedText)
+    {
+        // at this stage, interval has elapsed
+    }
+}
