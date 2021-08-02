@@ -5,6 +5,7 @@ using RuS.Application.Features.Sites.Commands.AddEdit;
 using RuS.Application.Features.Sites.Commands.Delete;
 using RuS.Application.Features.Sites.Queries.Export;
 using RuS.Application.Features.Sites.Queries.GetAllPaged;
+using RuS.Application.Features.Sites.Queries.GetById;
 using RuS.Shared.Constants.Permission;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,19 @@ namespace RuS.Server.Controllers.v1.Core
         {
             var companies = await _mediator.Send(new GetAllSitesQuery(pageNumber, pageSize, searchString, orderBy));
             return Ok(companies);
+        }
+
+        /// <summary>
+        /// Get a Site By Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Status 200 Ok</returns>
+        [Authorize(Policy = Permissions.Sites.View)]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var site = await _mediator.Send(new GetSiteByIdQuery() { Id = id });
+            return Ok(site);
         }
 
         /// <summary>

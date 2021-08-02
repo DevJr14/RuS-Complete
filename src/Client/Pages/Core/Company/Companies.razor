@@ -44,6 +44,7 @@ else
             }
         </ToolBarContent>
         <HeaderContent>
+            <MudTh Style="text-align:left">@_localizer["Manage Company"]</MudTh>
             <MudTh><MudTableSortLabel T="GetAllPagedCompaniesResponse" SortLabel="Name">@_localizer["Name"]</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel T="GetAllPagedCompaniesResponse" SortLabel="Short Title">@_localizer["Short Title"]</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel T="GetAllPagedCompaniesResponse" SortLabel="Registration No.">@_localizer["Registration No"]</MudTableSortLabel></MudTh>
@@ -51,6 +52,11 @@ else
             <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
         </HeaderContent>
         <RowTemplate>
+            <MudTd DataLabel="Manage">
+                <MudTooltip Text="View Details" Delay="1000" Placement="Placement.Top">
+                    <MudButton Color="Color.Secondary" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Settings" OnClick="@(()=>InvokeDetails(context.Id))" Size="Size.Small" Class="ma-2"> Manage Company</MudButton>
+                </MudTooltip>
+            </MudTd>
             <MudTd DataLabel="Name">
                 <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
             </MudTd>

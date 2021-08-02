@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace RuS.Client.Infrastructure.Routes
 {
-    public static class CompanyEndpoints
+    public class SiteEndpoints
     {
         public static string GetAllPaged(int pageNumber, int pageSize, string searchString, string[] orderBy)
         {
-            var url = $"api/v1/companies?pageNumber={pageNumber}&pageSize={pageSize}&searchString={searchString}&orderBy=";
+            var url = $"api/v1/sites?pageNumber={pageNumber}&pageSize={pageSize}&searchString={searchString}&orderBy=";
             if (orderBy?.Any() == true)
             {
                 foreach (var orderByPart in orderBy)
@@ -29,11 +29,11 @@ namespace RuS.Client.Infrastructure.Routes
 
         public static string GetById(int id)
         {
-            return $"api/v1/companies/{id}";
+            return $"api/v1/sites/{id}";
         }
 
-        public static string Save = "api/v1/companies";
-        public static string Delete = "api/v1/companies";
-        public static string Export = "api/v1/companies/export";
+        public static string Save = "api/v1/sites";
+        public static string Delete = "api/v1/sites";
+        public static string Export = "api/v1/sites/export";
     }
 }

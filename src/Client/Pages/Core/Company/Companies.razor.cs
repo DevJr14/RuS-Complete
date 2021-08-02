@@ -150,6 +150,11 @@ namespace RuS.Client.Pages.Core.Company
             }
         }
 
+        private void InvokeDetails(int id)
+        {
+            _navigationManager.NavigateTo($"/core/companies/details/{id}");
+        }
+
         private async Task Delete(int id)
         {
             string deleteContent = _localizer["Delete Content"];

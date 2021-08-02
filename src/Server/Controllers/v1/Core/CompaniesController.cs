@@ -5,6 +5,7 @@ using RuS.Application.Features.Companies.Commands.AddEdit;
 using RuS.Application.Features.Companies.Commands.Delete;
 using RuS.Application.Features.Companies.Queries.Export;
 using RuS.Application.Features.Companies.Queries.GetAllPaged;
+using RuS.Application.Features.Companies.Queries.GetById;
 using RuS.Shared.Constants.Permission;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,19 @@ namespace RuS.Server.Controllers.v1.Core
         {
             var companies = await _mediator.Send(new GetAllCompaniesQuery(pageNumber, pageSize, searchString, orderBy));
             return Ok(companies);
+        }
+
+        /// <summary>
+        /// Get a Company By Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Status 200 Ok</returns>
+        [Authorize(Policy = Permissions.Companies.View)]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var company = await _mediator.Send(new GetCompanyByIdQuery() { Id = id });
+            return Ok(company);
         }
 
         /// <summary>
