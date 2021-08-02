@@ -53,8 +53,8 @@ else
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Manage">
-                <MudTooltip Text="View Company Details" Delay="1000">
-                    <MudIconButton Disabled="true" OnClick="@(()=>InvokeDetails(context.Id))" Icon="@Icons.Material.Filled.Info" />
+                <MudTooltip Text="View Details" Delay="1000" Placement="Placement.Top">
+                    <MudButton Color="Color.Secondary" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Settings" OnClick="@(()=>InvokeDetails(context.Id))" Size="Size.Small" Class="ma-2"> Manage Company</MudButton>
                 </MudTooltip>
             </MudTd>
             <MudTd DataLabel="Name">
