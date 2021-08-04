@@ -29,39 +29,56 @@ namespace RuS.Application.Features.Companies.Commands.AddEdit
         private readonly IMapper _mapper;
         private readonly IUnitOfWork<int> _unitOfWork;
         private readonly IStringLocalizer<AddEditCompanyCommandHnadler> _localizer;
-
-        public AddEditCompanyCommandHnadler(IStringLocalizer<AddEditCompanyCommandHnadler> localizer, IUnitOfWork<int> unitOfWork, IMapper mapper)
+        private readonly ICompanyRepository _companyRepository;
+        public AddEditCompanyCommandHnadler(IStringLocalizer<AddEditCompanyCommandHnadler> localizer, IUnitOfWork<int> unitOfWork, IMapper mapper, ICompanyRepository companyRepository)
         {
             _localizer = localizer;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _companyRepository = companyRepository;
         }
 
         public async Task<Result<int>> Handle(AddEditCompanyCommand command, CancellationToken cancellationToken)
         {
             if (command.Id == 0)
             {
-                var company = _mapper.Map<Company>(command);
-                await _unitOfWork.Repository<Company>().AddAsync(company);
-                await _unitOfWork.Commit(cancellationToken);
-                return await Result<int>.SuccessAsync(company.Id, "Company Saved");
-            }
-            else
-            {
-                var company = await _unitOfWork.Repository<Company>().GetByIdAsync(command.Id);
-                if (company != null)
+                var isUnique = await _companyRepository.IsUniqueEntry(command.Name, command.RegistrationNo);
+                if (!isUnique)
                 {
-                    company.Name = command.Name ?? company.Name;
-                    company.ShortTitle = command.ShortTitle ?? company.ShortTitle;
-                    company.RegistrationNo = command.RegistrationNo ?? company.RegistrationNo;
-                    company.RegistrationDate = command.RegistrationDate ?? company.RegistrationDate;
-                    await _unitOfWork.Repository<Company>().UpdateAsync(company);
-                    await _unitOfWork.Commit(cancellationToken);
-                    return await Result<int>.SuccessAsync(company.Id, "Company Updated");
+                    return await Result<int>.FailAsync(_localizer["Company already exists."]);
                 }
                 else
                 {
-                    return await Result<int>.FailAsync("Company Not Found!");
+                    var company = _mapper.Map<Company>(command);
+                    await _unitOfWork.Repository<Company>().AddAsync(company);
+                    await _unitOfWork.Commit(cancellationToken);
+                    return await Result<int>.SuccessAsync(company.Id, "Company Saved");
+                }
+            }
+            else
+            {
+                var isUnique = await _companyRepository.IsUniqueEntry(command.Name, command.RegistrationNo, command.Id);
+                if (!isUnique)
+                {
+                    return await Result<int>.FailAsync(_localizer["Company already exists."]);
+                }
+                else
+                {
+                    var company = await _unitOfWork.Repository<Company>().GetByIdAsync(command.Id);
+                    if (company != null)
+                    {
+                        company.Name = command.Name ?? company.Name;
+                        company.ShortTitle = command.ShortTitle ?? company.ShortTitle;
+                        company.RegistrationNo = command.RegistrationNo ?? company.RegistrationNo;
+                        company.RegistrationDate = command.RegistrationDate ?? company.RegistrationDate;
+                        await _unitOfWork.Repository<Company>().UpdateAsync(company);
+                        await _unitOfWork.Commit(cancellationToken);
+                        return await Result<int>.SuccessAsync(company.Id, "Company Updated");
+                    }
+                    else
+                    {
+                        return await Result<int>.FailAsync("Company Not Found!");
+                    }
                 }
             }
         }

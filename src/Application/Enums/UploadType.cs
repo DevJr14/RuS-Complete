@@ -11,6 +11,9 @@ namespace RuS.Application.Enums
         ProfilePicture,
 
         [Description(@"Documents")]
-        Document
+        Document,
+
+        [Description(@"Images\Employees")]
+        Employee
     }
 }

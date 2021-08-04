@@ -12,13 +12,9 @@ namespace RuS.Application.Validators.Features.Sites.Commands.AddEdit
 {
     public class AddEditSiteCommandValidator : AbstractValidator<AddEditSiteCommand>
     {
-        private readonly ISiteRepository _siteRepository;
 
-        public AddEditSiteCommandValidator(ISiteRepository siteRepository)
+        public AddEditSiteCommandValidator()
         {
-            _siteRepository = siteRepository;
-            RuleFor(s => s)
-                .MustAsync(UniqueEntry).WithMessage("Site already exists.");
             RuleFor(s => s.CompanyId)
                 .NotEqual(0).WithMessage("Site must be linked to a Company");
             RuleFor(s => s.Name)
@@ -28,9 +24,5 @@ namespace RuS.Application.Validators.Features.Sites.Commands.AddEdit
                 .MaximumLength(100).WithMessage("Site description must not exceed 100 characters.");
         }
 
-        private async Task<bool> UniqueEntry(AddEditSiteCommand command, CancellationToken cancelationToken)
-        {
-            return await _siteRepository.IsUniqueEntry(command.Name, command.CompanyId, command.Id);
-        }
     }
 }

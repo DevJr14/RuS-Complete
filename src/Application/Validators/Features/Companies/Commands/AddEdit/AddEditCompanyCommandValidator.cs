@@ -12,21 +12,12 @@ namespace RuS.Application.Validators.Features.Companies.Commands.AddEdit
 {
     public class AddEditCompanyCommandValidator : AbstractValidator<AddEditCompanyCommand>
     {
-        private readonly ICompanyRepository _companyRepository;
-        public AddEditCompanyCommandValidator(ICompanyRepository companyRepository)
+        public AddEditCompanyCommandValidator()
         {
-            _companyRepository = companyRepository;
 
-            RuleFor(c => c)
-                .MustAsync(UniqueEntry).WithMessage("Company already exists.");
             RuleFor(c => c.Name)
                 .NotEmpty().WithMessage("Company name cannot be empty.")
                 .MaximumLength(30).WithMessage("Company name must not exceed 30 characters.");
-        }
-
-        private async Task<bool> UniqueEntry(AddEditCompanyCommand command, CancellationToken cancelationToken)
-        {
-            return await _companyRepository.IsUniqueEntry(command.Name, command.RegistrationNo, command.Id);
         }
     }
 }

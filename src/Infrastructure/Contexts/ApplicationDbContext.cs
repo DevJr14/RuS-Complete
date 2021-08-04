@@ -35,6 +35,7 @@ namespace RuS.Infrastructure.Contexts
 
         public DbSet<Company> Companies { get; set; }
         public DbSet<Site> Sites { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {
