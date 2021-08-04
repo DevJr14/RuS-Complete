@@ -452,6 +452,48 @@
             <param name="searchString"></param>
             <returns>Status 200 OK</returns>
         </member>
+        <member name="M:RuS.Server.Controllers.v1.Core.EmployeesController.Post(RuS.Application.Features.Employees.Commands.AddEdit.AddEditEmployeeCommand)">
+            <summary>
+            Create/Update a Employee
+            </summary>
+            <param name="command">
+            <summary>
+            Recieves input values
+            </summary>
+            </param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Core.EmployeesController.GetAll(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Employees
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <param name="orderBy"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Core.EmployeesController.GetById(System.Int32)">
+            <summary>
+            Get a Employee By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Core.EmployeesController.Delete(System.Int32)">
+            <summary>
+            Delete a Employees
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK response</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Core.EmployeesController.Export(System.String)">
+            <summary>
+            Search Employees and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns>Status 200 OK</returns>
+        </member>
         <member name="M:RuS.Server.Controllers.v1.Core.SitesController.Post(RuS.Application.Features.Sites.Commands.AddEdit.AddEditSiteCommand)">
             <summary>
             Create/Update a Site
