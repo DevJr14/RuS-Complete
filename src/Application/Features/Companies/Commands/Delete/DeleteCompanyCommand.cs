@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Localization;
 using RuS.Application.Interfaces.Repositories;
 using RuS.Domain.Entities.Core;
 using RuS.Shared.Wrapper;
@@ -19,11 +20,12 @@ namespace RuS.Application.Features.Companies.Commands.Delete
     internal class DeleteCompanyCommandHandler : IRequestHandler<DeleteCompanyCommand, Result<int>>
     {
         private readonly IUnitOfWork<int> _unitOfWork;
-        //private readonly IStringLocalizer<DeleteCompanyCommandHandler> _localizer;
+        private readonly IStringLocalizer<DeleteCompanyCommandHandler> _localizer;
 
-        public DeleteCompanyCommandHandler(IUnitOfWork<int> unitOfWork)
+        public DeleteCompanyCommandHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<DeleteCompanyCommandHandler> localizer)
         {
             _unitOfWork = unitOfWork;
+            _localizer = localizer;
         }
 
         public async Task<Result<int>> Handle(DeleteCompanyCommand command, CancellationToken cancellationToken)
@@ -33,11 +35,11 @@ namespace RuS.Application.Features.Companies.Commands.Delete
             {
                 await _unitOfWork.Repository<Company>().DeleteAsync(company);
                 await _unitOfWork.Commit(cancellationToken);
-                return await Result<int>.SuccessAsync(company.Id, "Company Deleted");
+                return await Result<int>.SuccessAsync(company.Id, _localizer["Company Deleted"]);
             }
             else
             {
-                return await Result<int>.FailAsync("Company Not Found!");
+                return await Result<int>.FailAsync(_localizer["Company Not Found!"]);
             }
         }
     }
