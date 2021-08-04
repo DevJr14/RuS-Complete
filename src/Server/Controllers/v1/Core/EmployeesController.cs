@@ -53,7 +53,7 @@ namespace RuS.Server.Controllers.v1.Core
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var employee = await _mediator.Send(new GetEmployeeByIdQuery() { Id = id });
+            var employee = await _mediator.Send(new GetCompanyByIdQuery() { Id = id });
             return Ok(employee);
         }
 
