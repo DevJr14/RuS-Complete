@@ -26,6 +26,35 @@ namespace RuS.Shared.Constants.Permission
             public const string Search = "Permissions.Brands.Search";
         }
 
+        public static class Companies
+        {
+            public const string View = "Permissions.Companies.View";
+            public const string Create = "Permissions.Companies.Create";
+            public const string Edit = "Permissions.Companies.Edit";
+            public const string Delete = "Permissions.Companies.Delete";
+            public const string Export = "Permissions.Companies.Export";
+            public const string Search = "Permissions.Companies.Search";
+        }
+        public static class Sites
+        {
+            public const string View = "Permissions.Sites.View";
+            public const string Create = "Permissions.Sites.Create";
+            public const string Edit = "Permissions.Sites.Edit";
+            public const string Delete = "Permissions.Sites.Delete";
+            public const string Export = "Permissions.Sites.Export";
+            public const string Search = "Permissions.Sites.Search";
+        }
+
+        public static class Employees
+        {
+            public const string View = "Permissions.Employees.View";
+            public const string Create = "Permissions.Employees.Create";
+            public const string Edit = "Permissions.Employees.Edit";
+            public const string Delete = "Permissions.Employees.Delete";
+            public const string Export = "Permissions.Employees.Export";
+            public const string Search = "Permissions.Employees.Search";
+        }
+
         public static class Documents
         {
             public const string View = "Permissions.Documents.View";
