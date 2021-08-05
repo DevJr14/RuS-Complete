@@ -1,0 +1,50 @@
+﻿@page "/core/employees/add-edit/{Id:int}"
+@attribute [Authorize(Policy = Permissions.Employees.Edit)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditEmployee> _localizer
+@using RuS.Application.Features.Employees.Queries.GetById;
+
+<HeroTitle Title="@_localizer["Employee"]" Description="@_localizer["Manage Details"]" />
+<MudPaper Elevation="25">
+    <MudGrid Class="ma-2">
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField @bind-Value="@EmployeeCommand.FirstName"
+                          Label="@_localizer["Firstname"]"
+                          Variant="Variant.Outlined"
+                          Adornment="Adornment.End"
+                          ReadOnly="true"
+                          Margin="Margin.Dense"
+                          AdornmentIcon="@Icons.Filled.Person" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField @bind-Value="@EmployeeCommand.LastName"
+                          Label="@_localizer["Lastname"]"
+                          Variant="Variant.Outlined"
+                          Adornment="Adornment.End"
+                          ReadOnly="true"
+                          Margin="Margin.Dense"
+                          AdornmentIcon="@Icons.Filled.Person" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField @bind-Value="@EmployeeCommand.MiddleName"
+                          Label="@_localizer["Middle Name"]"
+                          Variant="Variant.Outlined"
+                          Adornment="Adornment.End"
+                          ReadOnly="true"
+                          Margin="Margin.Dense"
+                          AdornmentIcon="@Icons.Filled.Person" />
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudTextField @bind-Value="@EmployeeCommand.Gender"
+                          Label="@_localizer["Gender"]"
+                          Variant="Variant.Outlined"
+                          Adornment="Adornment.End"
+                          ReadOnly="true"
+                          Margin="Margin.Dense"
+                          AdornmentIcon="@Icons.Filled.PlusOne" />
+        </MudItem>
+    </MudGrid>
+</MudPaper>
+
+@code {
+
+}
