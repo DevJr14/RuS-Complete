@@ -45,6 +45,7 @@ namespace RuS.Application.Features.Employees.Queries.Export
         {
             var employeeFilterSpec = new EmployeeFilterSpecification(request.SearchString);
             var employees = await _unitOfWork.Repository<Employee>().Entities
+                .Include(e => e.Company)
                 .Specify(employeeFilterSpec)
                 .ToListAsync(cancellationToken);
             var data = await _excelService.ExportAsync(employees, mappers: new Dictionary<string, Func<Employee, object>> 
