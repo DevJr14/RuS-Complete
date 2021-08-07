@@ -47,11 +47,11 @@ namespace RuS.Client.Extensions
                 .AddBlazoredLocalStorage()
                 .AddMudServices(configuration =>
                 {
-                    configuration.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomRight;
+                    configuration.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.TopRight;
                     configuration.SnackbarConfiguration.HideTransitionDuration = 100;
                     configuration.SnackbarConfiguration.ShowTransitionDuration = 100;
-                    configuration.SnackbarConfiguration.VisibleStateDuration = 3000;
-                    configuration.SnackbarConfiguration.ShowCloseIcon = false;
+                    configuration.SnackbarConfiguration.VisibleStateDuration = 6000;
+                    configuration.SnackbarConfiguration.ShowCloseIcon = true;
                 })
                 .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
                 .AddScoped<ClientPreferenceManager>()

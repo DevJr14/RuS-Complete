@@ -34,7 +34,7 @@ namespace RuS.Application.Features.Employees.Commands.AddEdit
 
         public string ImageUrl { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         public string CellphoneNo { get; set; }
 
@@ -100,7 +100,7 @@ namespace RuS.Application.Features.Employees.Commands.AddEdit
                     employee.LastName = command.LastName ?? employee.LastName;
                     employee.MiddleName = command.MiddleName ?? employee.MiddleName;
                     employee.Street = command.Street ?? employee.Street;
-                    employee.DateOfBirth = command.DateOfBirth;
+                    employee.DateOfBirth = (DateTime)command.DateOfBirth;
                     employee.Email = command.Email ?? employee.Email;
                     employee.Gender = command.Email ?? employee.Email;
                     employee.CellphoneNo = command.CellphoneNo ?? employee.CellphoneNo;

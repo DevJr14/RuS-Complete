@@ -13,7 +13,7 @@ namespace RuS.Client.Infrastructure.Managers.Core.Company
 {
     public interface ICompanyManager : IManager
     {
-        Task<PaginatedResult<GetAllPagedCompaniesResponse>> GetProductsAsync(GetAllPagedCompaniesRequest request);
+        Task<PaginatedResult<GetAllPagedCompaniesResponse>> GetCompaniesAsync(GetAllPagedCompaniesRequest request);
 
         Task<IResult<int>> SaveAsync(AddEditCompanyCommand command);
 
