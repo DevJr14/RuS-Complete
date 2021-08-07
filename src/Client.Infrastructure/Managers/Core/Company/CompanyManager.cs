@@ -23,7 +23,7 @@ namespace RuS.Client.Infrastructure.Managers.Core.Company
             _httpClient = httpClient;
         }
 
-        public async Task<PaginatedResult<GetAllPagedCompaniesResponse>> GetProductsAsync(GetAllPagedCompaniesRequest request)
+        public async Task<PaginatedResult<GetAllPagedCompaniesResponse>> GetCompaniesAsync(GetAllPagedCompaniesRequest request)
         {
             var response = await _httpClient.GetAsync(Routes.CompanyEndpoints.GetAllPaged(request.PageNumber, request.PageSize, request.SearchString, request.Orderby));
             return await response.ToPaginatedResult<GetAllPagedCompaniesResponse>();
