@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
+using RuS.Application.Features.Companies.Queries.GetAll;
 using RuS.Application.Features.Companies.Queries.GetAllPaged;
 using RuS.Application.Features.Employees.Commands.AddEdit;
+using RuS.Application.Features.Employees.Queries.GetById;
 using RuS.Application.Requests;
 using RuS.Client.Extensions;
 using RuS.Client.Infrastructure.Managers.Core.Company;
@@ -24,15 +26,17 @@ namespace RuS.Client.Pages.Core.Employee
 
         [Parameter] public int Id { get; set; }
         [Parameter] public AddEditEmployeeCommand EmployeeCommand { get; set; } = new();
+        [Parameter] public GetEmployeeResponse Employee { get; set; } = new();
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
-        private List<GetAllPagedCompaniesResponse> _companies = new();
+        private List<GetAllCompaniesResponse> _companies = new();
 
         private async Task SaveAsync()
         {
             var response = await EmployeeManager.SaveAsync(EmployeeCommand);
             if (response.Succeeded)
             {
+                Cancel();
                 _snackBar.Add(response.Messages[0], Severity.Success);
                 await HubConnection.SendAsync(ApplicationConstants.SignalR.SendUpdateDashboard);
             }
@@ -47,6 +51,28 @@ namespace RuS.Client.Pages.Core.Employee
 
         protected override async Task OnInitializedAsync()
         {
+            if (Id != 0)
+            {
+                var response = await EmployeeManager.GetByIdAsync(Id);
+                if (response.Succeeded)
+                {
+                    Employee = response.Data;
+                    EmployeeCommand.Id = Employee.Id;
+                    EmployeeCommand.FirstName = Employee.FirstName;
+                    EmployeeCommand.LastName = Employee.LastName;
+                    EmployeeCommand.MiddleName = Employee.MiddleName;
+                    EmployeeCommand.Gender = Employee.Gender;
+                    EmployeeCommand.CompanyId = Employee.CompanyId;
+                    EmployeeCommand.CellphoneNo = Employee.CellphoneNo;
+                    EmployeeCommand.Email = Employee.Email;
+                    EmployeeCommand.Street = Employee.Street;
+                    EmployeeCommand.Suburb = Employee.Suburb;
+                    EmployeeCommand.City = Employee.City;
+                    EmployeeCommand.DateOfBirth = Employee.DateOfBirth;
+                    EmployeeCommand.Postcode = Employee.Postcode;
+                    EmployeeCommand.ImageUrl = Employee.ImageUrl;
+                }
+            }
             await LoadDataAsync();
             HubConnection = HubConnection.TryInitialize(_navigationManager);
             if (HubConnection.State == HubConnectionState.Disconnected)
@@ -57,16 +83,16 @@ namespace RuS.Client.Pages.Core.Employee
 
         private async Task LoadDataAsync()
         {
-            await LoadImageAsync();
             await LoadCompaniesAsync();
         }
 
         private async Task LoadCompaniesAsync()
         {
-        }
-
-        private async Task LoadImageAsync()
-        {
+            var data = await CompanyManger.GetAllCompaniesAsync();
+            if (data.Succeeded)
+            {
+                _companies = data.Data;
+            }
         }
 
         private IBrowserFile _file;
@@ -92,7 +118,7 @@ namespace RuS.Client.Pages.Core.Employee
             }
         }
 
-        private async Task<IEnumerable<int>> SearchBrands(string value)
+        private async Task<IEnumerable<int>> SearchCompany(string value)
         {
             // In real life use an asynchronous function for fetching data from an api.
             await Task.Delay(5);
@@ -105,7 +131,7 @@ namespace RuS.Client.Pages.Core.Employee
                 .Select(x => x.Id);
         }
 
-        private void ReturnToEmployees()
+        private void Cancel()
         {
             _navigationManager.NavigateTo($"/core/employees/");            
         }
