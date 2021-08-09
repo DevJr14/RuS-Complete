@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using RuS.Application.Features.Companies.Commands.AddEdit;
 using RuS.Application.Features.Companies.Commands.Delete;
 using RuS.Application.Features.Companies.Queries.Export;
+using RuS.Application.Features.Companies.Queries.GetAll;
 using RuS.Application.Features.Companies.Queries.GetAllPaged;
 using RuS.Application.Features.Companies.Queries.GetById;
 using RuS.Shared.Constants.Permission;
@@ -33,7 +34,7 @@ namespace RuS.Server.Controllers.v1.Core
         }
 
         /// <summary>
-        /// Get All Companies
+        /// Get All Paged Companies
         /// </summary>
         /// <param name="pageNumber"></param>
         /// <param name="pageSize"></param>
@@ -41,10 +42,22 @@ namespace RuS.Server.Controllers.v1.Core
         /// <param name="orderBy"></param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Companies.View)]
-        [HttpGet]
-        public async Task<IActionResult> GetAll(int pageNumber, int pageSize, string searchString, string orderBy = null)
+        [HttpGet("all-paged")]
+        public async Task<IActionResult> GetAllPaged(int pageNumber, int pageSize, string searchString, string orderBy = null)
         {
-            var companies = await _mediator.Send(new GetAllCompaniesQuery(pageNumber, pageSize, searchString, orderBy));
+            var companies = await _mediator.Send(new GetAllPagedCompaniesQuery(pageNumber, pageSize, searchString, orderBy));
+            return Ok(companies);
+        }
+
+        /// <summary>
+        /// Get All Companies
+        /// </summary>
+        /// <returns>Status 200 OK</returns>
+        [Authorize(Policy = Permissions.Companies.View)]
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAll()
+        {
+            var companies = await _mediator.Send(new GetAllCompaniesQuery());
             return Ok(companies);
         }
 
