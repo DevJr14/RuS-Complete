@@ -421,14 +421,20 @@
             </param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:RuS.Server.Controllers.v1.Core.CompaniesController.GetAll(System.Int32,System.Int32,System.String,System.String)">
+        <member name="M:RuS.Server.Controllers.v1.Core.CompaniesController.GetAllPaged(System.Int32,System.Int32,System.String,System.String)">
             <summary>
-            Get All Companies
+            Get All Paged Companies
             </summary>
             <param name="pageNumber"></param>
             <param name="pageSize"></param>
             <param name="searchString"></param>
             <param name="orderBy"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Core.CompaniesController.GetAll">
+            <summary>
+            Get All Companies
+            </summary>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:RuS.Server.Controllers.v1.Core.CompaniesController.GetById(System.Int32)">
