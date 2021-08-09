@@ -5,6 +5,7 @@ using RuS.Application.Features.Employees.Commands.AddEdit;
 using RuS.Application.Features.Employees.Commands.Delete;
 using RuS.Application.Features.Employees.Queries.Export;
 using RuS.Application.Features.Employees.Queries.GetAllPaged;
+using RuS.Application.Features.Employees.Queries.GetById;
 using RuS.Shared.Constants.Permission;
 using System.Threading.Tasks;
 
@@ -53,7 +54,7 @@ namespace RuS.Server.Controllers.v1.Core
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var employee = await _mediator.Send(new GetCompanyByIdQuery() { Id = id });
+            var employee = await _mediator.Send(new GetEmployeeById() { Id = id });
             return Ok(employee);
         }
 
