@@ -77,7 +77,7 @@ namespace RuS.Client.Pages.Core.Company
             }
 
             var request = new GetAllPagedCompaniesRequest { PageSize = pageSize, PageNumber = pageNumber + 1, SearchString = _searchString, Orderby = orderings };
-            var response = await CompanyManager.GetCompaniesAsync(request);
+            var response = await CompanyManager.GetAllPagedCompaniesAsync(request);
             if (response.Succeeded)
             {
                 _totalItems = response.TotalCount;
