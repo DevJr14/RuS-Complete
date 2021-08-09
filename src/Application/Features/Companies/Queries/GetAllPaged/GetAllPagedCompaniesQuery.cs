@@ -15,14 +15,14 @@ using System.Threading.Tasks;
 
 namespace RuS.Application.Features.Companies.Queries.GetAllPaged
 {
-    public class GetAllCompaniesQuery : IRequest<PaginatedResult<GetAllPagedCompaniesResponse>>
+    public class GetAllPagedCompaniesQuery : IRequest<PaginatedResult<GetAllPagedCompaniesResponse>>
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
         public string SearchString { get; set; }
         public string[] OrderBy { get; set; }
 
-        public GetAllCompaniesQuery(int pageNumber, int pageSize, string searchString, string orderBy)
+        public GetAllPagedCompaniesQuery(int pageNumber, int pageSize, string searchString, string orderBy)
         {
             SearchString = searchString;
             PageSize = pageSize;
@@ -34,7 +34,7 @@ namespace RuS.Application.Features.Companies.Queries.GetAllPaged
         }
     }
 
-    internal class GetAllCompaniesQueryHandler : IRequestHandler<GetAllCompaniesQuery, PaginatedResult<GetAllPagedCompaniesResponse>>
+    internal class GetAllCompaniesQueryHandler : IRequestHandler<GetAllPagedCompaniesQuery, PaginatedResult<GetAllPagedCompaniesResponse>>
     {
         private readonly IUnitOfWork<int> _unitOfWork;
 
@@ -43,7 +43,7 @@ namespace RuS.Application.Features.Companies.Queries.GetAllPaged
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<PaginatedResult<GetAllPagedCompaniesResponse>> Handle(GetAllCompaniesQuery request, CancellationToken cancellationToken)
+        public async Task<PaginatedResult<GetAllPagedCompaniesResponse>> Handle(GetAllPagedCompaniesQuery request, CancellationToken cancellationToken)
         {
             Expression<Func<Company, GetAllPagedCompaniesResponse>> expression = e => new GetAllPagedCompaniesResponse
             {
