@@ -41,6 +41,8 @@ namespace RuS.Infrastructure.Contexts
         public DbSet<Category> Categories { get; set; }
         public DbSet<Priority> Priorities { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Client> Clients { get; set; }
+
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {
