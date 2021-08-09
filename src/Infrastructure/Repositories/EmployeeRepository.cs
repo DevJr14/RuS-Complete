@@ -26,5 +26,24 @@ namespace RuS.Infrastructure.Repositories
             _employeeNo = "EMP" + maxid;
             return _employeeNo;
         }
+
+        public async Task<bool> IsUniqueEntry(string fName, string lName, DateTime dBirth, int companyId, int id = 0)
+        {
+            List<Employee> employees = await _repository.Entities.ToListAsync();
+            if (id == 0)
+            {
+                return !employees.Any(e => string.Equals(e.FirstName, fName, StringComparison.OrdinalIgnoreCase)
+                    && string.Equals(e.LastName, lName, StringComparison.OrdinalIgnoreCase)
+                    && e.DateOfBirth == dBirth
+                    && e.CompanyId == companyId);
+            }
+            else
+            {
+                return !employees.Any(e => string.Equals(e.FirstName, fName, StringComparison.OrdinalIgnoreCase)
+                    && string.Equals(e.LastName, lName, StringComparison.OrdinalIgnoreCase)
+                    && e.DateOfBirth == dBirth
+                    && e.CompanyId == companyId && e.Id != id);
+            }
+        }
     }
 }

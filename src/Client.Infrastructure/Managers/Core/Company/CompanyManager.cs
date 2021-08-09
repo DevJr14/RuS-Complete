@@ -1,8 +1,10 @@
 ﻿using RuS.Application.Features.Companies.Commands.AddEdit;
+using RuS.Application.Features.Companies.Queries.GetAll;
 using RuS.Application.Features.Companies.Queries.GetAllPaged;
 using RuS.Application.Features.Companies.Queries.GetById;
 using RuS.Application.Requests.Core;
 using RuS.Client.Infrastructure.Extensions;
+using RuS.Client.Infrastructure.Routes;
 using RuS.Shared.Wrapper;
 using System;
 using System.Collections.Generic;
@@ -23,15 +25,15 @@ namespace RuS.Client.Infrastructure.Managers.Core.Company
             _httpClient = httpClient;
         }
 
-        public async Task<PaginatedResult<GetAllPagedCompaniesResponse>> GetCompaniesAsync(GetAllPagedCompaniesRequest request)
+        public async Task<PaginatedResult<GetAllPagedCompaniesResponse>> GetAllPagedCompaniesAsync(GetAllPagedCompaniesRequest request)
         {
-            var response = await _httpClient.GetAsync(Routes.CompanyEndpoints.GetAllPaged(request.PageNumber, request.PageSize, request.SearchString, request.Orderby));
+            var response = await _httpClient.GetAsync(CompanyEndpoints.GetAllPaged(request.PageNumber, request.PageSize, request.SearchString, request.Orderby));
             return await response.ToPaginatedResult<GetAllPagedCompaniesResponse>();
         }
 
         public async Task<IResult<int>> DeleteAsync(int id)
         {
-            var response = await _httpClient.DeleteAsync($"{Routes.CompanyEndpoints.Delete}/{id}" );
+            var response = await _httpClient.DeleteAsync($"{CompanyEndpoints.Delete}/{id}" );
             return await response.ToResult<int>();
         }
 
@@ -51,8 +53,14 @@ namespace RuS.Client.Infrastructure.Managers.Core.Company
 
         public async Task<IResult<GetCompanyResponse>> GetByIdAsync(int id)
         {
-            var response = await _httpClient.GetAsync(Routes.CompanyEndpoints.GetById(id));
+            var response = await _httpClient.GetAsync(CompanyEndpoints.GetById(id));
             return await response.ToResult<GetCompanyResponse>();
+        }
+
+        public async Task<IResult<List<GetAllCompaniesResponse>>> GetAllCompaniesAsync()
+        {
+            var response = await _httpClient.GetAsync(CompanyEndpoints.GetAll);
+            return await response.ToResult<List<GetAllCompaniesResponse>>();
         }
     }
 }
