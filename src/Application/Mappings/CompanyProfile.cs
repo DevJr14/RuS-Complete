@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RuS.Application.Features.Companies.Commands.AddEdit;
+using RuS.Application.Features.Companies.Queries.GetAll;
 using RuS.Application.Features.Companies.Queries.GetById;
 using RuS.Domain.Entities.Core;
 using System;
@@ -16,6 +17,7 @@ namespace RuS.Application.Mappings
         {
             CreateMap<AddEditCompanyCommand, Company>().ReverseMap();
             CreateMap<GetCompanyResponse, Company>().ReverseMap();
+            CreateMap<GetAllCompaniesResponse, Company>().ReverseMap();
         }
     }
 }
