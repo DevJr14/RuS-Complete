@@ -22,6 +22,8 @@ namespace RuS.Domain.Entities.Projects
 
         public int PriorityId { get; set; }
 
+        public int ClientId { get; set; }
+
         public string Description { get; set; }
 
         public string ScopeOfWork { get; set; }
@@ -32,19 +34,12 @@ namespace RuS.Domain.Entities.Projects
 
         public DateTime? ActualStart { get; set; }
 
-        public DateTime? ActualEnd { get; set; }
-
-        public string Client { get; set; }
-
-        public string ContactPerson { get; set; }
-
-        public string CellphoneNo { get; set; }
-
-        public string Email { get; set; }
+        public DateTime? ActualEnd { get; set; }       
 
         public Site Site { get; set; }
         public Status Status { get; set; }
         public Category Category { get; set; }
         public Priority Priority { get; set; }
+        public Client Client { get; set; }
     }
 }
