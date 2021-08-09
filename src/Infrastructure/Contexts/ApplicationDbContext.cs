@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using RuS.Domain.Entities.ExtendedAttributes;
 using RuS.Domain.Entities.Misc;
 using RuS.Domain.Entities.Core;
+using RuS.Domain.Entities.Projects;
 
 namespace RuS.Infrastructure.Contexts
 {
@@ -36,6 +37,10 @@ namespace RuS.Infrastructure.Contexts
         public DbSet<Company> Companies { get; set; }
         public DbSet<Site> Sites { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Status> Statuses { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Priority> Priorities { get; set; }
+        public DbSet<Project> Projects { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {
