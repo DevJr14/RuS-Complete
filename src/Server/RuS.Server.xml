@@ -548,5 +548,93 @@
             </summary>
             <returns>Status 200 OK </returns>
         </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.CategoriesController.GetAll">
+            <summary>
+            Get All Categories
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.CategoriesController.GetById(System.Int32)">
+            <summary>
+            Get a Category By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.CategoriesController.Post(RuS.Application.Features.Categories.Commands.AddEditCategoryCommand)">
+            <summary>
+            Create/Update a Category
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.CategoriesController.Delete(System.Int32)">
+            <summary>
+            Delete a Category
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.CategoriesController.Export(System.String)">
+            <summary>
+            Search Categories and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.PrioritiesController.GetAll">
+            <summary>
+            Get All Priorities
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.PrioritiesController.GetById(System.Int32)">
+            <summary>
+            Get a Priority By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.PrioritiesController.Post(RuS.Application.Features.Priorities.Commands.AddEditPriorityCommand)">
+            <summary>
+            Create/Update a Priority
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.PrioritiesController.Delete(System.Int32)">
+            <summary>
+            Delete a Priority
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.StatusesController.GetAll">
+            <summary>
+            Get All Statuses
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.StatusesController.GetById(System.Int32)">
+            <summary>
+            Get a Status By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.StatusesController.Post(RuS.Application.Features.Statuses.Commands.AddEditStatusCommand)">
+            <summary>
+            Create/Update a Status
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.StatusesController.Delete(System.Int32)">
+            <summary>
+            Delete a Status
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
     </members>
 </doc>
