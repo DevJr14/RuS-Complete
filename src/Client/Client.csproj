@@ -44,4 +44,9 @@
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Project\Status\" />
+    <Folder Include="Pages\Project\Priority\" />
+  </ItemGroup>
+
 </Project>
