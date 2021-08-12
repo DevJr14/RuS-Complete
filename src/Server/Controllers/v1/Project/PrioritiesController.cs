@@ -61,5 +61,17 @@ namespace RuS.Server.Controllers.v1.Project
         {
             return Ok(await _mediator.Send(new DeletePriorityCommand { Id = id }));
         }
+
+        /// <summary>
+        /// Search Priority and Export to Excel
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
+        [Authorize(Policy = Permissions.Priorities.Export)]
+        [HttpGet("export")]
+        public async Task<IActionResult> Export(string searchString = "")
+        {
+            return Ok(await _mediator.Send(new ExportPrioritiesQuery(searchString)));
+        }
     }
 }
