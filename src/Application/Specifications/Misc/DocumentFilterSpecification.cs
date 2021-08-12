@@ -3,7 +3,7 @@ using RuS.Domain.Entities.Misc;
 
 namespace RuS.Application.Specifications.Misc
 {
-    public class DocumentFilterSpecification : HeroSpecification<Document>
+    public class DocumentFilterSpecification : BaseSpecification<Document>
     {
         public DocumentFilterSpecification(string searchString, string userId)
         {

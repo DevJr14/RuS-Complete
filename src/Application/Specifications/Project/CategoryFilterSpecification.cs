@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RuS.Application.Specifications.Project
 {
-    public class CategoryFilterSpecification : HeroSpecification<Category>
+    public class CategoryFilterSpecification : BaseSpecification<Category>
     {
         public CategoryFilterSpecification(string searchString)
         {

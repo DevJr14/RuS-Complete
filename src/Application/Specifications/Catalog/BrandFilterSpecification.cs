@@ -3,7 +3,7 @@ using RuS.Domain.Entities.Catalog;
 
 namespace RuS.Application.Specifications.Catalog
 {
-    public class BrandFilterSpecification : HeroSpecification<Brand>
+    public class BrandFilterSpecification : BaseSpecification<Brand>
     {
         public BrandFilterSpecification(string searchString)
         {
