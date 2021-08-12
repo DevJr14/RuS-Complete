@@ -474,6 +474,220 @@ namespace RuS.Infrastructure.Migrations
                     b.ToTable("DocumentTypes");
                 });
 
+            modelBuilder.Entity("RuS.Domain.Entities.Projects.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("RuS.Domain.Entities.Projects.Client", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CellphoneNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactPerson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Postcode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Suburb")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TelephoneNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("RuS.Domain.Entities.Projects.Priority", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Priorities");
+                });
+
+            modelBuilder.Entity("RuS.Domain.Entities.Projects.Project", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("ActualEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ActualStart")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("End")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PriorityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ScopeOfWork")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SiteId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Start")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("PriorityId");
+
+                    b.HasIndex("SiteId");
+
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("Projects");
+                });
+
+            modelBuilder.Entity("RuS.Domain.Entities.Projects.Status", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Statuses");
+                });
+
             modelBuilder.Entity("RuS.Infrastructure.Models.Audit.Audit", b =>
                 {
                     b.Property<int>("Id")
@@ -808,6 +1022,49 @@ namespace RuS.Infrastructure.Migrations
                     b.Navigation("DocumentType");
                 });
 
+            modelBuilder.Entity("RuS.Domain.Entities.Projects.Project", b =>
+                {
+                    b.HasOne("RuS.Domain.Entities.Projects.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RuS.Domain.Entities.Projects.Client", "Client")
+                        .WithMany("Projects")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RuS.Domain.Entities.Projects.Priority", "Priority")
+                        .WithMany()
+                        .HasForeignKey("PriorityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RuS.Domain.Entities.Core.Site", "Site")
+                        .WithMany()
+                        .HasForeignKey("SiteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RuS.Domain.Entities.Projects.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Priority");
+
+                    b.Navigation("Site");
+
+                    b.Navigation("Status");
+                });
+
             modelBuilder.Entity("RuS.Infrastructure.Models.Identity.ApplicationRoleClaim", b =>
                 {
                     b.HasOne("RuS.Infrastructure.Models.Identity.ApplicationRole", "Role")
@@ -827,6 +1084,11 @@ namespace RuS.Infrastructure.Migrations
             modelBuilder.Entity("RuS.Domain.Entities.Misc.Document", b =>
                 {
                     b.Navigation("ExtendedAttributes");
+                });
+
+            modelBuilder.Entity("RuS.Domain.Entities.Projects.Client", b =>
+                {
+                    b.Navigation("Projects");
                 });
 
             modelBuilder.Entity("RuS.Infrastructure.Models.Identity.ApplicationRole", b =>

@@ -5,7 +5,7 @@ using RuS.Domain.Contracts;
 
 namespace RuS.Application.Specifications.Base
 {
-    public abstract class HeroSpecification<T> : ISpecification<T> where T : class, IEntity
+    public abstract class BaseSpecification<T> : ISpecification<T> where T : class, IEntity
     {
         public Expression<Func<T, bool>> Criteria { get; set; }
         public List<Expression<Func<T, object>>> Includes { get; } = new();

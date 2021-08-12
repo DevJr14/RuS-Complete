@@ -32,6 +32,9 @@ namespace RuS.Infrastructure.Extensions
                 .AddTransient<ICompanyRepository, CompanyRepository>()
                 .AddTransient<ISiteRepository, SiteRepository>()
                 .AddTransient<IEmployeeRepository, EmployeeRepository>()
+                .AddTransient<ICategoryRepository, CategoryRepository>()
+                .AddTransient<IStatusRepository, StatusRepository>()
+                .AddTransient<IPriorityRepository, PriorityRepository>()
                 .AddTransient<IDocumentTypeRepository, DocumentTypeRepository>()
                 .AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
         }

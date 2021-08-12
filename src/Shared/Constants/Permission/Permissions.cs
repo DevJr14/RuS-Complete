@@ -54,6 +54,36 @@ namespace RuS.Shared.Constants.Permission
             public const string Export = "Permissions.Employees.Export";
             public const string Search = "Permissions.Employees.Search";
         }
+        
+        public static class Priorities
+        {
+            public const string View = "Permissions.Priorities.View";
+            public const string Create = "Permissions.Priorities.Create";
+            public const string Edit = "Permissions.Priorities.Edit";
+            public const string Delete = "Permissions.Priorities.Delete";
+            public const string Export = "Permissions.Priorities.Export";
+            public const string Search = "Permissions.Priorities.Search";
+        }
+        
+        public static class Statuses
+        {
+            public const string View = "Permissions.Statuses.View";
+            public const string Create = "Permissions.Statuses.Create";
+            public const string Edit = "Permissions.Statuses.Edit";
+            public const string Delete = "Permissions.Statuses.Delete";
+            public const string Export = "Permissions.Statuses.Export";
+            public const string Search = "Permissions.Statuses.Search";
+        }
+        
+        public static class Categories
+        {
+            public const string View = "Permissions.Categories.View";
+            public const string Create = "Permissions.Categories.Create";
+            public const string Edit = "Permissions.Categories.Edit";
+            public const string Delete = "Permissions.Categories.Delete";
+            public const string Export = "Permissions.Categories.Export";
+            public const string Search = "Permissions.Categories.Search";
+        }
 
         public static class Documents
         {

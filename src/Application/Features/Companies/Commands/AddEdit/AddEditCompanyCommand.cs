@@ -52,7 +52,7 @@ namespace RuS.Application.Features.Companies.Commands.AddEdit
                     var company = _mapper.Map<Company>(command);
                     await _unitOfWork.Repository<Company>().AddAsync(company);
                     await _unitOfWork.Commit(cancellationToken);
-                    return await Result<int>.SuccessAsync(company.Id, "Company Saved");
+                    return await Result<int>.SuccessAsync(company.Id, _localizer["Company Saved"]);
                 }
             }
             else
@@ -73,11 +73,11 @@ namespace RuS.Application.Features.Companies.Commands.AddEdit
                         company.RegistrationDate = command.RegistrationDate ?? company.RegistrationDate;
                         await _unitOfWork.Repository<Company>().UpdateAsync(company);
                         await _unitOfWork.Commit(cancellationToken);
-                        return await Result<int>.SuccessAsync(company.Id, "Company Updated");
+                        return await Result<int>.SuccessAsync(company.Id, _localizer["Company Updated"]);
                     }
                     else
                     {
-                        return await Result<int>.FailAsync("Company Not Found!");
+                        return await Result<int>.FailAsync(_localizer["Company Not Found!"]);
                     }
                 }
             }
