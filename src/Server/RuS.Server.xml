@@ -609,6 +609,13 @@
             <param name="id"></param>
             <returns>Status 200 OK</returns>
         </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.PrioritiesController.Export(System.String)">
+            <summary>
+            Search Priority and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
         <member name="M:RuS.Server.Controllers.v1.Project.StatusesController.GetAll">
             <summary>
             Get All Statuses
@@ -635,6 +642,13 @@
             </summary>
             <param name="id"></param>
             <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.StatusesController.Export(System.String)">
+            <summary>
+            Search Priority and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>
