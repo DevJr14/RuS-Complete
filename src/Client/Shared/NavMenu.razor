@@ -77,7 +77,7 @@
             </MudNavLink>
         }
     }
-    
+
     @if (_canViewCategories)
     {
         <MudListSubheader Class="mt-2 mb-n2">@_localizer["Project Management"]</MudListSubheader>
@@ -85,6 +85,18 @@
         {
             <MudNavLink Href="/project/categories" Icon="@Icons.Material.Outlined.Category">
                 @_localizer["Categories"]
+            </MudNavLink>
+        }
+        @if (_canViewPriorities)
+        {
+            <MudNavLink Href="/project/priorities" Icon="@Icons.Material.Outlined.LowPriority">
+                @_localizer["Priorities"]
+            </MudNavLink>
+        }
+        @if (_canViewStatuses)
+        {
+            <MudNavLink Href="/project/statuses" Icon="@Icons.Material.Outlined.Timer">
+                @_localizer["Statuses"]
             </MudNavLink>
         }
     }
@@ -130,6 +142,8 @@
     private bool _canViewCompanies;
     private bool _canViewEmployees;
     private bool _canViewCategories;
+    private bool _canViewPriorities;
+    private bool _canViewStatuses;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -147,5 +161,7 @@
         _canViewCompanies = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Companies.View)).Succeeded;
         _canViewEmployees = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Employees.View)).Succeeded;
         _canViewCategories = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Categories.View)).Succeeded;
+        _canViewPriorities = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Priorities.View)).Succeeded;
+        _canViewStatuses = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Statuses.View)).Succeeded;
     }
 }
