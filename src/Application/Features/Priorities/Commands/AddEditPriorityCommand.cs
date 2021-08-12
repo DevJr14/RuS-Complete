@@ -66,7 +66,7 @@ namespace RuS.Application.Features.Priorities.Commands
                     {
                         priority.Name = command.Name ?? priority.Name;
                         priority.Description = command.Description ?? priority.Description;
-                        await _unitOfWork.Repository<Priority>().AddAsync(priority);
+                        await _unitOfWork.Repository<Priority>().UpdateAsync(priority);
                         await _unitOfWork.Commit(cancellationToken);
                         return await Result<int>.SuccessAsync(priority.Id, _localizer["Priority Updated"]);
                     }
