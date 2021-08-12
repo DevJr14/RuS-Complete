@@ -77,6 +77,17 @@
             </MudNavLink>
         }
     }
+    
+    @if (_canViewCategories)
+    {
+        <MudListSubheader Class="mt-2 mb-n2">@_localizer["Project Management"]</MudListSubheader>
+        @if (_canViewCategories)
+        {
+            <MudNavLink Href="/project/categories" Icon="@Icons.Material.Outlined.Category">
+                @_localizer["Categories"]
+            </MudNavLink>
+        }
+    }
 
     @if (_canViewChat)
     {
@@ -118,6 +129,7 @@
     private bool _canViewBrands;
     private bool _canViewCompanies;
     private bool _canViewEmployees;
+    private bool _canViewCategories;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -134,5 +146,6 @@
         _canViewBrands = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Brands.View)).Succeeded;
         _canViewCompanies = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Companies.View)).Succeeded;
         _canViewEmployees = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Employees.View)).Succeeded;
+        _canViewCategories = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Categories.View)).Succeeded;
     }
 }
