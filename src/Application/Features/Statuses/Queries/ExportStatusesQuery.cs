@@ -14,42 +14,43 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RuS.Application.Features.Categories.Queries
+namespace RuS.Application.Features.Statuses.Queries
 {
-    public class ExportCategoriesQuery : IRequest<Result<string>>
+    public class ExportStatusesQuery : IRequest<Result<string>>
     {
         public string SearchString { get; set; }
-        public ExportCategoriesQuery(string searchString = "")
+
+        public ExportStatusesQuery(string searchString = "")
         {
             SearchString = searchString;
         }
     }
 
-    internal class ExportCategoriesQueryHandler : IRequestHandler<ExportCategoriesQuery, Result<string>>
+    internal class ExportStatusQueryHandler : IRequestHandler<ExportStatusesQuery, Result<string>>
     {
         private readonly IExcelService _excelService;
         private readonly IUnitOfWork<int> _unitOfWork;
-        private readonly IStringLocalizer<ExportCategoriesQueryHandler> _localizer;
+        private readonly IStringLocalizer<ExportStatusQueryHandler> _localizer;
 
-        public ExportCategoriesQueryHandler(IUnitOfWork<int> unitOfWork, IExcelService excelService, IStringLocalizer<ExportCategoriesQueryHandler> localizer)
+        public ExportStatusQueryHandler(IUnitOfWork<int> unitOfWork, IExcelService excelService, IStringLocalizer<ExportStatusQueryHandler> localizer)
         {
             _unitOfWork = unitOfWork;
             _excelService = excelService;
             _localizer = localizer;
         }
 
-        public async Task<Result<string>> Handle(ExportCategoriesQuery request, CancellationToken cancellationToken)
+        public async Task<Result<string>> Handle(ExportStatusesQuery request, CancellationToken cancellationToken)
         {
-            var categoryFilterSpec = new CategoryFilterSpecification(request.SearchString);
-            var categories = await _unitOfWork.Repository<Category>().Entities
-                .Specify(categoryFilterSpec)
+            var statusFilterSpec = new StatusFilterSpecification(request.SearchString);
+            var statuses = await _unitOfWork.Repository<Status>().Entities
+                .Specify(statusFilterSpec)
                 .ToListAsync(cancellationToken);
-            var data = await _excelService.ExportAsync(categories, mappers: new Dictionary<string, Func<Category, object>>
+            var data = await _excelService.ExportAsync(statuses, mappers: new Dictionary<string, Func<Status, object>>
             {
                 { _localizer["Id"], item => item.Id },
                 { _localizer["Name"], item => item.Name },
                 { _localizer["Description"], item => item.Description }
-            }, sheetName: _localizer["Categories"]);
+            }, sheetName: _localizer["Statuses"]);
 
             return await Result<string>.SuccessAsync(data: data);
         }

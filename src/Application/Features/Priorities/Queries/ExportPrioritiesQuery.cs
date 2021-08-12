@@ -14,42 +14,42 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RuS.Application.Features.Categories.Queries
+namespace RuS.Application.Features.Priorities.Queries
 {
-    public class ExportCategoriesQuery : IRequest<Result<string>>
+    public class ExportPrioritiesQuery : IRequest<Result<string>>
     {
         public string SearchString { get; set; }
-        public ExportCategoriesQuery(string searchString = "")
+        public ExportPrioritiesQuery(string searchString = "")
         {
             SearchString = searchString;
         }
     }
 
-    internal class ExportCategoriesQueryHandler : IRequestHandler<ExportCategoriesQuery, Result<string>>
+    internal class ExportPrioritiesQueryHandler : IRequestHandler<ExportPrioritiesQuery, Result<string>>
     {
         private readonly IExcelService _excelService;
         private readonly IUnitOfWork<int> _unitOfWork;
-        private readonly IStringLocalizer<ExportCategoriesQueryHandler> _localizer;
+        private readonly IStringLocalizer<ExportPrioritiesQueryHandler> _localizer;
 
-        public ExportCategoriesQueryHandler(IUnitOfWork<int> unitOfWork, IExcelService excelService, IStringLocalizer<ExportCategoriesQueryHandler> localizer)
+        public ExportPrioritiesQueryHandler(IUnitOfWork<int> unitOfWork, IExcelService excelService, IStringLocalizer<ExportPrioritiesQueryHandler> localizer)
         {
             _unitOfWork = unitOfWork;
             _excelService = excelService;
             _localizer = localizer;
         }
 
-        public async Task<Result<string>> Handle(ExportCategoriesQuery request, CancellationToken cancellationToken)
+        public async Task<Result<string>> Handle(ExportPrioritiesQuery request, CancellationToken cancellationToken)
         {
-            var categoryFilterSpec = new CategoryFilterSpecification(request.SearchString);
-            var categories = await _unitOfWork.Repository<Category>().Entities
-                .Specify(categoryFilterSpec)
+            var priorityFilterSpec = new PriorityFilterSpecification(request.SearchString);
+            var priorities = await _unitOfWork.Repository<Priority>().Entities
+                .Specify(priorityFilterSpec)
                 .ToListAsync(cancellationToken);
-            var data = await _excelService.ExportAsync(categories, mappers: new Dictionary<string, Func<Category, object>>
+            var data = await _excelService.ExportAsync(priorities, mappers: new Dictionary<string, Func<Priority, object>>
             {
                 { _localizer["Id"], item => item.Id },
                 { _localizer["Name"], item => item.Name },
                 { _localizer["Description"], item => item.Description }
-            }, sheetName: _localizer["Categories"]);
+            }, sheetName: _localizer["Priorities"]);
 
             return await Result<string>.SuccessAsync(data: data);
         }
