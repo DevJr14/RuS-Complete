@@ -23,11 +23,11 @@ namespace RuS.Infrastructure.Repositories
             List<Category> categories = await _repository.Entities.ToListAsync();
             if (id == 0)
             {
-                return !categories.Any(c => c.Name == name);
+                return categories.Any(c => string.Equals(c.Name, name, StringComparison.OrdinalIgnoreCase));
             }
             else
             {
-                return !categories.Any(c => c.Name == name && c.Id != id);
+                return categories.Any(c => string.Equals(c.Name, name, StringComparison.OrdinalIgnoreCase) && c.Id != id);
             }
         }
     }

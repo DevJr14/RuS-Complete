@@ -23,12 +23,12 @@ namespace RuS.Infrastructure.Repositories
             List<Company> companies = await _repository.Entities.ToListAsync();
             if(id == 0)
             {
-                return !companies.Any(c => string.Equals(c.Name, name, StringComparison.OrdinalIgnoreCase)
+                return companies.Any(c => string.Equals(c.Name, name, StringComparison.OrdinalIgnoreCase)
                     && string.Equals(c.RegistrationNo, regNo, StringComparison.OrdinalIgnoreCase));
             }
             else
             {
-                return !companies.Any(c => string.Equals(c.Name, name, StringComparison.OrdinalIgnoreCase)
+                return companies.Any(c => string.Equals(c.Name, name, StringComparison.OrdinalIgnoreCase)
                     && string.Equals(c.RegistrationNo, regNo, StringComparison.OrdinalIgnoreCase)
                     && c.Id != id);
             }

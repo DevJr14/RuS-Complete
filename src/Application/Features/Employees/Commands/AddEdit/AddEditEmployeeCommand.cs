@@ -78,8 +78,8 @@ namespace RuS.Application.Features.Employees.Commands.AddEdit
 
             if (command.Id == 0)
             {
-                var isUnique = await _employeeRepository.IsUniqueEntry(command.FirstName, command.LastName, (DateTime)command.DateOfBirth, command.CompanyId);
-                if (!isUnique)
+                var notUnique = await _employeeRepository.IsUniqueEntry(command.FirstName, command.LastName, (DateTime)command.DateOfBirth, command.CompanyId);
+                if (notUnique)
                 {
                     return await Result<int>.FailAsync(_localizer["Employee already exists."]);
                 }
@@ -101,8 +101,8 @@ namespace RuS.Application.Features.Employees.Commands.AddEdit
             }
             else
             {
-                var isUnique = await _employeeRepository.IsUniqueEntry(command.FirstName, command.LastName, (DateTime)command.DateOfBirth, command.CompanyId, command.Id);
-                if (!isUnique)
+                var notUnique = await _employeeRepository.IsUniqueEntry(command.FirstName, command.LastName, (DateTime)command.DateOfBirth, command.CompanyId, command.Id);
+                if (notUnique)
                 {
                     return await Result<int>.FailAsync(_localizer["Employee already exists."]);
                 }

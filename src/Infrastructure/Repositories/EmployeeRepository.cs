@@ -32,14 +32,14 @@ namespace RuS.Infrastructure.Repositories
             List<Employee> employees = await _repository.Entities.ToListAsync();
             if (id == 0)
             {
-                return !employees.Any(e => string.Equals(e.FirstName, fName, StringComparison.OrdinalIgnoreCase)
+                return employees.Any(e => string.Equals(e.FirstName, fName, StringComparison.OrdinalIgnoreCase)
                     && string.Equals(e.LastName, lName, StringComparison.OrdinalIgnoreCase)
                     && e.DateOfBirth == dBirth
                     && e.CompanyId == companyId);
             }
             else
             {
-                return !employees.Any(e => string.Equals(e.FirstName, fName, StringComparison.OrdinalIgnoreCase)
+                return employees.Any(e => string.Equals(e.FirstName, fName, StringComparison.OrdinalIgnoreCase)
                     && string.Equals(e.LastName, lName, StringComparison.OrdinalIgnoreCase)
                     && e.DateOfBirth == dBirth
                     && e.CompanyId == companyId && e.Id != id);

@@ -42,7 +42,7 @@ namespace RuS.Application.Features.Categories.Commands
         {
             if (command.Id == 0)
             {
-                var notUnique = !await _categoryRepository.IsUniqueEntry(command.Name);
+                var notUnique = await _categoryRepository.IsUniqueEntry(command.Name);
                 if (notUnique)
                 {
                     return await Result<int>.FailAsync(_localizer["Category already exists."]);
@@ -57,7 +57,7 @@ namespace RuS.Application.Features.Categories.Commands
             }
             else
             {
-                var notUnique = !await _categoryRepository.IsUniqueEntry(command.Name, command.Id);
+                var notUnique = await _categoryRepository.IsUniqueEntry(command.Name, command.Id);
                 if (notUnique)
                 {
                     return await Result<int>.FailAsync(_localizer["Category already exists."]);

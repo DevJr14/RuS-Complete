@@ -43,8 +43,8 @@ namespace RuS.Application.Features.Sites.Commands.AddEdit
             
             if (command.Id == 0)
             {
-                var isUnique = await _siteRepository.IsUniqueEntry(command.Name, command.CompanyId);
-                if (!isUnique)
+                var notUnique = await _siteRepository.IsUniqueEntry(command.Name, command.CompanyId);
+                if (notUnique)
                 {
                     return await Result<int>.FailAsync(_localizer["Site already exists."]);
                 }
@@ -58,8 +58,8 @@ namespace RuS.Application.Features.Sites.Commands.AddEdit
             }
             else
             {
-                var isUnique = await _siteRepository.IsUniqueEntry(command.Name, command.CompanyId, command.Id);
-                if (!isUnique)
+                var notUnique = await _siteRepository.IsUniqueEntry(command.Name, command.CompanyId, command.Id);
+                if (notUnique)
                 {
                     return await Result<int>.FailAsync(_localizer["Site already exists."]);
                 }
