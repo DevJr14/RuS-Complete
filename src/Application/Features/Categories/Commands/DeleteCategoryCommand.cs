@@ -22,9 +22,10 @@ namespace RuS.Application.Features.Categories.Commands
         private readonly IUnitOfWork<int> _unitOfWork;
         private readonly IStringLocalizer<DeleteCategoryCommandHandler> _localizer;
 
-        public DeleteCategoryCommandHandler(IUnitOfWork<int> unitOfWork)
+        public DeleteCategoryCommandHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<DeleteCategoryCommandHandler> localizer)
         {
             _unitOfWork = unitOfWork;
+            _localizer = localizer;
         }
 
         public async Task<Result<int>> Handle(DeleteCategoryCommand command, CancellationToken cancellationToken)
