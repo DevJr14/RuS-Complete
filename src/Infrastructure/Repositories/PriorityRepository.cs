@@ -23,11 +23,11 @@ namespace RuS.Infrastructure.Repositories
             List<Priority> priorities = await _repository.Entities.ToListAsync();
             if (id == 0)
             {
-                return !priorities.Any(p => p.Name == name);
+                return priorities.Any(p => string.Equals(p.Name, name, StringComparison.OrdinalIgnoreCase));
             }
             else
             {
-                return !priorities.Any(p => p.Name == name && p.Id != id);
+                return priorities.Any(p => string.Equals(p.Name, name, StringComparison.OrdinalIgnoreCase) && p.Id != id);
             }
         }
     }

@@ -42,8 +42,8 @@ namespace RuS.Application.Features.Companies.Commands.AddEdit
         {
             if (command.Id == 0)
             {
-                var isUnique = await _companyRepository.IsUniqueEntry(command.Name, command.RegistrationNo);
-                if (!isUnique)
+                var isNotUnique = await _companyRepository.IsUniqueEntry(command.Name, command.RegistrationNo);
+                if (isNotUnique)
                 {
                     return await Result<int>.FailAsync(_localizer["Company already exists."]);
                 }
@@ -57,8 +57,8 @@ namespace RuS.Application.Features.Companies.Commands.AddEdit
             }
             else
             {
-                var isUnique = await _companyRepository.IsUniqueEntry(command.Name, command.RegistrationNo, command.Id);
-                if (!isUnique)
+                var isNotUnique = await _companyRepository.IsUniqueEntry(command.Name, command.RegistrationNo, command.Id);
+                if (isNotUnique)
                 {
                     return await Result<int>.FailAsync(_localizer["Company already exists."]);
                 }

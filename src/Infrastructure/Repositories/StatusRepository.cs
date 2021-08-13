@@ -23,11 +23,11 @@ namespace RuS.Infrastructure.Repositories
             List<Status> statuses = await _repository.Entities.ToListAsync();
             if (id == 0)
             {
-                return !statuses.Any(s => s.Name == name);
+                return statuses.Any(s => string.Equals(s.Name, name, StringComparison.OrdinalIgnoreCase));
             }
             else
             {
-                return !statuses.Any(s => s.Name == name && s.Id != id);
+                return statuses.Any(s => string.Equals(s.Name, name, StringComparison.OrdinalIgnoreCase) && s.Id != id);
             }
         }
     }
