@@ -1,23 +1,17 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.Localization;
 using RuS.Application.Features.Companies.Commands.AddEdit;
-using RuS.Application.Interfaces.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace RuS.Application.Validators.Features.Companies.Commands.AddEdit
 {
     public class AddEditCompanyCommandValidator : AbstractValidator<AddEditCompanyCommand>
     {
-        public AddEditCompanyCommandValidator()
+        public AddEditCompanyCommandValidator(IStringLocalizer<AddEditCompanyCommandValidator> localizer)
         {
 
             RuleFor(c => c.Name)
-                .NotEmpty().WithMessage("Company name cannot be empty.")
-                .MaximumLength(30).WithMessage("Company name must not exceed 30 characters.");
+                .Must(c => !string.IsNullOrWhiteSpace(c)).WithMessage(c => localizer["Company Name is required"])
+                .MaximumLength(30).WithMessage(c => localizer["Company name must not exceed 30 characters."]);
         }
     }
 }

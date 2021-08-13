@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.Localization;
 using RuS.Application.Features.Employees.Commands.AddEdit;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,17 @@ namespace RuS.Application.Validators.Features.Employees
 {
     public class AddEditEmployeeCommandValidator : AbstractValidator<AddEditEmployeeCommand>
     {
-        public AddEditEmployeeCommandValidator()
+        public AddEditEmployeeCommandValidator(IStringLocalizer<AddEditEmployeeCommandValidator> localizer)
         {
             RuleFor(e => e.FirstName)
-                .NotEmpty().WithMessage("Firstname is required.")
-                .MaximumLength(30).WithMessage("Firstname must not exceed 30 charactors.");
+                .Must(c => !string.IsNullOrWhiteSpace(c)).WithMessage(c => localizer["Firstname is required"])
+                .MaximumLength(30).WithMessage(c => localizer["Firstname must not exceed 30 characters."])
+                .Matches(@"^[a-zA-Z]+$").WithMessage(localizer["Firstname must contain alphabets only."]);
 
             RuleFor(e => e.LastName)
-                .NotEmpty().WithMessage("Lastname is required.")
-                .MaximumLength(30).WithMessage("Lastname must not exceed 30 charactors.");
+                .Must(c => !string.IsNullOrWhiteSpace(c)).WithMessage(c => localizer["Lastname is required"])
+                .MaximumLength(30).WithMessage(c => localizer["Lastname must not exceed 30 characters."])
+                .Matches(@"^[a-zA-Z]+$").WithMessage(localizer["Lastname must contain alphabets only."]);
         }
     }
 }
