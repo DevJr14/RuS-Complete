@@ -63,7 +63,7 @@ namespace RuS.Server.Controllers.v1.Project
         }
 
         /// <summary>
-        /// Search Priority and Export to Excel
+        /// Search Status and Export to Excel
         /// </summary>
         /// <param name="searchString"></param>
         /// <returns></returns>
