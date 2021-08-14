@@ -11,7 +11,7 @@ namespace RuS.Application.Validators.Features.Companies.Commands.AddEdit
 
             RuleFor(c => c.Name)
                 .Must(c => !string.IsNullOrWhiteSpace(c)).WithMessage(c => localizer["Company Name is required"])
-                .MaximumLength(30).WithMessage(c => localizer["Company name must not exceed 30 characters."]);
+                .MaximumLength(30).WithMessage(c => localizer["Name must not exceed 30 characters."]);
         }
     }
 }
