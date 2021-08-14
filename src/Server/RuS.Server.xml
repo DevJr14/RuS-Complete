@@ -616,6 +616,40 @@
             <param name="searchString"></param>
             <returns></returns>
         </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ProjectsController.GetAll">
+            <summary>
+            Get All Projects
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ProjectsController.GetById(System.Int32)">
+            <summary>
+            Get a Project By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ProjectsController.Post(RuS.Application.Features.Projects.Commands.AddEdit.AddEditProjectCommand)">
+            <summary>
+            Create/Update a Project
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ProjectsController.Delete(System.Int32)">
+            <summary>
+            Delete a Project
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ProjectsController.Export(System.String)">
+            <summary>
+            Search Project and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
         <member name="M:RuS.Server.Controllers.v1.Project.StatusesController.GetAll">
             <summary>
             Get All Statuses
