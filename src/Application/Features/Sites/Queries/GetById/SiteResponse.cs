@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RuS.Application.Features.Sites.Queries.GetById
 {
-    public class GetSiteResponse
+    public class SiteResponse
     {
         public int Id { get; set; }
         public string Name { get; set; }

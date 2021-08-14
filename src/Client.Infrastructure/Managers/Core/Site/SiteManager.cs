@@ -37,10 +37,10 @@ namespace RuS.Client.Infrastructure.Managers.Core.Site
             return await response.ToResult<string>();
         }
 
-        public async Task<IResult<GetSiteResponse>> GetByIdAsync(int id)
+        public async Task<IResult<SiteResponse>> GetByIdAsync(int id)
         {
             var response = await _httpClient.GetAsync(Routes.SiteEndpoints.GetById(id));
-            return await response.ToResult<GetSiteResponse>();
+            return await response.ToResult<SiteResponse>();
         }
 
         public async Task<PaginatedResult<GetAllPagedSitesResponse>> GetProductsAsync(GetAllPagedSitesRequest request)

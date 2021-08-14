@@ -61,7 +61,7 @@
             }
             else
             {
-                <MudTable Hover="true" Elevation="25" Items="_company.Sites" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" Filter="new Func<GetSiteResponse, bool>(Search)" @bind-brand="_site">
+                <MudTable Hover="true" Elevation="25" Items="_company.Sites" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" Filter="new Func<SiteResponse, bool>(Search)" @bind-brand="_site">
                     <ToolBarContent>
                         <div class="justify-center mud-text-align-center">
                             @if (_canCreateSites)
@@ -89,9 +89,9 @@
                         }
                     </ToolBarContent>
                     <HeaderContent>
-                        <MudTh><MudTableSortLabel SortBy="new Func<GetSiteResponse, object>(x => x.Name)">@_localizer["Name"]</MudTableSortLabel></MudTh>
-                        <MudTh><MudTableSortLabel SortBy="new Func<GetSiteResponse, object>(x => x.Description)">@_localizer["Description"]</MudTableSortLabel></MudTh>
-                        <MudTh><MudTableSortLabel SortBy="new Func<GetSiteResponse, object>(x => x.Company.Name)">@_localizer["Company"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<SiteResponse, object>(x => x.Name)">@_localizer["Name"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<SiteResponse, object>(x => x.Description)">@_localizer["Description"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<SiteResponse, object>(x => x.Company.Name)">@_localizer["Company"]</MudTableSortLabel></MudTh>
                         <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
                     </HeaderContent>
                     <RowTemplate>

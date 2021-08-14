@@ -29,7 +29,7 @@ namespace RuS.Client.Pages.Core.Company
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
         private GetCompanyResponse _company;
-        private GetSiteResponse _site;
+        private SiteResponse _site;
 
         [Parameter] public string Name { get; set; }
         [Parameter] public string ShortTitle { get; set; }
@@ -182,7 +182,7 @@ namespace RuS.Client.Pages.Core.Company
             await LoadData();
         }
 
-        private bool Search(GetSiteResponse site)
+        private bool Search(SiteResponse site)
         {
             if (string.IsNullOrWhiteSpace(_searchString)) return true;
             if (site.Name?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)

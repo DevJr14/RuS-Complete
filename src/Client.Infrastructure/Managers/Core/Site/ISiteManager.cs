@@ -21,6 +21,6 @@ namespace RuS.Client.Infrastructure.Managers.Core.Site
 
         Task<IResult<string>> ExportToExcelAsync(string searchString = "");
 
-        Task<IResult<GetSiteResponse>> GetByIdAsync(int id);
+        Task<IResult<SiteResponse>> GetByIdAsync(int id);
     }
 }
