@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.FluentValidation;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
@@ -23,6 +24,9 @@ namespace RuS.Client.Pages.Core.Employee
     {
         [Inject] public IEmployeeManager EmployeeManager { get; set; }
         [Inject] public ICompanyManager CompanyManger { get; set; }
+
+        private FluentValidationValidator _fluentValidationValidator;
+        private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
 
         [Parameter] public int Id { get; set; }
         [Parameter] public AddEditEmployeeCommand EmployeeCommand { get; set; } = new();

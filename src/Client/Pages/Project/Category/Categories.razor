@@ -7,6 +7,7 @@
 <HeroTitle Title="@_localizer["Category"]" Description="@_localizer["Manage Category"]" />
 
 <EditForm Model="@_command" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
     <MudCard Elevation="25">
         <MudCardHeader>
             <CardHeaderAvatar>
@@ -58,11 +59,11 @@
             <MudSpacer />
             @if (Id != 0)
             {
-                <MudButton DisableElevation Style="margin-right:7px;" Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary">@_localizer["Update"]</MudButton>
+                <MudButton DisableElevation Style="margin-right:7px;" Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Update"]</MudButton>
             }
             else
             {
-                <MudButton DisableElevation Style="margin-right:7px;" Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success">@_localizer["Save"]</MudButton>
+                <MudButton DisableElevation Style="margin-right:7px;" Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Save"]</MudButton>
             }
         </MudCardActions>
     </MudCard>
