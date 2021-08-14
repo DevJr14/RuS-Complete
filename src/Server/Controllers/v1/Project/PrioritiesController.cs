@@ -30,7 +30,7 @@ namespace RuS.Server.Controllers.v1.Project
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Status 200 Ok</returns>
-        [Authorize(Policy = Permissions.Categories.View)]
+        [Authorize(Policy = Permissions.Priorities.View)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -43,7 +43,7 @@ namespace RuS.Server.Controllers.v1.Project
         /// </summary>
         /// <param name="command"></param>
         /// <returns>Status 200 OK</returns>
-        [Authorize(Policy = Permissions.Categories.Create)]
+        [Authorize(Policy = Permissions.Priorities.Create)]
         [HttpPost]
         public async Task<IActionResult> Post(AddEditPriorityCommand command)
         {
