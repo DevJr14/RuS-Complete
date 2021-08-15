@@ -1,7 +1,10 @@
-﻿using RuS.Application.Features.Clients.Commands.AddEdit;
+﻿using Microsoft.EntityFrameworkCore;
+using RuS.Application.Features.Clients.Commands.AddEdit;
 using RuS.Application.Interfaces.Repositories;
 using RuS.Domain.Entities.Projects;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace RuS.Infrastructure.Repositories
@@ -15,14 +18,17 @@ namespace RuS.Infrastructure.Repositories
             _repository = repository;
         }
 
-        public Task<bool> IsUniqueEntry(string name, int id = 0)
+        public async Task<bool> IsUniqueEntry(AddEditClientCommand command)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> IsUniqueEntry(AddEditClientCommand command)
-        {
-            throw new NotImplementedException();
+            List<Client> clients = await _repository.Entities.ToListAsync();
+            if (command.Id == 0)
+            {
+                return clients.Any(c => string.Equals(c.Name, command.Name, StringComparison.OrdinalIgnoreCase));
+            }
+            else
+            {
+                return clients.Any(c => string.Equals(c.Name, command.Name, StringComparison.OrdinalIgnoreCase) && c.Id != command.Id);
+            }
         }
     }
 }
