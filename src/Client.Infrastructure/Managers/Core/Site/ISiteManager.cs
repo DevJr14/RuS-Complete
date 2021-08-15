@@ -13,7 +13,9 @@ namespace RuS.Client.Infrastructure.Managers.Core.Site
 {
     public interface ISiteManager : IManager
     {
-        Task<PaginatedResult<GetAllPagedSitesResponse>> GetProductsAsync(GetAllPagedSitesRequest request);
+        Task<PaginatedResult<GetAllPagedSitesResponse>> GetSitesPagedAsync(GetAllPagedSitesRequest request);
+
+        Task<IResult<List<SiteResponse>>> GetAllSitesAsync();
 
         Task<IResult<int>> SaveAsync(AddEditSiteCommand command);
 
