@@ -15,7 +15,7 @@ namespace RuS.Application.Mappings
         public SiteProfile()
         {
             CreateMap<AddEditSiteCommand, Site>().ReverseMap();
-            CreateMap<GetSiteResponse, Site>().ReverseMap();
+            CreateMap<SiteResponse, Site>().ReverseMap();
         }
     }
 }

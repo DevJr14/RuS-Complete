@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Blazored.FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
@@ -18,6 +19,9 @@ namespace RuS.Client.Pages.Project.Category
     public partial class Categories
     {
         [Inject] private ICategoryManager CategoryManager { get; set; }
+
+        private FluentValidationValidator _fluentValidationValidator;
+        private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
 
         [Parameter] public int Id { get; set; }
         [Parameter] public AddEditCategoryCommand _command { get; set; } = new();

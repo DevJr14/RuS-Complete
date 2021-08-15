@@ -17,9 +17,7 @@ namespace RuS.Application.Features.Sites.Commands.AddEdit
     public class AddEditSiteCommand : IRequest<Result<int>>
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Site name is required.")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Company must be linked.")]
         public int CompanyId { get; set; }
         public string Description { get; set; }
     }

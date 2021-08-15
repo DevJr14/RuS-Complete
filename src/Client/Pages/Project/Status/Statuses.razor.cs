@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Blazored.FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
@@ -19,6 +20,9 @@ namespace RuS.Client.Pages.Project.Status
     public partial class Statuses
     {
         [Inject] private IStatusManager StatusManager { get; set; }
+
+        private FluentValidationValidator _fluentValidationValidator;
+        private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
 
         [Parameter] public int Id { get; set; }
         [Parameter] public AddEditStatusCommand _command { get; set; } = new();

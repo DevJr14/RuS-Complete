@@ -513,13 +513,20 @@
         </member>
         <member name="M:RuS.Server.Controllers.v1.Core.SitesController.GetAll(System.Int32,System.Int32,System.String,System.String)">
             <summary>
-            Get All Sites. Data will be paged.
+            Get All Sites Paged. Data will be paged.
             </summary>
             <param name="pageNumber"></param>
             <param name="pageSize"></param>
             <param name="searchString"></param>
             <param name="orderBy"></param>
             <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Core.SitesController.GetAll">
+            <summary>
+            Get all Sites
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
         </member>
         <member name="M:RuS.Server.Controllers.v1.Core.SitesController.GetById(System.Int32)">
             <summary>
@@ -582,6 +589,40 @@
             <param name="searchString"></param>
             <returns></returns>
         </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ClientsController.GetAll">
+            <summary>
+            Get All Clients
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ClientsController.GetById(System.Int32)">
+            <summary>
+            Get a Clients By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ClientsController.Post(RuS.Application.Features.Clients.Commands.AddEdit.AddEditClientCommand)">
+            <summary>
+            Create/Update a Client
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ClientsController.Delete(System.Int32)">
+            <summary>
+            Delete a Client
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ClientsController.Export(System.String)">
+            <summary>
+            Search Client and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
         <member name="M:RuS.Server.Controllers.v1.Project.PrioritiesController.GetAll">
             <summary>
             Get All Priorities
@@ -616,6 +657,40 @@
             <param name="searchString"></param>
             <returns></returns>
         </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ProjectsController.GetAll">
+            <summary>
+            Get All Projects
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ProjectsController.GetById(System.Int32)">
+            <summary>
+            Get a Project By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ProjectsController.Post(RuS.Application.Features.Projects.Commands.AddEdit.AddEditProjectCommand)">
+            <summary>
+            Create/Update a Project
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ProjectsController.Delete(System.Int32)">
+            <summary>
+            Delete a Project
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ProjectsController.Export(System.String)">
+            <summary>
+            Search Project and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
         <member name="M:RuS.Server.Controllers.v1.Project.StatusesController.GetAll">
             <summary>
             Get All Statuses
@@ -645,7 +720,7 @@
         </member>
         <member name="M:RuS.Server.Controllers.v1.Project.StatusesController.Export(System.String)">
             <summary>
-            Search Priority and Export to Excel
+            Search Status and Export to Excel
             </summary>
             <param name="searchString"></param>
             <returns></returns>

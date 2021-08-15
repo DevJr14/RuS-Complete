@@ -16,14 +16,14 @@ using System.Threading.Tasks;
 
 namespace RuS.Application.Features.Sites.Queries.GetAllPaged
 {
-    public class GetAllSitesQuery : IRequest<PaginatedResult<GetAllPagedSitesResponse>>
+    public class GetAllPagedSitesQuery : IRequest<PaginatedResult<GetAllPagedSitesResponse>>
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
         public string SearchString { get; set; }
         public string[] OrderBy { get; set; }
 
-        public GetAllSitesQuery(int pageNumber, int pageSize, string searchString, string orderBy)
+        public GetAllPagedSitesQuery(int pageNumber, int pageSize, string searchString, string orderBy)
         {
             PageNumber = pageNumber;
             PageSize = pageSize;
@@ -35,7 +35,7 @@ namespace RuS.Application.Features.Sites.Queries.GetAllPaged
         }
     }
 
-    internal class GetAllPagedSitesQueryHandler : IRequestHandler<GetAllSitesQuery, PaginatedResult<GetAllPagedSitesResponse>>
+    internal class GetAllPagedSitesQueryHandler : IRequestHandler<GetAllPagedSitesQuery, PaginatedResult<GetAllPagedSitesResponse>>
     {
         private readonly IUnitOfWork<int> _unitOfWork;
 
@@ -44,7 +44,7 @@ namespace RuS.Application.Features.Sites.Queries.GetAllPaged
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<PaginatedResult<GetAllPagedSitesResponse>> Handle(GetAllSitesQuery request, CancellationToken cancellationToken)
+        public async Task<PaginatedResult<GetAllPagedSitesResponse>> Handle(GetAllPagedSitesQuery request, CancellationToken cancellationToken)
         {
             Expression<Func<Site, GetAllPagedSitesResponse>> expression = s => new GetAllPagedSitesResponse
             {

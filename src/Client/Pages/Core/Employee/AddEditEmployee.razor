@@ -7,6 +7,7 @@
 <HeroTitle Title="@_localizer["Employee"]" Description="@_localizer["Manage Details"]" />
 @*<MudPaper Elevation="25">*@
 <EditForm Model="@EmployeeCommand" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
     <MudCard>
         <MudCardHeader>
             <CardHeaderAvatar>
@@ -83,7 +84,7 @@
                                    AdornmentIcon="@Icons.Filled.CalendarToday" />
                 </MudItem>
                 <MudItem xs="12" sm="12" md="12">
-                    <MudRadioGroup T="string" @bind-SelectedOption="@EmployeeCommand.Gender" Required="true" RequiredError="Gender is required!">
+                    <MudRadioGroup T="string" @bind-SelectedOption="@EmployeeCommand.Gender" For="@(() => EmployeeCommand.Gender)" Required="true" RequiredError="Gender is required!">
                         <MudRadio Option="@("F")" Color="Color.Primary">Female</MudRadio>
                         <MudRadio Option="@("M")" Color="Color.Primary">Male</MudRadio>
                         <MudRadio Option="@("Not Disclose")" Color="Color.Primary">Not Disclose</MudRadio>
@@ -185,15 +186,15 @@
             <MudSpacer />
             @if (Id != 0)
             {
-                <MudButton DisableElevation Style="margin-right:7px;" Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary">@_localizer["Update"]</MudButton>
+                <MudButton DisableElevation Style="margin-right:7px;" Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Update"]</MudButton>
             }
             else
             {
-                <MudButton DisableElevation Style="margin-right:7px;" Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success">@_localizer["Save"]</MudButton>
+                <MudButton DisableElevation Style="margin-right:7px;" Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Save"]</MudButton>
             }
         </MudCardActions>
     </MudCard>
-    </EditForm>
+</EditForm>
     @code {
 
     }

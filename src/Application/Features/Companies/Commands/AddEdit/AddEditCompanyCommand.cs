@@ -17,7 +17,6 @@ namespace RuS.Application.Features.Companies.Commands.AddEdit
     public class AddEditCompanyCommand : IRequest<Result<int>>
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Company name is required.")]
         public string Name { get; set; }
         public string ShortTitle { get; set; }
         public string RegistrationNo { get; set; }

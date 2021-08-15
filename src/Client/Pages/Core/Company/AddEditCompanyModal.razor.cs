@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.FluentValidation;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using RuS.Application.Features.Companies.Commands.AddEdit;
@@ -16,6 +17,9 @@ namespace RuS.Client.Pages.Core.Company
         [Parameter] public AddEditCompanyCommand AddEditCompanyModel { get; set; } = new();
         [CascadingParameter] private HubConnection HubConnection { get; set; }
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+
+        private FluentValidationValidator _fluentValidationValidator;
+        private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
 
         public void Cancel()
         {

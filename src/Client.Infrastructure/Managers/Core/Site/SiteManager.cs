@@ -3,13 +3,11 @@ using RuS.Application.Features.Sites.Queries.GetAllPaged;
 using RuS.Application.Features.Sites.Queries.GetById;
 using RuS.Application.Requests.Core;
 using RuS.Client.Infrastructure.Extensions;
+using RuS.Client.Infrastructure.Routes;
 using RuS.Shared.Wrapper;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace RuS.Client.Infrastructure.Managers.Core.Site
@@ -25,33 +23,39 @@ namespace RuS.Client.Infrastructure.Managers.Core.Site
 
         public async Task<IResult<int>> DeleteAsync(int id)
         {
-            var response = await _httpClient.DeleteAsync($"{Routes.SiteEndpoints.Delete}/{id}");
+            var response = await _httpClient.DeleteAsync($"{SiteEndpoints.Delete}/{id}");
             return await response.ToResult<int>();
         }
 
         public async Task<IResult<string>> ExportToExcelAsync(string searchString = "")
         {
             var response = await _httpClient.GetAsync(string.IsNullOrWhiteSpace(searchString)
-                ? Routes.SiteEndpoints.Export
-                : Routes.SiteEndpoints.ExportFiltered(searchString));
+                ? SiteEndpoints.Export
+                : SiteEndpoints.ExportFiltered(searchString));
             return await response.ToResult<string>();
         }
 
-        public async Task<IResult<GetSiteResponse>> GetByIdAsync(int id)
+        public async Task<IResult<List<SiteResponse>>> GetAllSitesAsync()
         {
-            var response = await _httpClient.GetAsync(Routes.SiteEndpoints.GetById(id));
-            return await response.ToResult<GetSiteResponse>();
+            var response = await _httpClient.GetAsync(SiteEndpoints.GetAll);
+            return await response.ToResult<List<SiteResponse>>();
         }
 
-        public async Task<PaginatedResult<GetAllPagedSitesResponse>> GetProductsAsync(GetAllPagedSitesRequest request)
+        public async Task<IResult<SiteResponse>> GetByIdAsync(int id)
         {
-            var response = await _httpClient.GetAsync(Routes.SiteEndpoints.GetAllPaged(request.PageNumber, request.PageSize, request.SearchString, request.Orderby));
+            var response = await _httpClient.GetAsync(SiteEndpoints.GetById(id));
+            return await response.ToResult<SiteResponse>();
+        }
+
+        public async Task<PaginatedResult<GetAllPagedSitesResponse>> GetSitesPagedAsync(GetAllPagedSitesRequest request)
+        {
+            var response = await _httpClient.GetAsync(SiteEndpoints.GetAllPaged(request.PageNumber, request.PageSize, request.SearchString, request.Orderby));
             return await response.ToPaginatedResult<GetAllPagedSitesResponse>();
         }
 
         public async Task<IResult<int>> SaveAsync(AddEditSiteCommand command)
         {
-            var response = await _httpClient.PostAsJsonAsync(Routes.SiteEndpoints.Save, command);
+            var response = await _httpClient.PostAsJsonAsync(SiteEndpoints.Save, command);
             return await response.ToResult<int>();
         }
     }

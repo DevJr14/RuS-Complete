@@ -85,6 +85,26 @@ namespace RuS.Shared.Constants.Permission
             public const string Search = "Permissions.Categories.Search";
         }
 
+        public static class Clients
+        {
+            public const string View = "Permissions.Clients.View";
+            public const string Create = "Permissions.Clients.Create";
+            public const string Edit = "Permissions.Clients.Edit";
+            public const string Delete = "Permissions.Clients.Delete";
+            public const string Export = "Permissions.Clients.Export";
+            public const string Search = "Permissions.Clients.Search";
+        }
+
+        public static class Projects
+        {
+            public const string View = "Permissions.Projects.View";
+            public const string Create = "Permissions.Projects.Create";
+            public const string Edit = "Permissions.Projects.Edit";
+            public const string Delete = "Permissions.Projects.Delete";
+            public const string Export = "Permissions.Projects.Export";
+            public const string Search = "Permissions.Projects.Search";
+        }
+
         public static class Documents
         {
             public const string View = "Permissions.Documents.View";

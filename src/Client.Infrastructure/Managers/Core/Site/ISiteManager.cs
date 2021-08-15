@@ -13,7 +13,9 @@ namespace RuS.Client.Infrastructure.Managers.Core.Site
 {
     public interface ISiteManager : IManager
     {
-        Task<PaginatedResult<GetAllPagedSitesResponse>> GetProductsAsync(GetAllPagedSitesRequest request);
+        Task<PaginatedResult<GetAllPagedSitesResponse>> GetSitesPagedAsync(GetAllPagedSitesRequest request);
+
+        Task<IResult<List<SiteResponse>>> GetAllSitesAsync();
 
         Task<IResult<int>> SaveAsync(AddEditSiteCommand command);
 
@@ -21,6 +23,6 @@ namespace RuS.Client.Infrastructure.Managers.Core.Site
 
         Task<IResult<string>> ExportToExcelAsync(string searchString = "");
 
-        Task<IResult<GetSiteResponse>> GetByIdAsync(int id);
+        Task<IResult<SiteResponse>> GetByIdAsync(int id);
     }
 }

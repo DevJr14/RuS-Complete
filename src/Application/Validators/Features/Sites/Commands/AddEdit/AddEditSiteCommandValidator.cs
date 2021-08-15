@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.Localization;
 using RuS.Application.Features.Sites.Commands.AddEdit;
 using RuS.Application.Interfaces.Repositories;
 using System;
@@ -13,15 +14,15 @@ namespace RuS.Application.Validators.Features.Sites.Commands.AddEdit
     public class AddEditSiteCommandValidator : AbstractValidator<AddEditSiteCommand>
     {
 
-        public AddEditSiteCommandValidator()
+        public AddEditSiteCommandValidator(IStringLocalizer<AddEditSiteCommandValidator> localizer)
         {
             RuleFor(s => s.CompanyId)
-                .NotEqual(0).WithMessage("Site must be linked to a Company");
+                .NotEqual(0).WithMessage(s => localizer["Site must be linked to a Company"]);
             RuleFor(s => s.Name)
-                .NotEmpty().WithMessage("Site name cannot be empty.")
-                .MaximumLength(30).WithMessage("Site name must not exceed 30 characters.");
+                .Must(s => !string.IsNullOrEmpty(s)).WithMessage(s => localizer["Name is required"])
+                .MaximumLength(30).WithMessage(c => localizer["Name must not exceed 30 characters."]);
             RuleFor(s => s.Description)
-                .MaximumLength(100).WithMessage("Site description must not exceed 100 characters.");
+                .MaximumLength(100).WithMessage(s => localizer["Site description must not exceed 100 characters."]);
         }
 
     }

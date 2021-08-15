@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.Localization;
 using RuS.Application.Features.Categories.Commands;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,13 @@ namespace RuS.Application.Validators.Features.Categories
 {
     public class AddEditCategoryCommandValidator : AbstractValidator<AddEditCategoryCommand>
     {
-        public AddEditCategoryCommandValidator()
+        public AddEditCategoryCommandValidator(IStringLocalizer<AddEditCategoryCommandValidator> localizer)
         {
             RuleFor(c => c.Name)
-                .NotEmpty().WithMessage("Category name cannot be empty.")
-                .MaximumLength(30).WithMessage("Category name must not exceed 30 characters.");
+                .Must(c => !string.IsNullOrEmpty(c)).WithMessage(c => localizer["Name is required"])
+                .MaximumLength(30).WithMessage(c => localizer["Name must not exceed 30 characters."]);
             RuleFor(c => c.Description)
-                .MaximumLength(60).WithMessage("Category name must not exceed 60 characters.");
+                .MaximumLength(60).WithMessage(c => localizer["Name must not exceed 60 characters."]);
         }
     }
 }
