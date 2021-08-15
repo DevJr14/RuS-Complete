@@ -14,7 +14,7 @@ namespace RuS.Application.Validators.Features.Categories
         public AddEditCategoryCommandValidator(IStringLocalizer<AddEditCategoryCommandValidator> localizer)
         {
             RuleFor(c => c.Name)
-                .Must(c => !string.IsNullOrWhiteSpace(c)).WithMessage(c => localizer["Name is required"])
+                .Must(c => !string.IsNullOrEmpty(c)).WithMessage(c => localizer["Name is required"])
                 .MaximumLength(30).WithMessage(c => localizer["Name must not exceed 30 characters."]);
             RuleFor(c => c.Description)
                 .MaximumLength(60).WithMessage(c => localizer["Name must not exceed 60 characters."]);
