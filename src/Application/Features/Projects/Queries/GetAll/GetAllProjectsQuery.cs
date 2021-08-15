@@ -33,7 +33,13 @@ namespace RuS.Application.Features.Projects.Queries.GetAll
 
         public async Task<Result<List<ProjectResponse>>> Handle(GetAllProjectsQuery request, CancellationToken cancellationToken)
         {
-            var projects = await _unitOfWork.Repository<Project>().Entities.Include(p => p.Site).ToListAsync();
+            var projects = await _unitOfWork.Repository<Project>().Entities
+                .Include(p => p.Site)
+                .Include(p => p.Client)
+                .Include(p => p.Category)
+                .Include(p => p.Status)
+                .Include(p => p.Priority)
+                .ToListAsync();
             if (projects.Count > 0)
             {
                 var mappedProjects = _mapper.Map<List<ProjectResponse>>(projects);
