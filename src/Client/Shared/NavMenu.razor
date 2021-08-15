@@ -13,7 +13,6 @@
     <MudNavLink Href="/swagger/index.html" Target="_blank" Icon="@Icons.Material.Outlined.LiveHelp">
         @_localizer["Swagger"]
     </MudNavLink>
-    <MudListSubheader Class="mt-2 mb-n2">@_localizer["Personal"]</MudListSubheader>
     @if (_canViewDashboards)
     {
         <MudNavLink Href="/dashboard" Icon="@Icons.Material.Outlined.Dashboard">
@@ -31,110 +30,114 @@
     }
     @if (_canViewDocuments || _canViewDocumentTypes)
     {
-        <MudListSubheader Class="mt-2 mb-n2">@_localizer["Document Management"]</MudListSubheader>
-        @if (_canViewDocuments)
-        {
-            <MudNavLink Href="/document-store" Icon="@Icons.Material.Outlined.AttachFile">
-                @_localizer["Document Store"]
-            </MudNavLink>
-        }
-        @if (_canViewDocumentTypes)
-        {
-            <MudNavLink Href="/document-types" Icon="@Icons.Material.Outlined.FileCopy">
-                @_localizer["Document Types"]
-            </MudNavLink>
-        }
+        <MudNavGroup Title="@_localizer["Document"]" Expanded="false" Icon="@Icons.Material.Outlined.Book">
+            @if (_canViewDocuments)
+            {
+                <MudNavLink Href="/document-store" Icon="@Icons.Material.Outlined.AttachFile">
+                    @_localizer["Document Store"]
+                </MudNavLink>
+            }
+            @if (_canViewDocumentTypes)
+            {
+                <MudNavLink Href="/document-types" Icon="@Icons.Material.Outlined.FileCopy">
+                    @_localizer["Document Types"]
+                </MudNavLink>
+            }
+        </MudNavGroup>
     }
 
     @if (_canViewUsers || _canViewRoles)
     {
-        <MudListSubheader Class="mt-2 mb-n2">@_localizer["Administrator"]</MudListSubheader>
-        @if (_canViewUsers)
-        {
-            <MudNavLink Href="/identity/users" Icon="@Icons.Material.Outlined.Person">
-                @_localizer["Users"]
-            </MudNavLink>
-        }
-        @if (_canViewRoles)
-        {
-            <MudNavLink Href="/identity/roles" Icon="@Icons.Material.Outlined.Person">@_localizer["Roles"]</MudNavLink>
-        }
+        <MudNavGroup Title="@_localizer["Security"]" Expanded="true" Icon="@Icons.Material.Outlined.Security">
+            @if (_canViewUsers)
+            {
+                <MudNavLink Href="/identity/users" Icon="@Icons.Material.Outlined.Person">
+                    @_localizer["Users"]
+                </MudNavLink>
+            }
+            @if (_canViewRoles)
+            {
+                <MudNavLink Href="/identity/roles" Icon="@Icons.Material.Outlined.Person">@_localizer["Roles"]</MudNavLink>
+            }
+        </MudNavGroup>
     }
 
     @if (_canViewCompanies)
     {
-        <MudListSubheader Class="mt-2 mb-n2">@_localizer["Personal Administration"]</MudListSubheader>
-        @if (_canViewCompanies)
-        {
-            <MudNavLink Href="/core/companies" Icon="@Icons.Material.Outlined.Business">
-                @_localizer["Companies"]
-            </MudNavLink>
-        }
-        @if (_canViewEmployees)
-        {
-            <MudNavLink Href="/core/employees" Icon="@Icons.Material.Outlined.People">
-                @_localizer["Employees"]
-            </MudNavLink>
-        }
+        <MudNavGroup Title="@_localizer["Company"]" Expanded="false" Icon="@Icons.Material.Outlined.BusinessCenter">
+            @if (_canViewCompanies)
+            {
+                <MudNavLink Href="/core/companies" Icon="@Icons.Material.Outlined.Business">
+                    @_localizer["Companies"]
+                </MudNavLink>
+            }
+            @if (_canViewEmployees)
+            {
+                <MudNavLink Href="/core/employees" Icon="@Icons.Material.Outlined.People">
+                    @_localizer["Employees"]
+                </MudNavLink>
+            }
+        </MudNavGroup>
     }
 
     @if (_canViewProjects)
     {
-        <MudListSubheader Class="mt-2 mb-n2">@_localizer["Project Management"]</MudListSubheader>
-        @if (_canViewCategories)
-        {
-            <MudNavLink Href="/project/projects" Icon="@Icons.Material.Outlined.Work">
-                @_localizer["Projects"]
-            </MudNavLink>
-        }
-        @if (_canViewClients)
-        {
-            <MudNavLink Href="/project/clients" Icon="@Icons.Material.Outlined.Business">
-                @_localizer["Clients"]
-            </MudNavLink>
-        }
-        @if (_canViewCategories)
-        {
-            <MudNavLink Href="/project/categories" Icon="@Icons.Material.Outlined.Category">
-                @_localizer["Categories"]
-            </MudNavLink>
-        }
-        @if (_canViewPriorities)
-        {
-            <MudNavLink Href="/project/priorities" Icon="@Icons.Material.Outlined.LowPriority">
-                @_localizer["Priorities"]
-            </MudNavLink>
-        }
-        @if (_canViewStatuses)
-        {
-            <MudNavLink Href="/project/statuses" Icon="@Icons.Material.Outlined.Timer">
-                @_localizer["Statuses"]
-            </MudNavLink>
-        }
+        <MudNavGroup Title="@_localizer["Project"]" Expanded="false" Icon="@Icons.Material.Outlined.GroupWork">
+            @if (_canViewCategories)
+            {
+                <MudNavLink Href="/project/projects" Icon="@Icons.Material.Outlined.Work">
+                    @_localizer["Projects"]
+                </MudNavLink>
+            }
+            @if (_canViewClients)
+            {
+                <MudNavLink Href="/project/clients" Icon="@Icons.Material.Outlined.Business">
+                    @_localizer["Clients"]
+                </MudNavLink>
+            }
+            @if (_canViewCategories)
+            {
+                <MudNavLink Href="/project/categories" Icon="@Icons.Material.Outlined.Category">
+                    @_localizer["Categories"]
+                </MudNavLink>
+            }
+            @if (_canViewPriorities)
+            {
+                <MudNavLink Href="/project/priorities" Icon="@Icons.Material.Outlined.LowPriority">
+                    @_localizer["Priorities"]
+                </MudNavLink>
+            }
+            @if (_canViewStatuses)
+            {
+                <MudNavLink Href="/project/statuses" Icon="@Icons.Material.Outlined.Timer">
+                    @_localizer["Statuses"]
+                </MudNavLink>
+            }
+        </MudNavGroup>
     }
 
     @if (_canViewChat)
     {
-        <MudListSubheader Class="mt-2 mb-n2">@_localizer["Communication"]</MudListSubheader>
         <MudNavLink Href="/chat" Icon="@Icons.Material.Outlined.Chat">
             @_localizer["Chat"]
         </MudNavLink>
     }
     @if (_canViewProducts || _canViewBrands)
     {
-        <MudListSubheader Class="mt-2 mb-n2">@_localizer["Catalog Management"]</MudListSubheader>
-        @if (_canViewProducts)
-        {
-            <MudNavLink Href="/catalog/products" Icon="@Icons.Material.Outlined.CallToAction">
-                @_localizer["Products"]
-            </MudNavLink>
-        }
-        @if (_canViewBrands)
-        {
-            <MudNavLink Href="/catalog/brands" Icon="@Icons.Material.Outlined.CallToAction">
-                @_localizer["Brands"]
-            </MudNavLink>
-        }
+        <MudNavGroup Title="@_localizer["Catalog"]" Expanded="false" Icon="@Icons.Material.Outlined.Shop">
+            @if (_canViewProducts)
+            {
+                <MudNavLink Href="/catalog/products" Icon="@Icons.Material.Outlined.CallToAction">
+                    @_localizer["Products"]
+                </MudNavLink>
+            }
+            @if (_canViewBrands)
+            {
+                <MudNavLink Href="/catalog/brands" Icon="@Icons.Material.Outlined.CallToAction">
+                    @_localizer["Brands"]
+                </MudNavLink>
+            }
+        </MudNavGroup>
     }
 </MudNavMenu>
 
