@@ -14,7 +14,7 @@ namespace RuS.Application.Validators.Features.Priorities
         public AddEditPriorityCommandValidator(IStringLocalizer<AddEditPriorityCommandValidator> localizer)
         {
             RuleFor(p => p.Name)
-                .Must(c => !string.IsNullOrWhiteSpace(c)).WithMessage(c => localizer["Name is required"])
+                .Must(c => !string.IsNullOrEmpty(c)).WithMessage(c => localizer["Name is required"])
                 .MaximumLength(30).WithMessage(c => localizer["Name must not exceed 30 characters."]);
             RuleFor(p => p.Description)
                 .MaximumLength(60).WithMessage(p => localizer["Priority name must not exceed 60 characters."]);
