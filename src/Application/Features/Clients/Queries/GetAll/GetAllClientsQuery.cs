@@ -38,7 +38,7 @@ namespace RuS.Application.Features.Clients.Queries.GetAll
             }
             else
             {
-                return new Result<List<ClientResponse>>();
+                return await Result<List<ClientResponse>>.FailAsync("No Clients");
             }
         }
     }
