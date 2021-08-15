@@ -20,6 +20,7 @@ namespace RuS.Application.Features.Projects.Queries
         public int CategoryId { get; set; }
         public int PriorityId { get; set; }
         public int ClientId { get; set; }
+        public string Code { get; set; }
         public string Description { get; set; }
         public string ScopeOfWork { get; set; }
         public DateTime? Start { get; set; }
