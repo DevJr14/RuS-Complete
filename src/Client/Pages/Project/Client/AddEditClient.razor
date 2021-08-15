@@ -1,0 +1,132 @@
+﻿@page "/project/clients/add/"
+@page "/project/clients/edit/{Id:int}"
+@attribute [Authorize(Policy = Permissions.Clients.Edit)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditClient> _localizer
+
+<HeroTitle Title="@_localizer["Clients"]" Description="@_localizer["Manage Details"]" />
+
+<EditForm Model="@_command" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudCard>
+        <MudCardHeader>
+            <CardHeaderAvatar>
+                @if (Id == 0)
+                {
+                    <MudAvatar Size="Size.Small" Color="Color.Success"><b>+</b></MudAvatar>
+                }
+                else
+                {
+                    <MudAvatar Size="Size.Small" Color="Color.Primary"><b>+</b></MudAvatar>
+                }
+            </CardHeaderAvatar>
+            <CardHeaderContent>
+                @if (Id != 0)
+                {
+
+                    <MudText Typo="Typo.body1">@_localizer["Update"]</MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.body1">@_localizer["Add"]</MudText>
+                }
+            </CardHeaderContent>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@_command.Name"
+                                  For="@(() => _command.Name)"
+                                  Label="@_localizer["Name"]"
+                                  Variant="Variant.Text"
+                                  Adornment="Adornment.End"
+                                  Margin="Margin.Dense"
+                                  AdornmentIcon="@Icons.Filled.Business" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@_command.ContactPerson"
+                                  For="@(() => _command.ContactPerson)"
+                                  Label="@_localizer["Contact Person"]"
+                                  Variant="Variant.Text"
+                                  Adornment="Adornment.End"
+                                  Margin="Margin.Dense"
+                                  AdornmentIcon="@Icons.Filled.Person" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@_command.TelephoneNo"
+                                  For="@(() => _command.TelephoneNo)"
+                                  Label="@_localizer["Telephone No."]"
+                                  Variant="Variant.Text"
+                                  Adornment="Adornment.End"
+                                  Margin="Margin.Dense"
+                                  AdornmentIcon="@Icons.Filled.Phone" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@_command.CellphoneNo"
+                                  For="@(() => _command.CellphoneNo)"
+                                  Label="@_localizer["Cellphone No."]"
+                                  Variant="Variant.Text"
+                                  Adornment="Adornment.End"
+                                  Margin="Margin.Dense"
+                                  AdornmentIcon="@Icons.Filled.Phone" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@_command.Email"
+                                  For="@(() => _command.Email)"
+                                  Label="@_localizer["Email"]"
+                                  Variant="Variant.Text"
+                                  Adornment="Adornment.End"
+                                  Margin="Margin.Dense"
+                                  AdornmentIcon="@Icons.Filled.Email" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@_command.Street"
+                                  For="@(() => _command.Street)"
+                                  Label="@_localizer["Street"]"
+                                  Variant="Variant.Text"
+                                  Adornment="Adornment.End"
+                                  Margin="Margin.Dense"
+                                  AdornmentIcon="@Icons.Filled.MyLocation" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@_command.Suburb"
+                                  For="@(() => _command.Suburb)"
+                                  Label="@_localizer["Suburb"]"
+                                  Variant="Variant.Text"
+                                  Adornment="Adornment.End"
+                                  Margin="Margin.Dense"
+                                  AdornmentIcon="@Icons.Filled.MyLocation" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@_command.City"
+                                  For="@(() => _command.City)"
+                                  Label="@_localizer["City"]"
+                                  Variant="Variant.Text"
+                                  Adornment="Adornment.End"
+                                  Margin="Margin.Dense"
+                                  AdornmentIcon="@Icons.Filled.LocationCity" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@_command.Postcode"
+                                  For="@(() => _command.Postcode)"
+                                  Label="@_localizer["Postcode"]"
+                                  Variant="Variant.Text"
+                                  Adornment="Adornment.End"
+                                  Margin="Margin.Dense"
+                                  AdornmentIcon="@Icons.Filled.MyLocation" />
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton DisableElevation OnClick="@(Cancel)" Style="margin-left:7px;" Variant="Variant.Filled">@_localizer["Cancel"]</MudButton>
+            <MudSpacer />
+            @if (Id != 0)
+            {
+                <MudButton DisableElevation Style="margin-right:7px;" Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Update"]</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Style="margin-right:7px;" Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Save"]</MudButton>
+            }
+        </MudCardActions>
+    </MudCard>
+</EditForm>
