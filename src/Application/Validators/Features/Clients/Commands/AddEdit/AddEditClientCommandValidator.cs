@@ -14,12 +14,12 @@ namespace RuS.Application.Validators.Features.Clients.Commands.AddEdit
         public AddEditClientCommandValidator(IStringLocalizer<AddEditClientCommandValidator> localizer)
         {
             RuleFor(c => c.Name)
-                .Must(c => !string.IsNullOrWhiteSpace(c)).WithMessage(c => localizer["Name is required"])
+                .Must(c => !string.IsNullOrEmpty(c)).WithMessage(c => localizer["Name is required"])
                 .MaximumLength(30).WithMessage(c => localizer["Name must not exceed 30 characters."])
-                .Matches(@"^[a-zA-Z]+$").WithMessage(localizer["Name must contain alphabets only."]);
+                .Matches(@"^[a-zA-Z ]+$").WithMessage(localizer["Name must contain alphabets only."]);
             RuleFor(c => c.ContactPerson)
                 .MaximumLength(30).WithMessage(c => localizer["Contact person name must not exceed 30 characters."])
-                .Matches(@"^[a-zA-Z]+$").WithMessage(c => localizer["Contact person name must contain alphabets only."]);
+                .Matches(@"^[a-zA-Z ]+$").WithMessage(c => localizer["Contact person name must contain alphabets only."]);
             RuleFor(c => c.TelephoneNo)
                 .Length(10).WithMessage(c => localizer["Telephone no. must be 10 numbers long."])
                 .Matches(@"^[0-9]+$").WithMessage(c => localizer["Telephone no. must contain numerics only."]);
