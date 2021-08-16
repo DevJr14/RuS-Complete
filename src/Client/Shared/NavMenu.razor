@@ -83,12 +83,7 @@
     @if (_canViewProjects)
     {
         <MudNavGroup Title="@_localizer["Project"]" Expanded="false" Icon="@Icons.Material.Outlined.GroupWork">
-            @if (_canViewCategories)
-            {
-                <MudNavLink Href="/project/projects" Icon="@Icons.Material.Outlined.Work">
-                    @_localizer["Projects"]
-                </MudNavLink>
-            }
+
             @if (_canViewClients)
             {
                 <MudNavLink Href="/project/clients" Icon="@Icons.Material.Outlined.Business">
@@ -111,6 +106,12 @@
             {
                 <MudNavLink Href="/project/statuses" Icon="@Icons.Material.Outlined.Timer">
                     @_localizer["Statuses"]
+                </MudNavLink>
+            }
+            @if (_canViewCategories)
+            {
+                <MudNavLink Href="/project/projects" Icon="@Icons.Material.Outlined.Work">
+                    @_localizer["Projects"]
                 </MudNavLink>
             }
         </MudNavGroup>
