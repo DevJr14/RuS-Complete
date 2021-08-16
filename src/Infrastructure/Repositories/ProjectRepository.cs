@@ -40,7 +40,7 @@ namespace RuS.Infrastructure.Repositories
             else
             {
                 return projects.Any(p => string.Equals(p.Name, command.Name, StringComparison.OrdinalIgnoreCase)
-                    && p.ClientId == command.ClientId && p.Id == command.Id);
+                    && p.ClientId == command.ClientId && p.Id != command.Id);
             }
         }
     }
