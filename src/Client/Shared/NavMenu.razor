@@ -82,39 +82,42 @@
 
     @if (_canViewProjects)
     {
-        <MudNavGroup Title="@_localizer["Project"]" Expanded="false" Icon="@Icons.Material.Outlined.GroupWork">
+<MudNavGroup Title="@_localizer["Project"]" Expanded="false" Icon="@Icons.Material.Outlined.GroupWork">
 
-            @if (_canViewClients)
-            {
-                <MudNavLink Href="/project/clients" Icon="@Icons.Material.Outlined.Business">
-                    @_localizer["Clients"]
-                </MudNavLink>
-            }
-            @if (_canViewCategories)
-            {
-                <MudNavLink Href="/project/categories" Icon="@Icons.Material.Outlined.Category">
-                    @_localizer["Categories"]
-                </MudNavLink>
-            }
-            @if (_canViewPriorities)
-            {
-                <MudNavLink Href="/project/priorities" Icon="@Icons.Material.Outlined.LowPriority">
-                    @_localizer["Priorities"]
-                </MudNavLink>
-            }
-            @if (_canViewStatuses)
-            {
-                <MudNavLink Href="/project/statuses" Icon="@Icons.Material.Outlined.Timer">
-                    @_localizer["Statuses"]
-                </MudNavLink>
-            }
-            @if (_canViewCategories)
-            {
-                <MudNavLink Href="/project/projects" Icon="@Icons.Material.Outlined.Work">
-                    @_localizer["Projects"]
-                </MudNavLink>
-            }
-        </MudNavGroup>
+    @if (_canViewClients)
+    {
+        <MudNavLink Href="/project/clients" Icon="@Icons.Material.Outlined.Business">
+            @_localizer["Clients"]
+        </MudNavLink>
+    }
+    @if (_canViewCategories)
+    {
+        <MudNavLink Href="/project/categories" Icon="@Icons.Material.Outlined.Category">
+            @_localizer["Categories"]
+        </MudNavLink>
+    }
+    @if (_canViewPriorities)
+    {
+        <MudNavLink Href="/project/priorities" Icon="@Icons.Material.Outlined.LowPriority">
+            @_localizer["Priorities"]
+        </MudNavLink>
+    }
+    @if (_canViewStatuses)
+    {
+        <MudNavLink Href="/project/statuses" Icon="@Icons.Material.Outlined.Timer">
+            @_localizer["Statuses"]
+        </MudNavLink>
+    }
+    @if (_canViewCategories)
+    {
+        <MudNavLink Href="/project/projects" Icon="@Icons.Material.Outlined.Work">
+            @_localizer["Projects"]
+        </MudNavLink>
+        <MudNavLink Href="/project/projectlist" Icon="@Icons.Material.Outlined.Details">
+            @_localizer["Projects Grid"]
+        </MudNavLink>
+    }
+</MudNavGroup>
     }
 
     @if (_canViewChat)
