@@ -1,0 +1,60 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditPriorityModal> _localizer
+
+<EditForm Model="@_command" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (_command.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @_localizer["Add Priority"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        @_localizer["Update Priority"]
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                @if (_command.Id != 0)
+                {
+                    <MudItem xs="12" sm="6" md="6">
+                        <MudTextField Disabled For="@(() => _command.Id)" @bind-Value="_command.Id" Label="@_localizer["Id"]" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="6">
+                        <MudTextField T="string" For="@(() => _command.Name)" @bind-Value="_command.Name" Label="@_localizer["Name"]" />
+                    </MudItem>
+                }
+                else
+                {
+                    <MudItem xs="12" sm="12" md="12">
+                        <MudTextField T="string" For="@(() => _command.Name)" @bind-Value="_command.Name" Label="@_localizer["Name"]" />
+                    </MudItem>
+
+                }
+                <MudItem xs="12" sm="12" md="12">
+                    <MudTextField For="@(() => _command.Description)" @bind-Value="_command.Description" Label="@_localizer["Description"]" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
+            <MudSpacer />
+            @if (_command.Id != 0)
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Update"]</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Save"]</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>
