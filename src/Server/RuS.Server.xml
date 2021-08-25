@@ -525,7 +525,6 @@
             <summary>
             Get all Sites
             </summary>
-            <param name="id"></param>
             <returns>Status 200 Ok</returns>
         </member>
         <member name="M:RuS.Server.Controllers.v1.Core.SitesController.GetById(System.Int32)">
