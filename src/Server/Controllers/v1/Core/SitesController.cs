@@ -52,7 +52,6 @@ namespace RuS.Server.Controllers.v1.Core
         /// <summary>
         /// Get all Sites
         /// </summary>
-        /// <param name="id"></param>
         /// <returns>Status 200 Ok</returns>
         [Authorize(Policy = Permissions.Sites.View)]
         [HttpGet("all")]
