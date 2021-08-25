@@ -6,69 +6,6 @@
 
 <HeroTitle Title="@_localizer["Category"]" Description="@_localizer["Manage Category"]" />
 
-<EditForm Model="@_command" OnValidSubmit="SaveAsync">
-    <FluentValidationValidator @ref="_fluentValidationValidator" />
-    <MudCard Elevation="25">
-        <MudCardHeader>
-            <CardHeaderAvatar>
-                @if (Id == 0)
-                {
-                    <MudAvatar Size="Size.Small" Color="Color.Success"><b>+</b></MudAvatar>
-                }
-                else
-                {
-                    <MudAvatar Size="Size.Small" Color="Color.Primary"><b>+</b></MudAvatar>
-                }
-            </CardHeaderAvatar>
-            <CardHeaderContent>
-                @if (Id != 0)
-                {
-
-                    <MudText Typo="Typo.body1">@_localizer["Update"]</MudText>
-                }
-                else
-                {
-                    <MudText Typo="Typo.body1">@_localizer["Add"]</MudText>
-                }
-            </CardHeaderContent>
-        </MudCardHeader>
-        <MudCardContent>
-            <MudGrid>
-                <MudItem xs="12" sm="3" md="2">
-                    <MudTextField @bind-Value="@_command.Name"
-                                  For="@(() => _command.Name)"
-                                  Label="@_localizer["Name"]"
-                                  Variant="Variant.Text"
-                                  Adornment="Adornment.End"
-                                  Margin="Margin.Dense"
-                                  AdornmentIcon="@Icons.Filled.Category" />
-                </MudItem>
-                <MudItem xs="12" sm="9" md="10">
-                    <MudTextField @bind-Value="@_command.Description"
-                                  For="@(() => _command.Description)"
-                                  Label="@_localizer["Description"]"
-                                  Variant="Variant.Text"
-                                  Adornment="Adornment.End"
-                                  Margin="Margin.Dense"
-                                  AdornmentIcon="@Icons.Filled.Description" />
-                </MudItem>
-            </MudGrid>
-        </MudCardContent>
-        <MudCardActions>
-            <MudButton DisableElevation OnClick="@(Reset)" Style="margin-left:7px;" Variant="Variant.Filled">@_localizer["Reset"]</MudButton>
-            <MudSpacer />
-            @if (Id != 0)
-            {
-                <MudButton DisableElevation Style="margin-right:7px;" Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Update"]</MudButton>
-            }
-            else
-            {
-                <MudButton DisableElevation Style="margin-right:7px;" Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Save"]</MudButton>
-            }
-        </MudCardActions>
-    </MudCard>
-</EditForm>
-
 <style>
     .mud-table-container {
         overflow: auto;
@@ -85,7 +22,7 @@ else
             <div class="justify-center mud-text-align-center">
                 @if (_canCreateCategories)
                 {
-                    @*<MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="(() => UpdateCategory())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>*@
+                    <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>
                     <MudButton DisableElevation Variant="Variant.Filled" OnClick="GetCategoriesAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
                     @if (_canExportCategories)
                     {
@@ -125,7 +62,7 @@ else
                     <MudMenu Label="@_localizer["Actions"]" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
                         @if (_canEditCategories)
                             {
-                            <MudMenuItem @onclick="@(() => UpdateCategory(@context.Id))">@_localizer["Edit"]</MudMenuItem>
+                            <MudMenuItem @onclick="@(() => InvokeModal(@context.Id))">@_localizer["Edit"]</MudMenuItem>
                             }
                         @if (_canDeleteCategories)
                             {

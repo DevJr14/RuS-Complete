@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
-using RuS.Application.Features.Priorities.Queries;
 using RuS.Application.Features.Statuses.Commands;
 using RuS.Application.Features.Statuses.Queries;
 using RuS.Client.Infrastructure.Managers.Project.Status;
@@ -141,14 +140,28 @@ namespace RuS.Client.Pages.Project.Status
             }
         }
 
-        private async Task UpdateStatus(int id = 0)
+        private async Task InvokeModal(int id = 0)
         {
-            _status = _statusList.FirstOrDefault(c => c.Id == id);
-            if (_status != null)
+            var parameters = new DialogParameters();
+            if (id != 0)
             {
-                _command.Id = _status.Id;
-                _command.Name = _status.Name;
-                _command.Description = _status.Description;
+                var status = _statusList.FirstOrDefault(c => c.Id == id);
+                if (status != null)
+                {
+                    parameters.Add(nameof(AddEditStatusModal._command), new AddEditStatusCommand
+                    {
+                        Id = status.Id,
+                        Name = status.Name,
+                        Description = status.Description
+                    });
+                }
+            }
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<AddEditStatusModal>(id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                await Reset();
             }
         }
 
