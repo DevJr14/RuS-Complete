@@ -2,17 +2,12 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
-using RuS.Application.Features.Projects.Queries;
 using RuS.Application.Interfaces.Repositories;
-using RuS.Domain.Entities.Projects;
 using RuS.Shared.Wrapper;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using static RuS.Shared.Constants.Permission.Permissions;
 using Task = RuS.Domain.Entities.Projects.Task;
 
 namespace RuS.Application.Features.Tasks.Queries.GetAll
