@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RuS.Infrastructure.Contexts;
 
 namespace RuS.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210826172114_Task Entity")]
+    partial class TaskEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -598,7 +600,7 @@ namespace RuS.Infrastructure.Migrations
                     b.Property<DateTime?>("ActualStart")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<int>("ClientId")
@@ -628,7 +630,7 @@ namespace RuS.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PriorityId")
+                    b.Property<int>("PriorityId")
                         .HasColumnType("int");
 
                     b.Property<string>("ScopeOfWork")
@@ -640,7 +642,7 @@ namespace RuS.Infrastructure.Migrations
                     b.Property<DateTime?>("Start")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("StatusId")
+                    b.Property<int>("StatusId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -1085,7 +1087,9 @@ namespace RuS.Infrastructure.Migrations
                 {
                     b.HasOne("RuS.Domain.Entities.Projects.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("RuS.Domain.Entities.Projects.Client", "Client")
                         .WithMany("Projects")
@@ -1095,7 +1099,9 @@ namespace RuS.Infrastructure.Migrations
 
                     b.HasOne("RuS.Domain.Entities.Projects.Priority", "Priority")
                         .WithMany()
-                        .HasForeignKey("PriorityId");
+                        .HasForeignKey("PriorityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("RuS.Domain.Entities.Core.Site", "Site")
                         .WithMany()
@@ -1105,7 +1111,9 @@ namespace RuS.Infrastructure.Migrations
 
                     b.HasOne("RuS.Domain.Entities.Projects.Status", "Status")
                         .WithMany()
-                        .HasForeignKey("StatusId");
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
 
