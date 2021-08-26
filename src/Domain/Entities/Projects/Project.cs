@@ -16,11 +16,11 @@ namespace RuS.Domain.Entities.Projects
 
         public int SiteId { get; set; }
 
-        public int StatusId { get; set; }
+        public int? StatusId { get; set; }
 
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
-        public int PriorityId { get; set; }
+        public int? PriorityId { get; set; }
 
         public int ClientId { get; set; }
 
@@ -41,5 +41,6 @@ namespace RuS.Domain.Entities.Projects
         public Category Category { get; set; }
         public Priority Priority { get; set; }
         public Client Client { get; set; }
+        public List<Task> Tasks { get; set; } = new();
     }
 }
