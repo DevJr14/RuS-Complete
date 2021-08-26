@@ -12,6 +12,7 @@ using RuS.Domain.Entities.ExtendedAttributes;
 using RuS.Domain.Entities.Misc;
 using RuS.Domain.Entities.Core;
 using RuS.Domain.Entities.Projects;
+using Task = RuS.Domain.Entities.Projects.Task;
 
 namespace RuS.Infrastructure.Contexts
 {
@@ -42,6 +43,7 @@ namespace RuS.Infrastructure.Contexts
         public DbSet<Priority> Priorities { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Task> Tasks { get; set; }
 
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
