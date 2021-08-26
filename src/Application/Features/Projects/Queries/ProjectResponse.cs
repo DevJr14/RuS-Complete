@@ -16,9 +16,9 @@ namespace RuS.Application.Features.Projects.Queries
         public int Id { get; set; }
         public string Name { get; set; }
         public int SiteId { get; set; }
-        public int StatusId { get; set; }
-        public int CategoryId { get; set; }
-        public int PriorityId { get; set; }
+        public int? StatusId { get; set; }
+        public int? CategoryId { get; set; }
+        public int? PriorityId { get; set; }
         public int ClientId { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
