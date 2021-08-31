@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RuS.Client.Infrastructure.Managers.Project.Task
 {
-    interface ITaskManager : IManager
+    public interface ITaskManager : IManager
     {
         Task<IResult<List<TaskResponse>>> GetAllAsync();
 
