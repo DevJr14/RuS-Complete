@@ -525,7 +525,6 @@
             <summary>
             Get all Sites
             </summary>
-            <param name="id"></param>
             <returns>Status 200 Ok</returns>
         </member>
         <member name="M:RuS.Server.Controllers.v1.Core.SitesController.GetById(System.Int32)">
@@ -721,6 +720,47 @@
         <member name="M:RuS.Server.Controllers.v1.Project.StatusesController.Export(System.String)">
             <summary>
             Search Status and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TasksController.GetAll">
+            <summary>
+            Get All Tasks
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TasksController.GetAllForProject(System.Int32)">
+            <summary>
+            Get All Tasks For a Project
+            </summary>
+            <param name="projectId"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TasksController.GetById(System.Int32)">
+            <summary>
+            Get a Task By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TasksController.Post(RuS.Application.Features.Tasks.Commands.AddEdit.AddEditTaskCommand)">
+            <summary>
+            Create/Update a Task
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TasksController.Delete(System.Int32)">
+            <summary>
+            Delete a Task
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TasksController.Export(System.String)">
+            <summary>
+            Search Tasks and Export to Excel
             </summary>
             <param name="searchString"></param>
             <returns></returns>

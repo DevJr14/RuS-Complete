@@ -1,0 +1,42 @@
+﻿@page "/project/projectlist"
+
+<MudCard Elevation="0" Outlined="false" Class="mb-1">
+    <MudCardContent>
+        <HeroTitle Title="Projects" Description="Project Management" />
+    </MudCardContent>
+</MudCard>
+<MudTabs Elevation="0" Rounded="true" Outlined="false" Color="@Color.Info" PrevIcon="@Icons.Filled.SkipPrevious" NextIcon="@Icons.Filled.SkipNext">
+    <MudTabPanel Text="Projects">
+        <MudCard Elevation="0" Outlined="false" Class="mb-1">
+            <MudToolBar>
+                <MudFab Color="Color.Success" Size="Size.Small" IconSize="Size.Small" Icon="@Icons.Material.Filled.Add" aria-label="add" />
+                <MudSpacer />
+                <MudIconButton Icon="@Icons.Material.Outlined.MoreVert" Color="Color.Inherit" />
+            </MudToolBar>
+        </MudCard>
+        <MudGrid Spacing="1">
+            @if (_projectList.Any())
+            {
+                foreach (var project in _projectList)
+                {
+                    <MudItem xs="6" sm="3">
+                        <ProjectCard Project="@project" />
+                    </MudItem>
+                }
+            }
+        </MudGrid>
+    </MudTabPanel>
+    <MudTabPanel Text="Teams">
+        <MudGrid Spacing="1" Class="mt-1">
+            @if (_projectList.Any())
+            {
+                foreach (var project in _projectList)
+                {
+                    <MudItem xs="6" sm="3">
+                        <ProjectCard Project="@project" />
+                    </MudItem>
+                }
+            }
+        </MudGrid>
+    </MudTabPanel>
+</MudTabs>

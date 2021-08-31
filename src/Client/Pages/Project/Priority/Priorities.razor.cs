@@ -140,14 +140,28 @@ namespace RuS.Client.Pages.Project.Priority
             }
         }
 
-        private async Task UpdatePriority(int id = 0)
+        private async Task InvokeModal(int id = 0)
         {
-            _priority = _priorityList.FirstOrDefault(c => c.Id == id);
-            if (_priority != null)
+            var parameters = new DialogParameters();
+            if (id != 0)
             {
-                _command.Id = _priority.Id;
-                _command.Name = _priority.Name;
-                _command.Description = _priority.Description;
+                var priority = _priorityList.FirstOrDefault(c => c.Id == id);
+                if (priority != null)
+                {
+                    parameters.Add(nameof(AddEditPriorityModal._command), new AddEditPriorityCommand
+                    {
+                        Id = priority.Id,
+                        Name = priority.Name,
+                        Description = priority.Description
+                    });
+                }
+            }
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<AddEditPriorityModal>(id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                await Reset();
             }
         }
 

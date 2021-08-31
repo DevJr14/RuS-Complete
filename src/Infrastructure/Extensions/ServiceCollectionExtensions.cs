@@ -37,6 +37,7 @@ namespace RuS.Infrastructure.Extensions
                 .AddTransient<IPriorityRepository, PriorityRepository>()
                 .AddTransient<IClientRepository, ClientRepository>()
                 .AddTransient<IProjectRepository, ProjectRepository>()
+                .AddTransient<ITaskRepository, TaskRepository>()
                 .AddTransient<IDocumentTypeRepository, DocumentTypeRepository>()
                 .AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
         }

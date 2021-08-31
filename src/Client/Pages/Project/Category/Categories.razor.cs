@@ -140,15 +140,40 @@ namespace RuS.Client.Pages.Project.Category
             }
         }
 
-        private async Task UpdateCategory(int id = 0)
-        {           
+        private void UpdateCategory(int id = 0)
+        {
             _category = _categoryList.FirstOrDefault(c => c.Id == id);
             if (_category != null)
             {
                 _command.Id = _category.Id;
                 _command.Name = _category.Name;
                 _command.Description = _category.Description;
-            }          
+            }
+        }
+
+        private async Task InvokeModal(int id = 0)
+        {
+            var parameters = new DialogParameters();
+            if (id != 0)
+            {
+                var category = _categoryList.FirstOrDefault(c => c.Id == id);
+                if (category != null)
+                {
+                    parameters.Add(nameof(AddEditCategoryModal._command), new AddEditCategoryCommand
+                    {
+                        Id = category.Id,
+                        Name = category.Name,
+                        Description = category.Description
+                    });
+                }
+            }
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<AddEditCategoryModal>(id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                await Reset();
+            }
         }
 
         private async Task Reset()
