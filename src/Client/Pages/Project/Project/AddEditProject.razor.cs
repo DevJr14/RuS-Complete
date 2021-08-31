@@ -1,6 +1,7 @@
 ﻿using Blazored.FluentValidation;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using RuS.Application.Features.Categories.Commands;
 using RuS.Application.Features.Categories.Queries;
 using RuS.Application.Features.Clients.Queries;
 using RuS.Application.Features.Priorities.Queries;
@@ -8,12 +9,17 @@ using RuS.Application.Features.Projects.Commands.AddEdit;
 using RuS.Application.Features.Projects.Queries;
 using RuS.Application.Features.Sites.Queries.GetById;
 using RuS.Application.Features.Statuses.Queries;
+using RuS.Application.Features.Tasks.Commands.AddEdit;
+using RuS.Application.Features.Tasks.Queries;
 using RuS.Client.Infrastructure.Managers.Core.Site;
 using RuS.Client.Infrastructure.Managers.Project.Category;
 using RuS.Client.Infrastructure.Managers.Project.Client;
 using RuS.Client.Infrastructure.Managers.Project.Priority;
 using RuS.Client.Infrastructure.Managers.Project.Project;
 using RuS.Client.Infrastructure.Managers.Project.Status;
+using RuS.Client.Infrastructure.Managers.Project.Task;
+using RuS.Client.Pages.Project.Category;
+using RuS.Client.Pages.Project.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +35,7 @@ namespace RuS.Client.Pages.Project.Project
         [Inject] public ICategoryManager CategoryManager { get; set; }
         [Inject] public IPriorityManager PriorityManager { get; set; }
         [Inject] public IStatusManager StatusManager { get; set; }
+        [Inject] public ITaskManager TaskManager { get; set; }
 
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
@@ -36,6 +43,8 @@ namespace RuS.Client.Pages.Project.Project
         [Parameter] public int Id { get; set; }
         [Parameter] public AddEditProjectCommand _command { get; set; } = new();
         [Parameter] public ProjectResponse _project { get; set; }
+
+        private List<TaskResponse> _taskList = new();
 
         private List<SiteResponse> _sites = new();
         private List<ClientResponse> _clients = new();
@@ -75,10 +84,10 @@ namespace RuS.Client.Pages.Project.Project
                     _command.Id = _project.Id;
                     _command.Name = _project.Name;
                     _command.SiteId = _project.SiteId;
-                    _command.CategoryId = _project.CategoryId;
+                    _command.CategoryId = (int)_project.CategoryId;
                     _command.ClientId = _project.ClientId;
-                    _command.PriorityId = _project.PriorityId;
-                    _command.StatusId = _project.StatusId;
+                    _command.PriorityId = (int)_project.PriorityId;
+                    _command.StatusId = (int)_project.StatusId;
                     _command.Description = _project.Description;
                     _command.ScopeOfWork = _project.ScopeOfWork;
                     _command.Start = _project.Start;
@@ -88,15 +97,25 @@ namespace RuS.Client.Pages.Project.Project
                 }
             }
             await LoadDataAsync();
-        }
+        }       
 
         private async Task LoadDataAsync()
         {
+            await LoadTasks();
             await LoadSitesAsync();
             await LoadCategories();
             await LoadPriorities();
             await LoadStatuses();
             await LoadClients();
+        }
+
+        private async Task LoadTasks()
+        {
+            var data = await TaskManager.GetAllForProjectAsync(Id);
+            if (data.Succeeded)
+            {
+                _taskList = data.Data;
+            }
         }
 
         private async Task LoadSitesAsync()
@@ -142,6 +161,49 @@ namespace RuS.Client.Pages.Project.Project
             {
                 _clients = response.Data;
             }
+        }
+
+        private async Task InvokeModal(int id = 0)
+        {
+            var parameters = new DialogParameters();
+            if (id != 0)
+            {
+                var task = _taskList.FirstOrDefault(t => t.Id == id);
+                if (task != null)
+                {
+                    parameters.Add(nameof(AddEditTaskModal._command), new AddEditTaskCommand
+                    {
+                        Id = task.Id,
+                        Name = task.Name,
+                        Description = task.Description,
+                        CategoryId = (int)task.CategoryId,
+                        PriorityId = (int)task.PriorityId,
+                        ProjectId = Id,
+                        StatusId = (int)task.StatusId,
+                        Start = task.Start,
+                        End = task.End
+                    });
+                }
+            }
+            else
+            {
+                parameters.Add(nameof(AddEditTaskModal._command), new AddEditTaskCommand
+                {
+                    ProjectId = Id
+                });
+            }
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<AddEditTaskModal>(id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                await Reset();
+            }
+        }
+
+        private async Task Reset()
+        {
+            await LoadTasks();
         }
 
         private async Task<IEnumerable<int>> SearchSites(string value)
