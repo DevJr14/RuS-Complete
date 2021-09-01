@@ -1,10 +1,13 @@
-﻿<MudCard Elevation="0" Outlined="false" Class="mb-1" @onclick="@(() => Details())" Style="cursor:pointer">
+﻿<MudCard Elevation="25" Outlined="false" Class="mb-1" @onclick="@(() => Details())" Style="cursor:pointer">
     <MudCardHeader>
+        <CardHeaderAvatar>
+            <MudAvatar Color="Color.Secondary">P</MudAvatar>
+        </CardHeaderAvatar>
         <CardHeaderContent>
-            <MudText Typo="Typo.body1">@Project.Name</MudText>            
+            <MudText Typo="Typo.body1">@Project.Name</MudText>
         </CardHeaderContent>
         <CardHeaderActions>
-            <MudMenu Icon="@Icons.Material.Filled.MoreVert" OffsetX="true">
+            <MudMenu Icon="@Icons.Material.Filled.MoreVert" OffsetX="true" Direction="Direction.Left" Class="mr-3">
                 <MudMenuItem>Activate</MudMenuItem>
                 <MudMenuItem>Update</MudMenuItem>
                 <MudMenuItem>Tracking</MudMenuItem>
@@ -14,12 +17,6 @@
     <MudCardContent>
         <MudText Typo="Typo.body2">@Project.Description</MudText>
     </MudCardContent>
-    <MudCardActions>
-        <MudSpacer />
-        <MudTooltip Text="Complete" Delay="0" Placement="Placement.Top">
-            <MudFab Color="Color.Tertiary" Icon="@Icons.Material.Filled.Check" Size="Size.Small" IconSize="Size.Medium" Class="ma-2" />
-        </MudTooltip>
-    </MudCardActions>
 </MudCard>
 
 
