@@ -27,10 +27,10 @@ namespace RuS.Application.Validators.Features.Projects.Commans.AddEdit
                 .GreaterThan(0).WithMessage(c => localizer["Project must have Category."]);
             RuleFor(p => p.ClientId)
                 .GreaterThan(0).WithMessage(c => localizer["Project must have Client."]);
-            RuleFor(p => p.Start)
-                .LessThanOrEqualTo(p => p.End).WithMessage(c => localizer["Start cannot be greater than End."]);
-            RuleFor(p => p.ActualStart)
-                .LessThanOrEqualTo(p => p.ActualEnd).WithMessage(c => localizer["Start cannot be greater than End."]);
+            RuleFor(p => p.End)
+                .GreaterThanOrEqualTo(p => p.Start).WithMessage(c => localizer["End should be greater than or equal Start."]);
+            RuleFor(p => p.ActualEnd)
+                .GreaterThanOrEqualTo(p => p.ActualStart).WithMessage(c => localizer["End should be greater than or equal Start."]);
         }
     }
 }
