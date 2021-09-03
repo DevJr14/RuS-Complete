@@ -1,106 +1,64 @@
 ﻿@page "/project/projects"
 @attribute [Authorize(Policy = Permissions.Projects.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Projects> _localizer
-@using RuS.Application.Features.Projects.Queries;
 
-<style>
-    .mud-table-container {
-        overflow: auto;
-    }
-</style>
 
-<HeroTitle Title="@_localizer["Projects"]" Description="@_localizer["Manage Projects."]" />
-@if (!_loaded)
-{
-    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
-}
-else
-{
-    <MudTable Hover="true" Elevation="25" Items="_projectList" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" Filter="new Func<ProjectResponse, bool>(Search)" @bind-brand="_project">
-        <ToolBarContent>
-            <div class="justify-center mud-text-align-center">
+<MudCard Elevation="0" Outlined="false" Class="mb-1">
+    <MudCardContent>
+        <MudToolBar>
+            <HeroTitle Title="Projects Management" Description=""/>
+            <MudSpacer />
+            <MudFab Size="Size.Small" Color="Color.Secondary" OnClick="(() => ReturnHome())" IconSize="Size.Small" Icon="@Icons.Material.Filled.Close" aria-label="close" />
+        </MudToolBar>
+    </MudCardContent>
+</MudCard>
+<MudTabs Elevation="25" Rounded="true" Outlined="false" Color="@Color.Transparent" PrevIcon="@Icons.Filled.SkipPrevious" NextIcon="@Icons.Filled.SkipNext" PanelClass="mt-6">
+    <MudTabPanel Text="Projects">
+        <MudCard Elevation="25" Outlined="false" Class="mb-1">
+            <MudToolBar>
                 @if (_canCreateProjects)
-                {
-                    <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="(() => ProjectDetails(0))" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>
-                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="GetProjectsAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+                {                    
+                    <MudFab Color="Color.Success" Size="Size.Small" OnClick="(() => AddEdit(0))" IconSize="Size.Small" Icon="@Icons.Material.Filled.Add" aria-label="add" />
+                    <MudFab Color="Color.Secondary" Size="Size.Small" OnClick="GetProjectsAsync" IconSize="Size.Small" Icon="@Icons.Material.Filled.Refresh" Style="margin-left: 5px;" aria-label="refresh" />
                     @if (_canExportProjects)
                     {
-                        <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export"]</MudButton>
+                        <MudFab Color="Color.Secondary" Size="Size.Small" OnClick="ExportToExcel" IconSize="Size.Small" Icon="@Icons.Custom.FileFormats.FileExcel" Style="margin-left: 5px;" aria-label="export" />
                     }
                 }
                 else
                 {
-                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="GetProjectsAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+                    <MudFab Color="Color.Secondary" Size="Size.Small" OnClick="GetProjectsAsync" IconSize="Size.Small" Icon="@Icons.Material.Filled.Refresh" aria-label="refresh" />
                     @if (_canExportProjects)
                     {
-                        <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export"]</MudButton>
+                        <MudFab Color="Color.Secondary" Size="Size.Small" OnClick="ExportToExcel" IconSize="Size.Small" Icon="@Icons.Custom.FileFormats.FileExcel" Style="margin-left: 5px;" aria-label="export" />
                     }
                 }
-            </div>
-            <MudToolBarSpacer />
-            @if (_canSearchProjects)
+                <MudSpacer />
+            </MudToolBar>
+        </MudCard>
+        <MudGrid Spacing="1">
+            @if (_projectList.Any())
             {
-                <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="@_localizer["Search for projects"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
+                foreach (var project in _projectList)
+                {
+                    <MudItem xs="12" sm="6" Class="mt-2">
+                        <ProjectCard OnEditSelection="AddEdit" OnDeleteSelection="Delete" Project="@project" />
+                    </MudItem>
+                }
             }
-        </ToolBarContent>
-        <HeaderContent>
-            <MudTh><MudTableSortLabel SortBy="new Func<ProjectResponse, object>(x => x.Name)">@_localizer["Name"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<ProjectResponse, object>(x => x.Code)">@_localizer["Code"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<ProjectResponse, object>(x => x.Site.Name)">@_localizer["Site"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<ProjectResponse, object>(x => x.Category.Name)">@_localizer["Category"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<ProjectResponse, object>(x => x.Priority.Name)">@_localizer["Priority"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<ProjectResponse, object>(x => x.Status.Name)">@_localizer["Status"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<ProjectResponse, object>(x => x.Start)">@_localizer["Start"]</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<ProjectResponse, object>(x => x.End)">@_localizer["End"]</MudTableSortLabel></MudTh>
-            <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
-        </HeaderContent>
-        <RowTemplate>
-            <MudTd DataLabel="Name">
-                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
-            </MudTd>
-            <MudTd DataLabel="Code">
-                <MudHighlighter Text="@context.Code" HighlightedText="@_searchString" />
-            </MudTd>
-            <MudTd DataLabel="Site">@context.Site.Name</MudTd>
-            <MudTd DataLabel="Category">@context.Category.Name</MudTd>
-            <MudTd DataLabel="Priority">@context.Priority.Name</MudTd>
-            <MudTd DataLabel="Status">@context.Status.Name</MudTd>
-            <MudTd DataLabel="Start">@context.Start</MudTd>
-            <MudTd DataLabel="End">@context.End</MudTd>
-            <MudTd DataLabel="Actions" Style="text-align: right">
-                @if (_canEditProjects || _canDeleteProjects)
-                    {
-                    <MudMenu Label="@_localizer["Actions"]" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
-                        @if (_canEditProjects)
-                            {
-                            <MudMenuItem @onclick="@(() => ProjectDetails(@context.Id))">@_localizer["Edit"]</MudMenuItem>
-                            }
-                        @if (_canDeleteProjects)
-                            {
-                            <MudMenuItem @onclick="@(() => Delete(@context.Id))">@_localizer["Delete"]</MudMenuItem>
-                            }
-                    </MudMenu>
-                    }
-                    else
-                    {
-                    <MudButton Variant="Variant.Filled"
-                               DisableElevation="true"
-                               StartIcon="@Icons.Material.Filled.DoNotTouch"
-                               IconColor="Color.Secondary"
-                               Size="Size.Small"
-                               Color="Color.Surface">
-                        @_localizer["No Allowed Actions"]
-                    </MudButton>
-                    }
-            </MudTd>
-        </RowTemplate>
-        <FooterContent>
-            <MudSwitch @bind-Checked="@_dense" Color="Color.Secondary" Style="margin-left: 5px;">@_localizer["Dense"]</MudSwitch>
-            <MudSwitch @bind-Checked="@_striped" Color="Color.Tertiary" Style="margin-left: 5px;">@_localizer["Striped"]</MudSwitch>
-            <MudSwitch @bind-Checked="@_bordered" Color="Color.Warning" Style="margin-left: 5px;">@_localizer["Bordered"]</MudSwitch>
-        </FooterContent>
-        <PagerContent>
-            <TablePager />
-        </PagerContent>
-    </MudTable>
-}
+        </MudGrid>
+    </MudTabPanel>
+    <MudTabPanel Text="Address">
+        <MudGrid Spacing="1">
+            @if (_projectList.Any())
+            {
+                foreach (var project in _projectList)
+                {
+                    <MudItem xs="12" sm="6" Class="mt-2">
+                        <ProjectCard Project="@project" />
+                    </MudItem>
+                }
+            }
+        </MudGrid>
+    </MudTabPanel>
+</MudTabs>

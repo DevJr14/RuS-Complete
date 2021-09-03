@@ -1,24 +1,20 @@
 ﻿
 <MudCard Elevation="25" Outlined="false">
-    <MudProgressLinear Color="Color.Success" Size="Size.Small" Minimum="20" Maximum="100" Min="2" Value="60" Indeterminate="false"/>
+    <MudProgressLinear Color="Color.Secondary" Size="Size.Small" Minimum="20" Maximum="100" Min="2" Value="60" Indeterminate="false"/>
     <MudCardHeader>
         <CardHeaderAvatar>
-            <MudAvatar Size="Size.Small" Color="Color.Success">I</MudAvatar>
+            <MudAvatar Size="Size.Small" Color="Color.Secondary">I</MudAvatar>
         </CardHeaderAvatar>
         <CardHeaderContent>
             <MudText Typo="Typo.body1">@Task.Name</MudText>
         </CardHeaderContent>
         <CardHeaderActions>
             <MudMenu Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small" OffsetX="true" Direction="Direction.Left" Class="mr-3 mt-3">
-                <MudMenuItem>Activate</MudMenuItem>
-                <MudMenuItem>Update</MudMenuItem>
-                <MudMenuItem>Tracking</MudMenuItem>
+                <MudMenuItem @onclick="(args) => EditProjectSelectionChanged(args, Task.Id)">Edit</MudMenuItem>
+                <MudMenuItem>Complete</MudMenuItem>
+                <MudMenuItem OnClick="@((args)=>DeleteSelectionChanged(args, Task.Id))">Delete</MudMenuItem>
             </MudMenu>
         </CardHeaderActions>
     </MudCardHeader>
-    @*<MudCardContent>
-        <MudText>This day everything happend.</MudText>
-        <MudText Typo="Typo.body2">The quick, brown fox jumps over a lazy dog.</MudText>
-    </MudCardContent>*@
 </MudCard>
 

@@ -108,13 +108,10 @@
             @_localizer["Statuses"]
         </MudNavLink>
     }
-    @if (_canViewCategories)
+    @if (_canViewProjects)
     {
         <MudNavLink Href="/project/projects" Icon="@Icons.Material.Outlined.Work">
             @_localizer["Projects"]
-        </MudNavLink>
-        <MudNavLink Href="/project/projectlist" Icon="@Icons.Material.Outlined.Details">
-            @_localizer["Projects Grid"]
         </MudNavLink>
     }
 </MudNavGroup>

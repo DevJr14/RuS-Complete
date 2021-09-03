@@ -173,14 +173,10 @@
     @if (_command.Id != 0)
     {
         <MudTabPanel Text="Tasks">
-            <MudCard Elevation="25" Outlined="false" Class="mb-1">
-                <MudToolBar>
-                    <MudText Typo="Typo.body1"> Add New Task</MudText>
-                    <MudSpacer />
-                    <MudFab @onclick="@(() => InvokeModal())" Color="Color.Success" Size="Size.Small" IconSize="Size.Small" Icon="@Icons.Material.Filled.Add" aria-label="add" />
-                </MudToolBar>
-            </MudCard>
-            <ProjectTasks Id="@_command.Id"/>
+            <ProjectTasks Id="@_command.Id" />
+        </MudTabPanel>
+        <MudTabPanel Text="Teams">
+            <ProjectTasks Id="@_command.Id" />
         </MudTabPanel>
     }
 </MudTabs>

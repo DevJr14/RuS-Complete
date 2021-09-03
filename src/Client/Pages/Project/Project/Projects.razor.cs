@@ -80,6 +80,7 @@ namespace RuS.Client.Pages.Project.Project
                 if (response.Succeeded)
                 {
                     _snackBar.Add(response.Messages[0], Severity.Success);
+                    await Reset();
                 }
                 else
                 {
@@ -115,7 +116,7 @@ namespace RuS.Client.Pages.Project.Project
             }
         }
 
-        private void ProjectDetails(int id)
+        private void AddEdit(int id)
         {
             if (id == 0)
             {
@@ -125,6 +126,11 @@ namespace RuS.Client.Pages.Project.Project
             {
                 _navigationManager.NavigateTo($"/project/projects/edit/{id}");
             }
+        }
+
+        private void ReturnHome()
+        {
+            _navigationManager.NavigateTo("/");
         }
 
         private async Task Reset()

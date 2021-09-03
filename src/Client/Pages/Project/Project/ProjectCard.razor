@@ -1,4 +1,5 @@
-﻿<MudCard Elevation="25" Outlined="false" Class="mb-1" @onclick="@(() => Details())" Style="cursor:pointer">
+﻿<MudCard Elevation="25" Outlined="false" Class="mb-1" @onclick="@(() => Details(Project.Id))" Style="cursor:pointer">
+    <MudProgressLinear Color="Color.Secondary" Size="Size.Small" Minimum="20" Maximum="100" Min="2" Value="60" Indeterminate="false" />
     <MudCardHeader>
         <CardHeaderAvatar>
             <MudAvatar Color="Color.Secondary">P</MudAvatar>
@@ -8,15 +9,12 @@
         </CardHeaderContent>
         <CardHeaderActions>
             <MudMenu Icon="@Icons.Material.Filled.MoreVert" OffsetX="true" Direction="Direction.Left" Class="mr-3">
-                <MudMenuItem>Activate</MudMenuItem>
+                <MudMenuItem @onclick="(args) => EditProjectSelectionChanged(args, Project.Id)">Edit</MudMenuItem>
                 <MudMenuItem>Update</MudMenuItem>
-                <MudMenuItem>Tracking</MudMenuItem>
+                <MudMenuItem OnClick="@((args)=>DeleteSelectionChanged(args, Project.Id))">Delete</MudMenuItem>
             </MudMenu>
         </CardHeaderActions>
     </MudCardHeader>
-    <MudCardContent>
-        <MudText Typo="Typo.body2">@Project.Description</MudText>
-    </MudCardContent>
 </MudCard>
 
 
