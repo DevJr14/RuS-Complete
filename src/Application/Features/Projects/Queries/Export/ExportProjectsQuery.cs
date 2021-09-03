@@ -64,8 +64,8 @@ namespace RuS.Application.Features.Projects.Queries.Export
                 { _localizer["Scope Of Work"], item => item.ScopeOfWork },
                 { _localizer["Start Date"], item => DateTime.SpecifyKind((DateTime)item.Start, DateTimeKind.Utc).ToLocalTime().ToString("G", CultureInfo.CurrentCulture) },
                 { _localizer["End Date"], item => DateTime.SpecifyKind((DateTime)item.End, DateTimeKind.Utc).ToLocalTime().ToString("G", CultureInfo.CurrentCulture) },
-                { _localizer["Actual Start"], item => DateTime.SpecifyKind((DateTime)item.ActualStart, DateTimeKind.Utc).ToLocalTime().ToString("G", CultureInfo.CurrentCulture) },
-                { _localizer["Actual End"], item => DateTime.SpecifyKind((DateTime)item.ActualEnd, DateTimeKind.Utc).ToLocalTime().ToString("G", CultureInfo.CurrentCulture) },
+                { _localizer["Actual Start"], item => DateTime.SpecifyKind(item.ActualStart.GetValueOrDefault(), DateTimeKind.Utc).ToLocalTime().ToString("G", CultureInfo.CurrentCulture) },
+                { _localizer["Actual End"], item => DateTime.SpecifyKind(item.ActualEnd.GetValueOrDefault(), DateTimeKind.Utc).ToLocalTime().ToString("G", CultureInfo.CurrentCulture) },
             }, sheetName: _localizer["Projects"]);
 
             return await Result<string>.SuccessAsync(data: data);
