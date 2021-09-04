@@ -115,13 +115,23 @@ namespace RuS.Shared.Constants.Permission
             public const string Search = "Permissions.Tasks.Search";
         }
 
+        public static class Teams
+        {
+            public const string View = "Permissions.Tasks.View";
+            public const string Create = "Permissions.Tasks.Create";
+            public const string Edit = "Permissions.Tasks.Edit";
+            public const string Delete = "Permissions.Tasks.Delete";
+            public const string Export = "Permissions.Tasks.Export";
+            public const string Search = "Permissions.Tasks.Search";
+        }
+
         public static class Documents
         {
-            public const string View = "Permissions.Documents.View";
-            public const string Create = "Permissions.Documents.Create";
-            public const string Edit = "Permissions.Documents.Edit";
-            public const string Delete = "Permissions.Documents.Delete";
-            public const string Search = "Permissions.Documents.Search";
+            public const string View = "Permissions.Team.View";
+            public const string Create = "Permissions.Team.Create";
+            public const string Edit = "Permissions.Team.Edit";
+            public const string Delete = "Permissions.Team.Delete";
+            public const string Search = "Permissions.Team.Search";
         }
 
         public static class DocumentTypes
