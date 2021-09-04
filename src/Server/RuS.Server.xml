@@ -765,5 +765,52 @@
             <param name="searchString"></param>
             <returns></returns>
         </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.GetAll">
+            <summary>
+            Get All Teams
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.GetAll(System.Int32)">
+            <summary>
+            Get Project Teams
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.GetById(System.Int32)">
+            <summary>
+            Get Team By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.Post(RuS.Application.Features.Teams.Commands.AddEdit.AddEditTeamCommand)">
+            <summary>
+            Create/Update a Team
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.Post(RuS.Application.Features.Teams.Commands.AddEdit.AddRemoveTeamMemberCommand)">
+            <summary>
+            Add or Remove Team Member(s) 
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.Delete(System.Int32)">
+            <summary>
+            Delete a Team
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.Export(System.String)">
+            <summary>
+            Search Team and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
