@@ -42,5 +42,6 @@ namespace RuS.Domain.Entities.Projects
         public Priority Priority { get; set; }
         public Client Client { get; set; }
         public List<Task> Tasks { get; set; } = new();
+        public List<Team> Teams { get; set; } = new();
     }
 }
