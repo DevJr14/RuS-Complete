@@ -33,6 +33,7 @@ namespace RuS.Client.Infrastructure.Routes
         }
 
         public static string Save = "api/v1/employees";
+        public static string GetAllNotPaged = "api/v1/employees/not-paged";
         public static string Delete = "api/v1/employees";
         public static string Export = "api/v1/employees/export";
     }

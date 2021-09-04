@@ -479,6 +479,12 @@
             <param name="orderBy"></param>
             <returns>Status 200 OK</returns>
         </member>
+        <member name="M:RuS.Server.Controllers.v1.Core.EmployeesController.GetAllNotPaged">
+            <summary>
+            Get Employees Not Paged
+            </summary>
+            <returns>Status 200 Ok</returns>
+        </member>
         <member name="M:RuS.Server.Controllers.v1.Core.EmployeesController.GetById(System.Int32)">
             <summary>
             Get a Employee By Id

@@ -43,6 +43,12 @@ namespace RuS.Client.Infrastructure.Managers.Core.Employee
             return await response.ToResult<GetEmployeeResponse>();
         }
 
+        public async Task<IResult<List<GetEmployeeResponse>>> GetAllNotPaged()
+        {
+            var response = await _httpClient.GetAsync(Routes.EmployeeEndpoints.GetAllNotPaged);
+            return await response.ToResult<List<GetEmployeeResponse>>();
+        }
+
         public async Task<PaginatedResult<GetAllPagedEmployeesResponse>> GetEmployeesAsync(GetAllPagedEmployeesRequest request)
         {
             var response = await _httpClient.GetAsync(Routes.EmployeeEndpoints.GetAllPaged(request.PageNumber, request.PageSize, request.SearchString, request.Orderby));

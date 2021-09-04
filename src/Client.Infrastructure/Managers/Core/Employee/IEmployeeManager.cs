@@ -19,6 +19,8 @@ namespace RuS.Client.Infrastructure.Managers.Core.Employee
 
         Task<IResult<int>> DeleteAsync(int id);
 
+        Task<IResult<List<GetEmployeeResponse>>> GetAllNotPaged();
+
         Task<IResult<string>> ExportToExcelAsync(string searchString = "");
 
         Task<IResult<GetEmployeeResponse>> GetByIdAsync(int id);

@@ -4,6 +4,7 @@ using RuS.Application.Features.Companies.Queries.GetById;
 using RuS.Application.Features.Employees.Commands.AddEdit;
 using RuS.Application.Features.Employees.Commands.Delete;
 using RuS.Application.Features.Employees.Queries.Export;
+using RuS.Application.Features.Employees.Queries.GetAll;
 using RuS.Application.Features.Employees.Queries.GetAllPaged;
 using RuS.Application.Features.Employees.Queries.GetById;
 using RuS.Shared.Constants.Permission;
@@ -42,6 +43,18 @@ namespace RuS.Server.Controllers.v1.Core
         public async Task<IActionResult> GetAll(int pageNumber, int pageSize, string searchString, string orderBy = null)
         {
             var employees = await _mediator.Send(new GetAllEmployeesQuery(pageNumber, pageSize, searchString, orderBy));
+            return Ok(employees);
+        }
+
+        /// <summary>
+        /// Get Employees Not Paged
+        /// </summary>
+        /// <returns>Status 200 Ok</returns>
+        [Authorize(Policy = Permissions.Employees.View)]
+        [HttpGet("not-paged")]
+        public async Task<IActionResult> GetAllNotPaged()
+        {
+            var employees = await _mediator.Send(new GetEmployeesQuery());
             return Ok(employees);
         }
 

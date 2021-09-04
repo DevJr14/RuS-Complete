@@ -1,0 +1,21 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<ProjectTeams> _localizer
+
+<MudCard Elevation="25" Outlined="false" Class="mb-1">
+    <MudToolBar>
+        <MudFab Color="Color.Success" Size="Size.Small" OnClick="(() => InvokeModal(0))" IconSize="Size.Small" Icon="@Icons.Material.Filled.Add" aria-label="add" />
+        <MudFab Color="Color.Secondary" Size="Size.Small" OnClick="(()=>LoadData())" IconSize="Size.Small" Icon="@Icons.Material.Filled.Refresh" Style="margin-left: 5px;" aria-label="refresh" />
+        <MudFab Color="Color.Secondary" Size="Size.Small" OnClick="ExportToExcel" IconSize="Size.Small" Icon="@Icons.Custom.FileFormats.FileExcel" Style="margin-left: 5px;" aria-label="export" />
+        <MudSpacer />
+    </MudToolBar>
+</MudCard>
+<MudGrid Spacing="1">
+    @if (_teamList.Any())
+    {
+        @foreach (var team in _teamList)
+        {
+            <MudItem xs="12" sm="6" Class="mt-2">
+                <TeamCard OnEditSelection="InvokeModal" OnDeleteSelection="Delete" Team="@team" />
+            </MudItem>
+        }
+    }
+</MudGrid>

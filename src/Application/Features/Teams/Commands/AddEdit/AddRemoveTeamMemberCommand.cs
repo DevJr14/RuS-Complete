@@ -16,7 +16,7 @@ namespace RuS.Application.Features.Teams.Commands.AddEdit
     public class AddRemoveTeamMemberCommand : IRequest<Result<int>>
     {
         public int TeamId { get; set; }
-        public List<string> Members { get; set; }
+        public IEnumerable<string> Members { get; set; }
     }
 
     internal class AddRemoveTeamMemberCommandHandler : IRequestHandler<AddRemoveTeamMemberCommand, Result<int>>

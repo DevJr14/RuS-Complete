@@ -1,0 +1,18 @@
+﻿<MudCard Elevation="25" Outlined="false">
+    <MudProgressLinear Color="Color.Secondary" Size="Size.Small" Minimum="20" Maximum="100" Min="2" Value="60" Indeterminate="false" />
+    <MudCardHeader>
+        <CardHeaderAvatar>
+            <MudAvatar Size="Size.Small" Color="Color.Secondary">T</MudAvatar>
+        </CardHeaderAvatar>
+        <CardHeaderContent>
+            <MudText Typo="Typo.body1">@Team.Name</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            <MudMenu Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small" OffsetX="true" Direction="Direction.Left" Class="mr-3 mt-3">
+                <MudMenuItem @onclick="(args) => EditTeamSelectionChanged(args, Team.Id)">Edit</MudMenuItem>
+                <MudMenuItem>Complete</MudMenuItem>
+                <MudMenuItem OnClick="@((args)=>DeleteSelectionChanged(args, Team.Id))">Delete</MudMenuItem>
+            </MudMenu>
+        </CardHeaderActions>
+    </MudCardHeader>
+</MudCard>

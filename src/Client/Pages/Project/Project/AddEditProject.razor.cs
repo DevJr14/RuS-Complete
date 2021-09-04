@@ -11,6 +11,7 @@ using RuS.Application.Features.Sites.Queries.GetById;
 using RuS.Application.Features.Statuses.Queries;
 using RuS.Application.Features.Tasks.Commands.AddEdit;
 using RuS.Application.Features.Tasks.Queries;
+using RuS.Application.Features.Teams.Queries;
 using RuS.Client.Infrastructure.Managers.Core.Site;
 using RuS.Client.Infrastructure.Managers.Project.Category;
 using RuS.Client.Infrastructure.Managers.Project.Client;
@@ -18,6 +19,7 @@ using RuS.Client.Infrastructure.Managers.Project.Priority;
 using RuS.Client.Infrastructure.Managers.Project.Project;
 using RuS.Client.Infrastructure.Managers.Project.Status;
 using RuS.Client.Infrastructure.Managers.Project.Task;
+using RuS.Client.Infrastructure.Managers.Project.Team;
 using RuS.Client.Pages.Project.Category;
 using RuS.Client.Pages.Project.Tasks;
 using System;
@@ -36,6 +38,7 @@ namespace RuS.Client.Pages.Project.Project
         [Inject] public IPriorityManager PriorityManager { get; set; }
         [Inject] public IStatusManager StatusManager { get; set; }
         [Inject] public ITaskManager TaskManager { get; set; }
+        [Inject] public ITeamManager TeamManager { get; set; }
 
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
@@ -45,6 +48,7 @@ namespace RuS.Client.Pages.Project.Project
         [Parameter] public ProjectResponse _project { get; set; }
 
         private List<TaskResponse> _taskList = new();
+        private List<TeamResponse> _teamkList = new();
 
         private List<SiteResponse> _sites = new();
         private List<ClientResponse> _clients = new();
@@ -102,6 +106,7 @@ namespace RuS.Client.Pages.Project.Project
         private async Task LoadDataAsync()
         {
             await LoadTasks();
+            await LoadTeams();
             await LoadSitesAsync();
             await LoadCategories();
             await LoadPriorities();
@@ -115,6 +120,15 @@ namespace RuS.Client.Pages.Project.Project
             if (data.Succeeded)
             {
                 _taskList = data.Data;
+            }
+        }
+
+        private async Task LoadTeams()
+        {
+            var data = await TeamManager.GetAllForProjectAsync(Id);
+            if (data.Succeeded)
+            {
+                _teamkList = data.Data;
             }
         }
 
