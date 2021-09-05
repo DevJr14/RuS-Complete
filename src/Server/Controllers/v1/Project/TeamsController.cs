@@ -60,6 +60,19 @@ namespace RuS.Server.Controllers.v1.Project
         }
 
         /// <summary>
+        /// Get Team Members
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Status 200 Ok</returns>
+        [Authorize(Policy = Permissions.Teams.View)]
+        [HttpGet("team-members/{id}")]
+        public async Task<IActionResult> GetMembers(int id)
+        {
+            var teamMembers = await _mediator.Send(new GetTeamMembersQuery() { TeamId = id });
+            return Ok(teamMembers);
+        }
+
+        /// <summary>
         /// Create/Update a Team
         /// </summary>
         /// <param name="command"></param>
@@ -67,6 +80,18 @@ namespace RuS.Server.Controllers.v1.Project
         [Authorize(Policy = Permissions.Teams.Create)]
         [HttpPost]
         public async Task<IActionResult> Post(AddEditTeamCommand command)
+        {
+            return Ok(await _mediator.Send(command));
+        }
+
+        /// <summary>
+        /// Update Team Member(s) 
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns>Status 200 OK</returns>
+        [Authorize(Policy = Permissions.Teams.Create)]
+        [HttpPost("update-members")]
+        public async Task<IActionResult> Post(UpdateTeamMembersCommand command)
         {
             return Ok(await _mediator.Send(command));
         }

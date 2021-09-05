@@ -790,9 +790,23 @@
             <param name="id"></param>
             <returns>Status 200 Ok</returns>
         </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.GetMembers(System.Int32)">
+            <summary>
+            Get Team Members
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
         <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.Post(RuS.Application.Features.Teams.Commands.AddEdit.AddEditTeamCommand)">
             <summary>
             Create/Update a Team
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.Post(RuS.Application.Features.Teams.Commands.AddEdit.UpdateTeamMembersCommand)">
+            <summary>
+            Update Team Member(s) 
             </summary>
             <param name="command"></param>
             <returns>Status 200 OK</returns>
