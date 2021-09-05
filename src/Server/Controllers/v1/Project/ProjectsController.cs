@@ -20,8 +20,8 @@ namespace RuS.Server.Controllers.v1.Project
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var brands = await _mediator.Send(new GetAllProjectsQuery());
-            return Ok(brands);
+            var projects = await _mediator.Send(new GetAllProjectsQuery());
+            return Ok(projects);
         }
 
         /// <summary>
@@ -33,8 +33,8 @@ namespace RuS.Server.Controllers.v1.Project
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var brand = await _mediator.Send(new GetProjectByIdQuery() { Id = id });
-            return Ok(brand);
+            var project = await _mediator.Send(new GetProjectByIdQuery() { Id = id });
+            return Ok(project);
         }
 
         /// <summary>

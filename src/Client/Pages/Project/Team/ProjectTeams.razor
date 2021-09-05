@@ -14,7 +14,7 @@
         @foreach (var team in _teamList)
         {
             <MudItem xs="12" sm="6" Class="mt-2">
-                <TeamCard OnEditSelection="InvokeModal" OnDeleteSelection="Delete" Team="@team" />
+                <TeamCard OnEditSelection="InvokeModal" OnMembersSelection="InvokeMembersModal" OnDeleteSelection="Delete" Team="@team" />
             </MudItem>
         }
     }

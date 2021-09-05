@@ -10,8 +10,8 @@
         <CardHeaderActions>
             <MudMenu Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small" OffsetX="true" Direction="Direction.Left" Class="mr-3 mt-3">
                 <MudMenuItem @onclick="(args) => EditTeamSelectionChanged(args, Team.Id)">Edit</MudMenuItem>
-                <MudMenuItem>Complete</MudMenuItem>
-                <MudMenuItem OnClick="@((args)=>DeleteSelectionChanged(args, Team.Id))">Delete</MudMenuItem>
+                <MudMenuItem OnClick="(args)=>DeleteSelectionChanged(args, Team.Id)">Delete</MudMenuItem>
+                <MudMenuItem OnClick="(args) => ManageTeamMembers(args, Team.Id)">Members</MudMenuItem>
             </MudMenu>
         </CardHeaderActions>
     </MudCardHeader>
