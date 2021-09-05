@@ -15,7 +15,7 @@ namespace RuS.Client.Pages.Project.Team
 
         [Parameter] public EventCallback<int> OnEditSelection { get; set; }
         [Parameter] public EventCallback<int> OnDeleteSelection { get; set; }
-
+        [Parameter] public EventCallback<int> OnMembersSelection { get; set; }
         protected async Task DeleteSelectionChanged(MouseEventArgs e, int teamId)
         {
             await OnDeleteSelection.InvokeAsync(teamId);
@@ -24,6 +24,11 @@ namespace RuS.Client.Pages.Project.Team
         protected async Task EditTeamSelectionChanged(MouseEventArgs e, int id)
         {
             await OnEditSelection.InvokeAsync(id);
+        }
+
+        protected async Task ManageTeamMembers(MouseEventArgs e, int teamId)
+        {
+            await OnMembersSelection.InvokeAsync(teamId);
         }
     }
 }
