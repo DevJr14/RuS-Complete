@@ -70,6 +70,28 @@ namespace RuS.Client.Pages.Project.Team
             }
         }
 
+        private async Task InvokeMembersModal(int id)
+        {
+            var parameters = new DialogParameters();
+            if (id != 0)
+            {
+
+                var team = _teamList.FirstOrDefault(t => t.Id == id);
+                if (team != null)
+                {
+                    parameters.Add(nameof(Id), id);
+                }
+            }
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<ManageMembers>(id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                await LoadData();
+            }
+
+        }
+        
         private async Task Delete(int id)
         {
             string deleteContent = _localizer["Delete Project Team"];
