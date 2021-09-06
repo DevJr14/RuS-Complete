@@ -19,6 +19,8 @@ namespace RuS.Client.Pages.Project.Team
         [Parameter]
         public int Id { get; set; }
 
+        [Parameter] public int TeamId { get; set; }
+
         private string _searchString = "";
 
         private List<TeamResponse> _teamList = new();
@@ -79,7 +81,7 @@ namespace RuS.Client.Pages.Project.Team
                 var team = _teamList.FirstOrDefault(t => t.Id == id);
                 if (team != null)
                 {
-                    parameters.Add(nameof(Id), id);
+                    parameters.Add(nameof(TeamId), id);
                 }
             }
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
