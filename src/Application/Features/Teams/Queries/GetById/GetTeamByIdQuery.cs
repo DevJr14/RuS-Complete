@@ -37,6 +37,7 @@ namespace RuS.Application.Features.Teams.Queries.GetById
         {
             var team = await _unitOfWork.Repository<Team>().Entities
                  .Include(t => t.Project)
+                 .Where(t => t.Id == request.Id)
                  .FirstOrDefaultAsync();
             if (team != null)
             {

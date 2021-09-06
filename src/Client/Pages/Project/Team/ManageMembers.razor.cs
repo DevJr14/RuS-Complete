@@ -17,7 +17,7 @@ namespace RuS.Client.Pages.Project.Team
         [Inject] public ITeamManager TeamManager { get; set; }
 
         [Parameter]
-        public int Id { get; set; }
+        public int TeamId { get; set; }
         [Parameter] public string TeamName { get; set; }
         [Parameter] public string Description { get; set; }
 
@@ -30,7 +30,7 @@ namespace RuS.Client.Pages.Project.Team
         private string _searchString = "";
         protected override async Task OnInitializedAsync()
         {
-            var teamResult = await TeamManager.GetByIdAsync(Id);
+            var teamResult = await TeamManager.GetByIdAsync(TeamId);
             if (teamResult.Succeeded)
             {
                 var team = teamResult.Data;
@@ -52,7 +52,7 @@ namespace RuS.Client.Pages.Project.Team
         {
             var command = new UpdateTeamMembersCommand()
             {
-                TeamId = Id,
+                TeamId = TeamId,
                 TeamMembers = TeamMembers
             };
             var response = await TeamManager.UpdateTeamMembersAsync(command);
