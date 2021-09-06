@@ -52,7 +52,7 @@ namespace RuS.Client.Pages.Project.Team
             if (response.Succeeded)
             {
                 _snackBar.Add(response.Messages[0], Severity.Success);
-                await AddTeamMembers(response.Data);
+                //await AddTeamMembers(response.Data);
                 MudDialog.Close();
             }
             else
@@ -64,26 +64,26 @@ namespace RuS.Client.Pages.Project.Team
             }
         }
 
-        private async Task AddTeamMembers(int teamId)
-        {
-            var command = new AddRemoveTeamMemberCommand()
-            {
-                TeamId = teamId,
-                Members = SelectedMembers
-            };
-            var response = await TeamManager.SaveMemberAsync(command);
-            if (response.Succeeded)
-            {
-                _snackBar.Add(response.Messages[0], Severity.Success);
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
-            }
-        }
+        //private async Task AddTeamMembers(int teamId)
+        //{
+        //    var command = new AddRemoveTeamMemberCommand()
+        //    {
+        //        TeamId = teamId,
+        //        Members = SelectedMembers
+        //    };
+        //    var response = await TeamManager.SaveMemberAsync(command);
+        //    if (response.Succeeded)
+        //    {
+        //        _snackBar.Add(response.Messages[0], Severity.Success);
+        //    }
+        //    else
+        //    {
+        //        foreach (var message in response.Messages)
+        //        {
+        //            _snackBar.Add(message, Severity.Error);
+        //        }
+        //    }
+        //}
 
         private async Task<IEnumerable<int>> SearchEmployees(string value)
         {
