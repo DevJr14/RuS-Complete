@@ -17,9 +17,7 @@ namespace RuS.Application.Features.Sites.Commands.AddEdit
     public class AddEditSiteCommand : IRequest<Result<int>>
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Site name is required.")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Company must be linked.")]
         public int CompanyId { get; set; }
         public string Description { get; set; }
     }
@@ -43,8 +41,8 @@ namespace RuS.Application.Features.Sites.Commands.AddEdit
             
             if (command.Id == 0)
             {
-                var isUnique = await _siteRepository.IsUniqueEntry(command.Name, command.CompanyId);
-                if (!isUnique)
+                var notUnique = await _siteRepository.IsUniqueEntry(command.Name, command.CompanyId);
+                if (notUnique)
                 {
                     return await Result<int>.FailAsync(_localizer["Site already exists."]);
                 }
@@ -58,8 +56,8 @@ namespace RuS.Application.Features.Sites.Commands.AddEdit
             }
             else
             {
-                var isUnique = await _siteRepository.IsUniqueEntry(command.Name, command.CompanyId, command.Id);
-                if (!isUnique)
+                var notUnique = await _siteRepository.IsUniqueEntry(command.Name, command.CompanyId, command.Id);
+                if (notUnique)
                 {
                     return await Result<int>.FailAsync(_localizer["Site already exists."]);
                 }

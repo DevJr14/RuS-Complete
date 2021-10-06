@@ -25,9 +25,21 @@ namespace RuS.Infrastructure.Repositories
             return entity;
         }
 
+        public async Task<T> AddRangeAsync(List<T> entities)
+        {
+            await _dbContext.Set<T>().AddRangeAsync(entities);
+            return entities[0];
+        }
+
         public Task DeleteAsync(T entity)
         {
             _dbContext.Set<T>().Remove(entity);
+            return Task.CompletedTask;
+        }
+
+        public Task DeleteRangeAsync(List<T> entities)
+        {
+            _dbContext.Set<T>().RemoveRange(entities);
             return Task.CompletedTask;
         }
 

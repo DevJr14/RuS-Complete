@@ -14,6 +14,6 @@ namespace RuS.Application.Features.Companies.Queries.GetById
         public string ShortTitle { get; set; }
         public string RegistrationNo { get; set; }
         public DateTime? RegistrationDate { get; set; }
-        public List<GetSiteResponse> Sites { get; set; } = new();
+        public List<SiteResponse> Sites { get; set; } = new();
     }
 }

@@ -125,7 +125,14 @@ namespace RuS.Client.Pages.Core.Employee
 
         private void EmployeeDetails(int id)
         {
-            _navigationManager.NavigateTo($"/core/employees/add-edit/{id}");
+            if(id == 0)
+            {
+                _navigationManager.NavigateTo($"/core/employees/add/");
+            }
+            else
+            {
+                _navigationManager.NavigateTo($"/core/employees/edit/{id}");
+            }
         }
 
         private async Task Delete(int id)

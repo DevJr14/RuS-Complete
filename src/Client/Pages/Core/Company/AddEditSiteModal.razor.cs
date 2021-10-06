@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.FluentValidation;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using MudBlazor;
 using RuS.Application.Features.Companies.Queries.GetById;
@@ -21,6 +22,9 @@ namespace RuS.Client.Pages.Core.Company
         [Inject] private ISiteManager SiteManager { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+
+        private FluentValidationValidator _fluentValidationValidator;
+        private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
 
         private GetCompanyResponse _company;
 

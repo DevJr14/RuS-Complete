@@ -1,4 +1,5 @@
 ﻿using RuS.Application.Features.Companies.Commands.AddEdit;
+using RuS.Application.Features.Companies.Queries.GetAll;
 using RuS.Application.Features.Companies.Queries.GetAllPaged;
 using RuS.Application.Features.Companies.Queries.GetById;
 using RuS.Application.Requests.Core;
@@ -13,7 +14,9 @@ namespace RuS.Client.Infrastructure.Managers.Core.Company
 {
     public interface ICompanyManager : IManager
     {
-        Task<PaginatedResult<GetAllPagedCompaniesResponse>> GetProductsAsync(GetAllPagedCompaniesRequest request);
+        Task<PaginatedResult<GetAllPagedCompaniesResponse>> GetAllPagedCompaniesAsync(GetAllPagedCompaniesRequest request);
+
+        Task<IResult<List<GetAllCompaniesResponse>>> GetAllCompaniesAsync();
 
         Task<IResult<int>> SaveAsync(AddEditCompanyCommand command);
 

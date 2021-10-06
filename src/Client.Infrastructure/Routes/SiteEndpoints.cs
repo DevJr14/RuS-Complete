@@ -10,7 +10,7 @@ namespace RuS.Client.Infrastructure.Routes
     {
         public static string GetAllPaged(int pageNumber, int pageSize, string searchString, string[] orderBy)
         {
-            var url = $"api/v1/sites?pageNumber={pageNumber}&pageSize={pageSize}&searchString={searchString}&orderBy=";
+            var url = $"api/v1/sites/all-paged?pageNumber={pageNumber}&pageSize={pageSize}&searchString={searchString}&orderBy=";
             if (orderBy?.Any() == true)
             {
                 foreach (var orderByPart in orderBy)
@@ -33,6 +33,7 @@ namespace RuS.Client.Infrastructure.Routes
         }
 
         public static string Save = "api/v1/sites";
+        public static string GetAll = "api/v1/sites/all";
         public static string Delete = "api/v1/sites";
         public static string Export = "api/v1/sites/export";
     }

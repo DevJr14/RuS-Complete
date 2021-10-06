@@ -17,8 +17,12 @@ namespace RuS.Application.Interfaces.Repositories
 
         Task<T> AddAsync(T entity);
 
+        Task<T> AddRangeAsync(List<T> entities);
+
         Task UpdateAsync(T entity);
 
         Task DeleteAsync(T entity);
+
+        Task DeleteRangeAsync(List<T> entities);
     }
 }

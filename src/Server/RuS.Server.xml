@@ -421,14 +421,20 @@
             </param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:RuS.Server.Controllers.v1.Core.CompaniesController.GetAll(System.Int32,System.Int32,System.String,System.String)">
+        <member name="M:RuS.Server.Controllers.v1.Core.CompaniesController.GetAllPaged(System.Int32,System.Int32,System.String,System.String)">
             <summary>
-            Get All Companies
+            Get All Paged Companies
             </summary>
             <param name="pageNumber"></param>
             <param name="pageSize"></param>
             <param name="searchString"></param>
             <param name="orderBy"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Core.CompaniesController.GetAll">
+            <summary>
+            Get All Companies
+            </summary>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:RuS.Server.Controllers.v1.Core.CompaniesController.GetById(System.Int32)">
@@ -473,6 +479,12 @@
             <param name="orderBy"></param>
             <returns>Status 200 OK</returns>
         </member>
+        <member name="M:RuS.Server.Controllers.v1.Core.EmployeesController.GetAllNotPaged">
+            <summary>
+            Get Employees Not Paged
+            </summary>
+            <returns>Status 200 Ok</returns>
+        </member>
         <member name="M:RuS.Server.Controllers.v1.Core.EmployeesController.GetById(System.Int32)">
             <summary>
             Get a Employee By Id
@@ -507,13 +519,19 @@
         </member>
         <member name="M:RuS.Server.Controllers.v1.Core.SitesController.GetAll(System.Int32,System.Int32,System.String,System.String)">
             <summary>
-            Get All Sites. Data will be paged.
+            Get All Sites Paged. Data will be paged.
             </summary>
             <param name="pageNumber"></param>
             <param name="pageSize"></param>
             <param name="searchString"></param>
             <param name="orderBy"></param>
             <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Core.SitesController.GetAll">
+            <summary>
+            Get all Sites
+            </summary>
+            <returns>Status 200 Ok</returns>
         </member>
         <member name="M:RuS.Server.Controllers.v1.Core.SitesController.GetById(System.Int32)">
             <summary>
@@ -541,6 +559,278 @@
             Get Dashboard Data
             </summary>
             <returns>Status 200 OK </returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.CategoriesController.GetAll">
+            <summary>
+            Get All Categories
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.CategoriesController.GetById(System.Int32)">
+            <summary>
+            Get a Category By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.CategoriesController.Post(RuS.Application.Features.Categories.Commands.AddEditCategoryCommand)">
+            <summary>
+            Create/Update a Category
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.CategoriesController.Delete(System.Int32)">
+            <summary>
+            Delete a Category
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.CategoriesController.Export(System.String)">
+            <summary>
+            Search Categories and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ClientsController.GetAll">
+            <summary>
+            Get All Clients
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ClientsController.GetById(System.Int32)">
+            <summary>
+            Get a Clients By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ClientsController.Post(RuS.Application.Features.Clients.Commands.AddEdit.AddEditClientCommand)">
+            <summary>
+            Create/Update a Client
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ClientsController.Delete(System.Int32)">
+            <summary>
+            Delete a Client
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ClientsController.Export(System.String)">
+            <summary>
+            Search Client and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.PrioritiesController.GetAll">
+            <summary>
+            Get All Priorities
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.PrioritiesController.GetById(System.Int32)">
+            <summary>
+            Get a Priority By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.PrioritiesController.Post(RuS.Application.Features.Priorities.Commands.AddEditPriorityCommand)">
+            <summary>
+            Create/Update a Priority
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.PrioritiesController.Delete(System.Int32)">
+            <summary>
+            Delete a Priority
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.PrioritiesController.Export(System.String)">
+            <summary>
+            Search Priority and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ProjectsController.GetAll">
+            <summary>
+            Get All Projects
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ProjectsController.GetById(System.Int32)">
+            <summary>
+            Get a Project By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ProjectsController.Post(RuS.Application.Features.Projects.Commands.AddEdit.AddEditProjectCommand)">
+            <summary>
+            Create/Update a Project
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ProjectsController.Delete(System.Int32)">
+            <summary>
+            Delete a Project
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.ProjectsController.Export(System.String)">
+            <summary>
+            Search Project and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.StatusesController.GetAll">
+            <summary>
+            Get All Statuses
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.StatusesController.GetById(System.Int32)">
+            <summary>
+            Get a Status By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.StatusesController.Post(RuS.Application.Features.Statuses.Commands.AddEditStatusCommand)">
+            <summary>
+            Create/Update a Status
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.StatusesController.Delete(System.Int32)">
+            <summary>
+            Delete a Status
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.StatusesController.Export(System.String)">
+            <summary>
+            Search Status and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TasksController.GetAll">
+            <summary>
+            Get All Tasks
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TasksController.GetAllForProject(System.Int32)">
+            <summary>
+            Get All Tasks For a Project
+            </summary>
+            <param name="projectId"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TasksController.GetById(System.Int32)">
+            <summary>
+            Get a Task By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TasksController.Post(RuS.Application.Features.Tasks.Commands.AddEdit.AddEditTaskCommand)">
+            <summary>
+            Create/Update a Task
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TasksController.Delete(System.Int32)">
+            <summary>
+            Delete a Task
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TasksController.Export(System.String)">
+            <summary>
+            Search Tasks and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.GetAll">
+            <summary>
+            Get All Teams
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.GetAll(System.Int32)">
+            <summary>
+            Get Project Teams
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.GetById(System.Int32)">
+            <summary>
+            Get Team By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.GetMembers(System.Int32)">
+            <summary>
+            Get Team Members
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.Post(RuS.Application.Features.Teams.Commands.AddEdit.AddEditTeamCommand)">
+            <summary>
+            Create/Update a Team
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.Post(RuS.Application.Features.Teams.Commands.AddEdit.UpdateTeamMembersCommand)">
+            <summary>
+            Update Team Member(s) 
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.Post(RuS.Application.Features.Teams.Commands.AddEdit.AddRemoveTeamMemberCommand)">
+            <summary>
+            Add or Remove Team Member(s) 
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.Delete(System.Int32)">
+            <summary>
+            Delete a Team
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.TeamsController.Export(System.String)">
+            <summary>
+            Search Team and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

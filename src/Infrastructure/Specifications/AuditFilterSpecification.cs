@@ -3,7 +3,7 @@ using RuS.Application.Specifications.Base;
 
 namespace RuS.Infrastructure.Specifications
 {
-    public class AuditFilterSpecification : HeroSpecification<Audit>
+    public class AuditFilterSpecification : BaseSpecification<Audit>
     {
         public AuditFilterSpecification(string userId, string searchString, bool searchInOldValues, bool searchInNewValues)
         {

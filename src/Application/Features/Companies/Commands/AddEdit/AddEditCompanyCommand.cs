@@ -17,7 +17,6 @@ namespace RuS.Application.Features.Companies.Commands.AddEdit
     public class AddEditCompanyCommand : IRequest<Result<int>>
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Company name is required.")]
         public string Name { get; set; }
         public string ShortTitle { get; set; }
         public string RegistrationNo { get; set; }
@@ -42,8 +41,8 @@ namespace RuS.Application.Features.Companies.Commands.AddEdit
         {
             if (command.Id == 0)
             {
-                var isUnique = await _companyRepository.IsUniqueEntry(command.Name, command.RegistrationNo);
-                if (!isUnique)
+                var isNotUnique = await _companyRepository.IsUniqueEntry(command.Name, command.RegistrationNo);
+                if (isNotUnique)
                 {
                     return await Result<int>.FailAsync(_localizer["Company already exists."]);
                 }
@@ -52,13 +51,13 @@ namespace RuS.Application.Features.Companies.Commands.AddEdit
                     var company = _mapper.Map<Company>(command);
                     await _unitOfWork.Repository<Company>().AddAsync(company);
                     await _unitOfWork.Commit(cancellationToken);
-                    return await Result<int>.SuccessAsync(company.Id, "Company Saved");
+                    return await Result<int>.SuccessAsync(company.Id, _localizer["Company Saved"]);
                 }
             }
             else
             {
-                var isUnique = await _companyRepository.IsUniqueEntry(command.Name, command.RegistrationNo, command.Id);
-                if (!isUnique)
+                var isNotUnique = await _companyRepository.IsUniqueEntry(command.Name, command.RegistrationNo, command.Id);
+                if (isNotUnique)
                 {
                     return await Result<int>.FailAsync(_localizer["Company already exists."]);
                 }
@@ -73,11 +72,11 @@ namespace RuS.Application.Features.Companies.Commands.AddEdit
                         company.RegistrationDate = command.RegistrationDate ?? company.RegistrationDate;
                         await _unitOfWork.Repository<Company>().UpdateAsync(company);
                         await _unitOfWork.Commit(cancellationToken);
-                        return await Result<int>.SuccessAsync(company.Id, "Company Updated");
+                        return await Result<int>.SuccessAsync(company.Id, _localizer["Company Updated"]);
                     }
                     else
                     {
-                        return await Result<int>.FailAsync("Company Not Found!");
+                        return await Result<int>.FailAsync(_localizer["Company Not Found!"]);
                     }
                 }
             }

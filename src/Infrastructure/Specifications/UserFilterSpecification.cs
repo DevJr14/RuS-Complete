@@ -3,7 +3,7 @@ using RuS.Application.Specifications.Base;
 
 namespace RuS.Infrastructure.Specifications
 {
-    public class UserFilterSpecification : HeroSpecification<ApplicationUser>
+    public class UserFilterSpecification : BaseSpecification<ApplicationUser>
     {
         public UserFilterSpecification(string searchString)
         {

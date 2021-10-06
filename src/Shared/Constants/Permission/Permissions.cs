@@ -54,14 +54,84 @@ namespace RuS.Shared.Constants.Permission
             public const string Export = "Permissions.Employees.Export";
             public const string Search = "Permissions.Employees.Search";
         }
+        
+        public static class Priorities
+        {
+            public const string View = "Permissions.Priorities.View";
+            public const string Create = "Permissions.Priorities.Create";
+            public const string Edit = "Permissions.Priorities.Edit";
+            public const string Delete = "Permissions.Priorities.Delete";
+            public const string Export = "Permissions.Priorities.Export";
+            public const string Search = "Permissions.Priorities.Search";
+        }
+        
+        public static class Statuses
+        {
+            public const string View = "Permissions.Statuses.View";
+            public const string Create = "Permissions.Statuses.Create";
+            public const string Edit = "Permissions.Statuses.Edit";
+            public const string Delete = "Permissions.Statuses.Delete";
+            public const string Export = "Permissions.Statuses.Export";
+            public const string Search = "Permissions.Statuses.Search";
+        }
+        
+        public static class Categories
+        {
+            public const string View = "Permissions.Categories.View";
+            public const string Create = "Permissions.Categories.Create";
+            public const string Edit = "Permissions.Categories.Edit";
+            public const string Delete = "Permissions.Categories.Delete";
+            public const string Export = "Permissions.Categories.Export";
+            public const string Search = "Permissions.Categories.Search";
+        }
+
+        public static class Clients
+        {
+            public const string View = "Permissions.Clients.View";
+            public const string Create = "Permissions.Clients.Create";
+            public const string Edit = "Permissions.Clients.Edit";
+            public const string Delete = "Permissions.Clients.Delete";
+            public const string Export = "Permissions.Clients.Export";
+            public const string Search = "Permissions.Clients.Search";
+        }
+
+        public static class Projects
+        {
+            public const string View = "Permissions.Projects.View";
+            public const string Create = "Permissions.Projects.Create";
+            public const string Edit = "Permissions.Projects.Edit";
+            public const string Delete = "Permissions.Projects.Delete";
+            public const string Export = "Permissions.Projects.Export";
+            public const string Search = "Permissions.Projects.Search";
+        }
+
+        public static class Tasks
+        {
+            public const string View = "Permissions.Tasks.View";
+            public const string Create = "Permissions.Tasks.Create";
+            public const string Edit = "Permissions.Tasks.Edit";
+            public const string Delete = "Permissions.Tasks.Delete";
+            public const string Export = "Permissions.Tasks.Export";
+            public const string Search = "Permissions.Tasks.Search";
+        }
+
+        public static class Teams
+        {
+            public const string View = "Permissions.Tasks.View";
+            public const string Create = "Permissions.Tasks.Create";
+            public const string Edit = "Permissions.Tasks.Edit";
+            public const string Delete = "Permissions.Tasks.Delete";
+            public const string Export = "Permissions.Tasks.Export";
+            public const string Search = "Permissions.Tasks.Search";
+        }
 
         public static class Documents
         {
-            public const string View = "Permissions.Documents.View";
-            public const string Create = "Permissions.Documents.Create";
-            public const string Edit = "Permissions.Documents.Edit";
-            public const string Delete = "Permissions.Documents.Delete";
-            public const string Search = "Permissions.Documents.Search";
+            public const string View = "Permissions.Team.View";
+            public const string Create = "Permissions.Team.Create";
+            public const string Edit = "Permissions.Team.Edit";
+            public const string Delete = "Permissions.Team.Delete";
+            public const string Search = "Permissions.Team.Search";
         }
 
         public static class DocumentTypes

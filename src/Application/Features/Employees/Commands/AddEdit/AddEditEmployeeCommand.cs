@@ -34,7 +34,7 @@ namespace RuS.Application.Features.Employees.Commands.AddEdit
 
         public string ImageUrl { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         public string CellphoneNo { get; set; }
 
@@ -78,49 +78,65 @@ namespace RuS.Application.Features.Employees.Commands.AddEdit
 
             if (command.Id == 0)
             {
-                Employee employee = _mapper.Map<Employee>(command);
-
-                //Generate employee no
-                employee.EmployeeNo = _employeeRepository.GenerateEmployeeNo();
-                //Upload image
-                if (uploadRequest != null)
+                var notUnique = await _employeeRepository.IsUniqueEntry(command.FirstName, command.LastName, (DateTime)command.DateOfBirth, command.CompanyId);
+                if (notUnique)
                 {
-                    employee.ImageUrl = _uploadService.UploadAsync(uploadRequest);
+                    return await Result<int>.FailAsync(_localizer["Employee already exists."]);
                 }
-                await _unitOfWork.Repository<Employee>().AddAsync(employee);
-                await _unitOfWork.Commit(cancellationToken);
-                return await Result<int>.SuccessAsync(employee.Id, _localizer["Employee Saved"]);
-            }
-            else
-            {
-                var employee = await _unitOfWork.Repository<Employee>().GetByIdAsync(command.Id);
-                if (employee != null)
+                else
                 {
-                    employee.FirstName = command.FirstName ?? employee.FirstName;
-                    employee.LastName = command.LastName ?? employee.LastName;
-                    employee.MiddleName = command.MiddleName ?? employee.MiddleName;
-                    employee.Street = command.Street ?? employee.Street;
-                    employee.DateOfBirth = command.DateOfBirth;
-                    employee.Email = command.Email ?? employee.Email;
-                    employee.Gender = command.Email ?? employee.Email;
-                    employee.CellphoneNo = command.CellphoneNo ?? employee.CellphoneNo;
-                    employee.Street = command.Street ?? employee.Street;
-                    employee.Suburb = command.Suburb ?? employee.Suburb;
-                    employee.City = command.City ?? employee.City;
-                    employee.Postcode = command.Postcode ?? employee.Postcode;
+                    Employee employee = _mapper.Map<Employee>(command);
 
+                    //Generate employee no
+                    employee.EmployeeNo = _employeeRepository.GenerateEmployeeNo();
                     //Upload image
                     if (uploadRequest != null)
                     {
                         employee.ImageUrl = _uploadService.UploadAsync(uploadRequest);
                     }
-                    await _unitOfWork.Repository<Employee>().UpdateAsync(employee);
+                    await _unitOfWork.Repository<Employee>().AddAsync(employee);
                     await _unitOfWork.Commit(cancellationToken);
-                    return await Result<int>.SuccessAsync(employee.Id, _localizer["Employee Updated"]);
+                    return await Result<int>.SuccessAsync(employee.Id, _localizer["Employee Saved"]);
+                }
+            }
+            else
+            {
+                var notUnique = await _employeeRepository.IsUniqueEntry(command.FirstName, command.LastName, (DateTime)command.DateOfBirth, command.CompanyId, command.Id);
+                if (notUnique)
+                {
+                    return await Result<int>.FailAsync(_localizer["Employee already exists."]);
                 }
                 else
                 {
-                    return await Result<int>.FailAsync("Employee Not Found!");
+                    var employee = await _unitOfWork.Repository<Employee>().GetByIdAsync(command.Id);
+                    if (employee != null)
+                    {
+                        employee.FirstName = command.FirstName ?? employee.FirstName;
+                        employee.LastName = command.LastName ?? employee.LastName;
+                        employee.MiddleName = command.MiddleName ?? employee.MiddleName;
+                        employee.Street = command.Street ?? employee.Street;
+                        employee.DateOfBirth = (DateTime)command.DateOfBirth;
+                        employee.Email = command.Email ?? employee.Email;
+                        employee.Gender = command.Gender ?? employee.Gender;
+                        employee.CellphoneNo = command.CellphoneNo ?? employee.CellphoneNo;
+                        employee.Street = command.Street ?? employee.Street;
+                        employee.Suburb = command.Suburb ?? employee.Suburb;
+                        employee.City = command.City ?? employee.City;
+                        employee.Postcode = command.Postcode ?? employee.Postcode;
+
+                        //Upload image
+                        if (uploadRequest != null)
+                        {
+                            employee.ImageUrl = _uploadService.UploadAsync(uploadRequest);
+                        }
+                        await _unitOfWork.Repository<Employee>().UpdateAsync(employee);
+                        await _unitOfWork.Commit(cancellationToken);
+                        return await Result<int>.SuccessAsync(employee.Id, _localizer["Employee Updated"]);
+                    }
+                    else
+                    {
+                        return await Result<int>.FailAsync("Employee Not Found!");
+                    }
                 }
             }
         }

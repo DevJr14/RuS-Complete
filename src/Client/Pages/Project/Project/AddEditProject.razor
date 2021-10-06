@@ -1,0 +1,183 @@
+﻿@page "/project/projects/add/"
+@page "/project/projects/edit/{Id:int}"
+@attribute [Authorize(Policy = Permissions.Projects.Edit)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditProject> _localizer
+
+<HeroTitle Title="@_localizer["Project"]" Description="@_localizer["Manage Details"]" />
+
+
+<MudTabs Elevation="25" Rounded="true" Outlined="false" Color="@Color.Transparent" PrevIcon="@Icons.Filled.SkipPrevious" NextIcon="@Icons.Filled.SkipNext" PanelClass="mt-6">
+    <MudTabPanel Text="Details">
+        <MudGrid Spacing="1" Class="mt-1">
+            <MudItem xs="12" sm="12" md="12">
+                <EditForm Model="@_command" OnValidSubmit="SaveAsync">
+                    <FluentValidationValidator @ref="_fluentValidationValidator" />
+                    <MudCard Elevation="0" Outlined="false" Class="mb-1">
+                        <MudCardHeader>
+                            <CardHeaderAvatar>
+                                @if (Id == 0)
+                                {
+                                    <MudAvatar Size="Size.Small" Color="Color.Success"><b>+</b></MudAvatar>
+                                }
+                                else
+                                {
+                                    <MudAvatar Size="Size.Small" Color="Color.Primary"><b>+</b></MudAvatar>
+                                }
+                            </CardHeaderAvatar>
+                            <CardHeaderContent>
+                                @if (Id != 0)
+                                {
+
+                                    <MudText Typo="Typo.body1">@_localizer["Update"]</MudText>
+                                }
+                                else
+                                {
+                                    <MudText Typo="Typo.body1">@_localizer["Add"]</MudText>
+                                }
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudGrid>
+                                <MudItem xs="12" sm="6" md="4">
+                                    <MudAutocomplete T="int" Label="@_localizer["Site"]"
+                                                     For="@(() => _command.SiteId)"
+                                                     @bind-Value="_command.SiteId"
+                                                     ResetValueOnEmptyText="true" SearchFunc="@SearchSites"
+                                                     Variant="Variant.Text"
+                                                     Margin="Margin.Dense"
+                                                     ToStringFunc="@(i => _sites.FirstOrDefault(b => b.Id == i)?.Name ?? string.Empty)"
+                                                     OffsetY="true" />
+                                </MudItem>
+                                <MudItem xs="12" sm="6" md="4">
+                                    <MudAutocomplete T="int" Label="@_localizer["Client"]"
+                                                     For="@(() => _command.ClientId)"
+                                                     @bind-Value="_command.ClientId"
+                                                     ResetValueOnEmptyText="true" SearchFunc="@SearchClients"
+                                                     Variant="Variant.Text"
+                                                     Margin="Margin.Dense"
+                                                     ToStringFunc="@(i => _clients.FirstOrDefault(b => b.Id == i)?.Name ?? string.Empty)"
+                                                     OffsetY="true" />
+                                </MudItem>
+                                <MudItem xs="12" sm="6" md="4">
+                                    <MudTextField @bind-Value="@_command.Name"
+                                                  For="@(() => _command.Name)"
+                                                  Label="@_localizer["Name"]"
+                                                  Variant="Variant.Text"
+                                                  Adornment="Adornment.End"
+                                                  Margin="Margin.Dense"
+                                                  AdornmentIcon="@Icons.Filled.Work" />
+                                </MudItem>
+                                <MudItem xs="12" sm="6" md="4">
+                                    <MudAutocomplete T="int" Label="@_localizer["Category"]"
+                                                     For="@(() => _command.CategoryId)"
+                                                     @bind-Value="_command.CategoryId"
+                                                     ResetValueOnEmptyText="true" SearchFunc="@SearchCategories"
+                                                     Variant="Variant.Text"
+                                                     Margin="Margin.Dense"
+                                                     ToStringFunc="@(i => _categories.FirstOrDefault(b => b.Id == i)?.Name ?? string.Empty)"
+                                                     OffsetY="true" />
+                                </MudItem>
+                                <MudItem xs="12" sm="6" md="4">
+                                    <MudAutocomplete T="int" Label="@_localizer["Priority"]"
+                                                     For="@(() => _command.PriorityId)"
+                                                     @bind-Value="_command.PriorityId"
+                                                     ResetValueOnEmptyText="true" SearchFunc="@SearchPriorities"
+                                                     Variant="Variant.Text"
+                                                     Margin="Margin.Dense"
+                                                     ToStringFunc="@(i => _priorities.FirstOrDefault(b => b.Id == i)?.Name ?? string.Empty)"
+                                                     OffsetY="true" />
+                                </MudItem>
+                                <MudItem xs="12" sm="6" md="4">
+                                    <MudAutocomplete T="int" Label="@_localizer["Status"]"
+                                                     For="@(() => _command.StatusId)"
+                                                     @bind-Value="_command.StatusId"
+                                                     ResetValueOnEmptyText="true" SearchFunc="@SearchStatuses"
+                                                     Variant="Variant.Text"
+                                                     Margin="Margin.Dense"
+                                                     ToStringFunc="@(i => _statuses.FirstOrDefault(b => b.Id == i)?.Name ?? string.Empty)"
+                                                     OffsetY="true" />
+                                </MudItem>
+                                <MudItem xs="12" sm="12" md="12">
+                                    <MudTextField @bind-Value="@_command.Description"
+                                                  For="@(() => _command.Description)"
+                                                  Label="@_localizer["Description"]"
+                                                  Variant="Variant.Text"
+                                                  Adornment="Adornment.End"
+                                                  Margin="Margin.Dense"
+                                                  AdornmentIcon="@Icons.Filled.Description" />
+                                </MudItem>
+                                <MudItem xs="12" sm="12" md="12">
+                                    <MudTextField @bind-Value="@_command.ScopeOfWork"
+                                                  For="@(() => _command.ScopeOfWork)"
+                                                  Label="@_localizer["Scope Of Work"]"
+                                                  Variant="Variant.Text"
+                                                  Adornment="Adornment.End"
+                                                  Margin="Margin.Dense"
+                                                  AdornmentIcon="@Icons.Filled.Description" />
+                                </MudItem>
+                                <MudItem xs="12" sm="6" md="6">
+                                    <MudDatePicker @ref="_picker" Label="Estimated Start" @bind-Date="_command.Start" For="@(() => _command.Start)" AutoClose="@autoClose">
+                                        <PickerActions>
+                                            <MudButton Class="mr-auto align-self-start" OnClick="@(() => _picker.Clear())">Clear</MudButton>
+                                            <MudButton OnClick="@(() => _picker.Close(false))">Cancel</MudButton>
+                                            <MudButton Color="Color.Primary" OnClick="@(() => _picker.Close())">Ok</MudButton>
+                                        </PickerActions>
+                                    </MudDatePicker>
+                                </MudItem>
+                                <MudItem xs="12" sm="6" md="6">
+                                    <MudDatePicker @ref="_picker" Label="Estimated End" @bind-Date="_command.End" For="@(() => _command.End)" AutoClose="@autoClose">
+                                        <PickerActions>
+                                            <MudButton Class="mr-auto align-self-start" OnClick="@(() => _picker.Clear())">Clear</MudButton>
+                                            <MudButton OnClick="@(() => _picker.Close(false))">Cancel</MudButton>
+                                            <MudButton Color="Color.Primary" OnClick="@(() => _picker.Close())">Ok</MudButton>
+                                        </PickerActions>
+                                    </MudDatePicker>
+                                </MudItem>
+                                <MudItem xs="12" sm="6" md="6">
+                                    <MudDatePicker @ref="_picker" Label="Actual Start" @bind-Date="_command.ActualStart" For="@(() => _command.ActualStart)" AutoClose="@autoClose">
+                                        <PickerActions>
+                                            <MudButton Class="mr-auto align-self-start" OnClick="@(() => _picker.Clear())">Clear</MudButton>
+                                            <MudButton OnClick="@(() => _picker.Close(false))">Cancel</MudButton>
+                                            <MudButton Color="Color.Primary" OnClick="@(() => _picker.Close())">Ok</MudButton>
+                                        </PickerActions>
+                                    </MudDatePicker>
+                                </MudItem>
+                                <MudItem xs="12" sm="6" md="6">
+                                    <MudDatePicker @ref="_picker" Label="Actual End" @bind-Date="_command.ActualEnd" For="@(() => _command.ActualEnd)" AutoClose="@autoClose">
+                                        <PickerActions>
+                                            <MudButton Class="mr-auto align-self-start" OnClick="@(() => _picker.Clear())">Clear</MudButton>
+                                            <MudButton OnClick="@(() => _picker.Close(false))">Cancel</MudButton>
+                                            <MudButton Color="Color.Primary" OnClick="@(() => _picker.Close())">Ok</MudButton>
+                                        </PickerActions>
+                                    </MudDatePicker>
+                                </MudItem>
+                            </MudGrid>
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudButton DisableElevation OnClick="@(Cancel)" Style="margin-left:7px;" Variant="Variant.Filled">@_localizer["Cancel"]</MudButton>
+                            <MudSpacer />
+                            @if (Id != 0)
+                            {
+                                <MudButton DisableElevation Style="margin-right:7px;" Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Update"]</MudButton>
+                            }
+                            else
+                            {
+                                <MudButton DisableElevation Style="margin-right:7px;" Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Save"]</MudButton>
+                            }
+                        </MudCardActions>
+                    </MudCard>
+                </EditForm>
+            </MudItem>
+        </MudGrid>
+    </MudTabPanel>
+    @if (_command.Id != 0)
+    {
+        <MudTabPanel Text="Tasks">
+            <ProjectTasks Id="@_command.Id" />
+        </MudTabPanel>
+        <MudTabPanel Text="Teams">
+            <ProjectTeams Id="@_command.Id" />
+        </MudTabPanel>
+    }
+</MudTabs>
+

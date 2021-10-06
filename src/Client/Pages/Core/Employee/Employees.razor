@@ -45,6 +45,7 @@ else
             }
         </ToolBarContent>
         <HeaderContent>
+            <MudTh><MudTableSortLabel T="GetAllPagedEmployeesResponse" SortLabel="EmployeeNo">@_localizer["Employee No"]</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel T="GetAllPagedEmployeesResponse" SortLabel="Firstname">@_localizer["Firstname"]</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel T="GetAllPagedEmployeesResponse" SortLabel="Lastname">@_localizer["Lastname"]</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel T="GetAllPagedEmployeesResponse" SortLabel="MiddleName">@_localizer["Middle Name"]</MudTableSortLabel></MudTh>
@@ -54,6 +55,9 @@ else
             <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
         </HeaderContent>
         <RowTemplate>            
+            <MudTd DataLabel="Employee No">
+                <MudHighlighter Text="@context.EmployeeNo" HighlightedText="@_searchString" />
+            </MudTd>           
             <MudTd DataLabel="Firstname">
                 <MudHighlighter Text="@context.FirstName" HighlightedText="@_searchString" />
             </MudTd>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RuS.Application.Specifications.Core
 {
-    public class SiteFilterSpecification : HeroSpecification<Site>
+    public class SiteFilterSpecification : BaseSpecification<Site>
     {
         public SiteFilterSpecification(string searchString)
         {

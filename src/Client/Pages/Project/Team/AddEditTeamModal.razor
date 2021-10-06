@@ -1,0 +1,69 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditTeamModal> _localizer
+
+<EditForm Model="@_command" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (_command.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @_localizer["Add Team"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        @_localizer["Update Team"]
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>                
+                <MudItem xs="12" sm="6" md="6">
+                    <MudTextField @bind-Value="@_command.Name"
+                                  For="@(() => _command.Name)"
+                                  Label="@_localizer["Name"]"
+                                  Variant="Variant.Text"
+                                  Adornment="Adornment.End"
+                                  Margin="Margin.Dense"
+                                  AdornmentIcon="@Icons.Filled.Work" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudAutocomplete T="int" Label="@_localizer["Team Leader"]"
+                                     For="@(() => _command.TeamLeaderId)"
+                                     @bind-Value="_command.TeamLeaderId"
+                                     ResetValueOnEmptyText="true" SearchFunc="@SearchEmployees"
+                                     Variant="Variant.Text"
+                                     Margin="Margin.Dense"
+                                     ToStringFunc="@(i => _employees.FirstOrDefault(b => b.Id == i)?.FirstName ?? string.Empty)"
+                                     OffsetY="true" />
+                </MudItem>
+                <MudItem xs="12" sm="12" md="12">
+                    <MudTextField @bind-Value="@_command.Description"
+                                  For="@(() => _command.Description)"
+                                  Label="@_localizer["Description"]"
+                                  Variant="Variant.Text"
+                                  Adornment="Adornment.End"
+                                  Margin="Margin.Dense"
+                                  AdornmentIcon="@Icons.Filled.Description" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
+            <MudSpacer />
+            @if (_command.Id != 0)
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Update"]</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Save"]</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>
