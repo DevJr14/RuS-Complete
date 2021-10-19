@@ -42,6 +42,7 @@ namespace RuS.Application.Features.Teams.Commands.AddEdit
             if(teamMembers.Any())
             {
                 await _unitOfWork.Repository<TeamMember>().DeleteRangeAsync(teamMembers);
+                await _unitOfWork.Commit(cancellationToken);
             }
 
             var selectedMembers = command.TeamMembers.Where(m => m.IsSelected).ToList();
@@ -84,7 +85,7 @@ namespace RuS.Application.Features.Teams.Commands.AddEdit
             }
             else
             {
-                return await Result<int>.SuccessAsync(0, _localizer["No Member(s) Added To Team."]);
+                return await Result<int>.SuccessAsync(0, _localizer["Member(s) Removed From Team."]);
             }
         }
     }
