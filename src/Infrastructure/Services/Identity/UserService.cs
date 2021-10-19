@@ -99,11 +99,12 @@ namespace RuS.Infrastructure.Services.Identity
                         var verificationUri = await SendVerificationEmail(user, origin);
                         var mailRequest = new MailRequest
                         {
+                            FirstName = request.FirstName,
                             To = user.Email,
-                            Body = string.Format(_localizer["Please confirm your account by <a href='{0}'>clicking here</a>."], verificationUri),
+                            Body = string.Format(verificationUri),
                             Subject = _localizer["Confirm Registration"]
                         };
-                        BackgroundJob.Enqueue(() => _mailService.SendAsync(mailRequest));
+                        BackgroundJob.Enqueue(() => _mailService.SendWelcomeEmailAsync(mailRequest));
                         return await Result<string>.SuccessAsync(user.Id, string.Format(_localizer["User {0} Registered. Please check your Mailbox to verify!"], user.UserName));
                     }
                     return await Result<string>.SuccessAsync(user.Id, string.Format(_localizer["User {0} Registered."], user.UserName));
