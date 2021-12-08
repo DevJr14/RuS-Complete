@@ -1,5 +1,4 @@
-﻿
-<MudCard Elevation="25" Outlined="false">
+﻿<MudCard Elevation="25" Outlined="false" @onclick="@(() => Details(Task.Id))" Style="cursor:pointer">
     <MudProgressLinear Color="Color.Secondary" Size="Size.Small" Minimum="20" Maximum="100" Min="2" Value="60" Indeterminate="false"/>
     <MudCardHeader>
         <CardHeaderAvatar>
@@ -10,7 +9,7 @@
         </CardHeaderContent>
         <CardHeaderActions>
             <MudMenu Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small" OffsetX="true" Direction="Direction.Left" Class="mr-3 mt-3">
-                <MudMenuItem @onclick="(args) => EditProjectSelectionChanged(args, Task.Id)">Edit</MudMenuItem>
+                <MudMenuItem @onclick="(args) => EditTaskSelectionChanged(args, Task.Id)">Edit</MudMenuItem>
                 <MudMenuItem>Complete</MudMenuItem>
                 <MudMenuItem OnClick="@((args)=>DeleteSelectionChanged(args, Task.Id))">Delete</MudMenuItem>
             </MudMenu>
