@@ -628,6 +628,44 @@
             <param name="searchString"></param>
             <returns></returns>
         </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.DiscussionsController.GetAll(System.Int32)">
+            <summary>
+            Get All Discussions For A Project
+            </summary>
+            <param name="projectid">
+            </param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.DiscussionsController.GetAllForTask(System.Int32)">
+            <summary>
+            Get All Discussions For A Task
+            </summary>
+            <param name="taskid">
+            </param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.DiscussionsController.GetById(System.Int32)">
+            <summary>
+            Get A Discussions By Id
+            </summary>
+            <param name="id">
+            </param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.DiscussionsController.Post(RuS.Application.Features.Discussions.Commands.AddEdit.AddEditDiscussionCommand)">
+            <summary>
+            Create/Update Discussion
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:RuS.Server.Controllers.v1.Project.DiscussionsController.Delete(System.Int32)">
+            <summary>
+            Delete a Discussion
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
         <member name="M:RuS.Server.Controllers.v1.Project.PrioritiesController.GetAll">
             <summary>
             Get All Priorities
