@@ -105,7 +105,6 @@ namespace RuS.Client.Pages.Project.Project
 
         private async Task LoadDataAsync()
         {
-            await LoadTasks();
             await LoadTeams();
             await LoadSitesAsync();
             await LoadCategories();
@@ -175,49 +174,6 @@ namespace RuS.Client.Pages.Project.Project
             {
                 _clients = response.Data;
             }
-        }
-
-        private async Task InvokeModal(int id = 0)
-        {
-            var parameters = new DialogParameters();
-            if (id != 0)
-            {
-                var task = _taskList.FirstOrDefault(t => t.Id == id);
-                if (task != null)
-                {
-                    parameters.Add(nameof(AddEditTaskModal._command), new AddEditTaskCommand
-                    {
-                        Id = task.Id,
-                        Name = task.Name,
-                        Description = task.Description,
-                        CategoryId = (int)task.CategoryId,
-                        PriorityId = (int)task.PriorityId,
-                        ProjectId = Id,
-                        StatusId = (int)task.StatusId,
-                        Start = task.Start,
-                        End = task.End
-                    });
-                }
-            }
-            else
-            {
-                parameters.Add(nameof(AddEditTaskModal._command), new AddEditTaskCommand
-                {
-                    ProjectId = Id
-                });
-            }
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<AddEditTaskModal>(id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
-            var result = await dialog.Result;
-            if (!result.Cancelled)
-            {
-                await Reset();
-            }
-        }
-
-        private async Task Reset()
-        {
-            await LoadTasks();
         }
 
         private async Task<IEnumerable<int>> SearchSites(string value)

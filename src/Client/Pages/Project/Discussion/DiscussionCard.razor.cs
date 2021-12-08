@@ -1,18 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using RuS.Application.Features.Tasks.Queries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using RuS.Application.Features.Discussions.Queries;
 using System.Threading.Tasks;
 
-namespace RuS.Client.Pages.Project.Tasks
+namespace RuS.Client.Pages.Project.Discussion
 {
-    public partial class TaskCard
+    public partial class DiscussionCard
     {
-        [Parameter]
-        public TaskResponse Task { get; set; }
-
+        [Parameter] public DiscussionResponse Discussion { get; set; }
         [Parameter] public EventCallback<int> OnEditSelection { get; set; }
         [Parameter] public EventCallback<int> OnDeleteSelection { get; set; }
 
@@ -21,14 +16,9 @@ namespace RuS.Client.Pages.Project.Tasks
             await OnDeleteSelection.InvokeAsync(tastId);
         }
 
-        protected async Task EditTaskSelectionChanged(MouseEventArgs e, int id)
+        protected async Task EditSelectionChanged(MouseEventArgs e, int id)
         {
             await OnEditSelection.InvokeAsync(id);
-        }
-
-        private void Details(int id)
-        {
-            _navigationManager.NavigateTo($"/tasks/details/{id}");
         }
     }
 }

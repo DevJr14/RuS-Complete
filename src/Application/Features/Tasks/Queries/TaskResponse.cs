@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RuS.Application.Features.Categories.Queries;
+using RuS.Application.Features.Discussions.Queries;
 using RuS.Application.Features.Priorities.Queries;
 using RuS.Application.Features.Projects.Queries;
 using RuS.Application.Features.Statuses.Queries;
@@ -34,10 +35,11 @@ namespace RuS.Application.Features.Tasks.Queries
 
         public DateTime? End { get; set; }
 
-        public ProjectResponse Project { get; set; }
-        public StatusResponse Status { get; set; }
-        public CategoryResponse Category { get; set; }
-        public PriorityResponse Priority { get; set; }
+        public ProjectResponse Project { get; set; } = new();
+        public StatusResponse Status { get; set; } = new();
+        public CategoryResponse Category { get; set; } = new();
+        public PriorityResponse Priority { get; set; } = new();
+        public List<DiscussionResponse> Discussions { get; set; } = new();
 
         public void Mapping(Profile profile)
         {

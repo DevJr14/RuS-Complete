@@ -1,0 +1,98 @@
+﻿@page "/tasks/details/{Id:int}"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<TaskDetails> _localizer
+
+<HeroTitle Title="@_localizer["Task"]" Description="@_localizer["Task Details"]" />
+
+<MudCard Elevation="25" Class="mb-2">
+    <MudCardContent>
+        <MudGrid Class="py-2">
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="@_task.Name"
+                              Label="@_localizer["Task"]"
+                              Variant="Variant.Text"
+                              Adornment="Adornment.End"
+                              ReadOnly="true"
+                              Margin="Margin.Dense"
+                              AdornmentIcon="@Icons.Filled.Construction" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@_task.Project.Name"
+                                  Label="@_localizer["Project"]"
+                                  Variant="Variant.Text"
+                                  Adornment="Adornment.End"
+                                  ReadOnly="true"
+                                  Margin="Margin.Dense"
+                                  AdornmentIcon="@Icons.Filled.Work" />
+                </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="@_task.Priority.Name"
+                              Label="@_localizer["Priority"]"
+                              Variant="Variant.Text"
+                              Adornment="Adornment.End"
+                              ReadOnly="true"
+                              Margin="Margin.Dense"
+                              AdornmentIcon="@Icons.Filled.Watch" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="@_task.Status.Name"
+                              Label="@_localizer["Status"]"
+                              Variant="Variant.Text"
+                              Adornment="Adornment.End"
+                              ReadOnly="true"
+                              Margin="Margin.Dense"
+                              AdornmentIcon="@Icons.Filled.PinDrop" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="@_task.Start"
+                              Label="@_localizer["Start Date"]"
+                              Variant="Variant.Text"
+                              Adornment="Adornment.End"
+                              ReadOnly="true"
+                              Margin="Margin.Dense"
+                              AdornmentIcon="@Icons.Filled.Timeline" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="@_task.End"
+                              Label="@_localizer["End Date"]"
+                              Variant="Variant.Text"
+                              Adornment="Adornment.End"
+                              ReadOnly="true"
+                              Margin="Margin.Dense"
+                              AdornmentIcon="@Icons.Filled.Timeline" />
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
+
+<MudCard Elevation="25" Class="mb-2">
+    <MudCardContent>
+        <MudExpansionPanels DisableBorders="true" MultiExpansion="true" Elevation="25">
+            <MudExpansionPanel Text="Description">
+                <MudItem xs="12" sm="12" md="12">
+                    <MudText>
+                        @_task.Description
+                    </MudText>
+                </MudItem>
+            </MudExpansionPanel>
+            <MudExpansionPanel Text="Discussions">
+                <MudCard Elevation="0" Outlined="false" Class="mb-1">
+                    <MudToolBar>
+                        <MudFab Color="Color.Success" Size="Size.Small" OnClick="@(() => InvokeAdd(_task.ProjectId, _task.Id))" IconSize="Size.Small" Icon="@Icons.Material.Filled.Add" aria-label="add" />
+                        <MudFab Color="Color.Secondary" Size="Size.Small" OnClick="@LoadDiscussions" IconSize="Size.Small" Icon="@Icons.Material.Filled.Refresh" Style="margin-left: 5px;" aria-label="refresh" />
+                        <MudFab Color="Color.Secondary" Size="Size.Small"  IconSize="Size.Small" Icon="@Icons.Custom.FileFormats.FileExcel" Style="margin-left: 5px;" aria-label="export" />                        
+                        <MudSpacer />
+                    </MudToolBar>
+                </MudCard>
+                @if (_discussions.Count > 0)
+                {
+                    foreach (var discussion in _discussions)
+                    {
+                        <MudItem xs="12" sm="12" Class="mt-2">
+                            <DiscussionCard OnEditSelection="InvokeEdit" OnDeleteSelection="InvokeDelete" Discussion="@discussion" />
+                        </MudItem>
+                    }
+                }
+            </MudExpansionPanel>
+        </MudExpansionPanels>
+    </MudCardContent>
+</MudCard>

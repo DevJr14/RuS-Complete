@@ -125,6 +125,16 @@ namespace RuS.Shared.Constants.Permission
             public const string Search = "Permissions.Tasks.Search";
         }
 
+        public static class Discussions
+        {
+            public const string View = "Permissions.Discussions.View";
+            public const string Create = "Permissions.Discussions.Create";
+            public const string Edit = "Permissions.Discussions.Edit";
+            public const string Delete = "Permissions.Discussions.Delete";
+            public const string Export = "Permissions.Discussions.Export";
+            public const string Search = "Permissions.Discussions.Search";
+        }
+
         public static class Documents
         {
             public const string View = "Permissions.Team.View";

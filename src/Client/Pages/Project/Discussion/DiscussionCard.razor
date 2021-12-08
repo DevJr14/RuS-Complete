@@ -1,0 +1,22 @@
+﻿<MudCard Elevation="25" Class="mb-1">
+    <MudCardHeader>
+        <CardHeaderAvatar>
+            <MudAvatar Size="Size.Medium" Color="Color.Secondary">I</MudAvatar>
+        </CardHeaderAvatar>
+        <CardHeaderContent>
+            <MudText Typo="Typo.body1">Istra Croatia</MudText>
+            <MudText Typo="Typo.body2">17:20 pm 21 December 2021</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            <MudMenu Icon="@Icons.Material.Filled.MoreVert" OffsetX="true" Size="Size.Medium" Direction="Direction.Left" Class="mr-3">
+                <MudMenuItem @onclick="(args) => EditSelectionChanged(args, Discussion.Id)">Edit</MudMenuItem>
+                <MudMenuItem @onclick="(args) => DeleteSelectionChanged(args, Discussion.Id)">Delete</MudMenuItem>
+            </MudMenu>
+        </CardHeaderActions>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudChip>
+           @Discussion.Comment
+        </MudChip>
+    </MudCardContent>
+</MudCard>
