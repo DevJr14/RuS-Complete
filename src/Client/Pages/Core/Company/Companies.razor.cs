@@ -184,5 +184,10 @@ namespace RuS.Client.Pages.Core.Company
                 }
             }
         }
+
+        private void Cancel()
+        {
+            _navigationManager.NavigateTo("/");
+        }
     }
 }

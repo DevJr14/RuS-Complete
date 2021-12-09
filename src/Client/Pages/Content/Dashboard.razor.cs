@@ -69,5 +69,10 @@ namespace RuS.Client.Pages.Content
                 }
             }
         }
+
+        private void Cancel()
+        {
+            _navigationManager.NavigateTo("/");
+        }
     }
 }

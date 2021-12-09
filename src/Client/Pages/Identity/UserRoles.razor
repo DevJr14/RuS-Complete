@@ -4,7 +4,7 @@
 @using RuS.Application.Responses.Identity
 @using Microsoft.AspNetCore.Components
 
-<HeroTitle Title="@Title" Description="@Description" />
+<Header OnClose="Cancel" Title="@Title" Description="@Description" />
 @if (!_loaded)
 {
     <MudProgressCircular Color="Color.Primary" Indeterminate="true" />

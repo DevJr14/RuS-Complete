@@ -195,5 +195,10 @@ namespace RuS.Client.Pages.Core.Company
             }
             return false;
         }
+
+        private void Cancel()
+        {
+            _navigationManager.NavigateTo("/core/companies");
+        }
     }
 }

@@ -4,7 +4,7 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Priorities> _localizer
 @using RuS.Application.Features.Priorities.Queries;
 
-<HeroTitle Title="@_localizer["Priority"]" Description="@_localizer["Manage Priority"]" />
+<Header OnClose="Cancel" Title="@_localizer["Priority"]" Description="@_localizer["Manage Priority"]" />
 
 <style>
     .mud-table-container {

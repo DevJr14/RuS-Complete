@@ -2,7 +2,7 @@
 @attribute [Authorize(Policy = Permissions.Dashboards.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Dashboard> _localizer
 
-<HeroTitle Title="@_localizer["Dashboard"]" Description="@_localizer["Realtime Updates & Insights with SignalR."]" />
+<Header OnClose="Cancel" Title="@_localizer["Dashboard"]" Description="@_localizer["Realtime Updates & Insights with SignalR."]" />
 @if (!_loaded)
 {
     <MudProgressCircular Color="Color.Primary" Indeterminate="true" />

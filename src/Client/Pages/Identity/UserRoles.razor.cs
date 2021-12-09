@@ -87,5 +87,10 @@ namespace RuS.Client.Pages.Identity
             }
             return false;
         }
+
+        private void Cancel()
+        {
+            _navigationManager.NavigateTo("/identity/users");
+        }
     }
 }
