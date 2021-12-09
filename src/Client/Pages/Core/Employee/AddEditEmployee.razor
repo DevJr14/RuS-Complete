@@ -4,7 +4,7 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditEmployee> _localizer
 @using RuS.Application.Features.Employees.Queries.GetById;
 
-<HeroTitle Title="@_localizer["Employee"]" Description="@_localizer["Manage Details"]" />
+<Header OnClose="Cancel" Title="@_localizer["Employee"]" Description="@_localizer["Manage Details"]" />
 @*<MudPaper Elevation="25">*@
 <EditForm Model="@EmployeeCommand" OnValidSubmit="SaveAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
@@ -182,7 +182,6 @@
             </MudGrid>
         </MudCardContent>
         <MudCardActions>
-            <MudButton DisableElevation OnClick="@(Cancel)" Style="margin-left:7px;" Variant="Variant.Filled">@_localizer["Cancel"]</MudButton>
             <MudSpacer />
             @if (Id != 0)
             {
@@ -195,6 +194,3 @@
         </MudCardActions>
     </MudCard>
 </EditForm>
-    @code {
-
-    }

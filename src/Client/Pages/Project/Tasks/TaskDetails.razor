@@ -1,7 +1,7 @@
 ﻿@page "/tasks/details/{Id:int}"
 @inject Microsoft.Extensions.Localization.IStringLocalizer<TaskDetails> _localizer
 
-<HeroTitle Title="@_localizer["Task"]" Description="@_localizer["Task Details"]" />
+<Header OnClose="Cancel" Title="@_localizer["Task"]" Description="@_localizer["Task Details"]" />
 
 <MudCard Elevation="25" Class="mb-2">
     <MudCardContent>

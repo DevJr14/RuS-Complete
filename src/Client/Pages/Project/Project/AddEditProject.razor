@@ -3,7 +3,7 @@
 @attribute [Authorize(Policy = Permissions.Projects.Edit)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditProject> _localizer
 
-<HeroTitle Title="@_localizer["Project"]" Description="@_localizer["Manage Details"]" />
+<Header OnClose="Cancel" Title="@_localizer["Project"]" Description="@_localizer["Manage Details"]" />
 
 <EditForm Model="_command" OnValidSubmit="SaveAsync">
     <FluentValidationValidator @ref="_fluentValidationValidator" />
@@ -159,7 +159,6 @@
                             </MudGrid>
                         </MudCardContent>
                         <MudCardActions Class="my-2">
-                            <MudButton DisableElevation OnClick="@(Cancel)" Style="margin-left:7px;" Variant="Variant.Filled">@_localizer["Cancel"]</MudButton>
                             <MudSpacer />
                             @if (Id != 0)
                             {

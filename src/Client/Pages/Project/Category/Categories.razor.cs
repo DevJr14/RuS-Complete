@@ -195,5 +195,10 @@ namespace RuS.Client.Pages.Project.Category
             }
             return false;
         }
+
+        private void Cancel()
+        {
+            _navigationManager.NavigateTo("/");
+        }
     }
 }

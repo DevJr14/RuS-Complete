@@ -4,7 +4,7 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Categories> _localizer
 @using RuS.Application.Features.Categories.Queries;
 
-<HeroTitle Title="@_localizer["Category"]" Description="@_localizer["Manage Category"]" />
+<Header OnClose="Cancel" Title="@_localizer["Category"]" Description="@_localizer["Manage Category"]" />
 
 <style>
     .mud-table-container {

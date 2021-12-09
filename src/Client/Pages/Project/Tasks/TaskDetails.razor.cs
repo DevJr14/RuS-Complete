@@ -116,5 +116,10 @@ namespace RuS.Client.Pages.Project.Tasks
             }
         }
 
+        private void Cancel()
+        {
+            _navigationManager.NavigateTo($"/project/projects/edit/{Id}");
+        }
+
     }
 }

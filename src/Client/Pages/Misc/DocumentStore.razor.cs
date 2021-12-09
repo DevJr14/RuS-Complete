@@ -192,5 +192,10 @@ namespace RuS.Client.Pages.Misc
         {
             _navigationManager.NavigateTo($"/extended-attributes/{typeof(Document).Name}/{documentId}");
         }
+
+        private void Cancel()
+        {
+            _navigationManager.NavigateTo("/");
+        }
     }
 }
