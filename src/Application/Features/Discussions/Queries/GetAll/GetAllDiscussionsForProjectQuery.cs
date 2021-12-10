@@ -34,7 +34,7 @@ namespace RuS.Application.Features.Discussions.Queries.GetAll
         public async Task<Result<List<DiscussionResponse>>> Handle(GetAllDiscussionsForProjectQuery request, CancellationToken cancellationToken)
         {
             var discussions = await _unitOfWork.Repository<Discussion>().Entities
-                .Where(d => d.ProjectId == request.ProjectId)
+                .Where(d => d.ProjectId == request.ProjectId && d.TaskId == null)
                 //.Include(d => d.Project)
                 //.Include(d => d.Task)
                 .OrderByDescending(d => d.CreatedOn)
