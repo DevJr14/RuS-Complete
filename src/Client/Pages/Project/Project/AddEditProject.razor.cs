@@ -4,6 +4,8 @@ using MudBlazor;
 using RuS.Application.Features.Categories.Commands;
 using RuS.Application.Features.Categories.Queries;
 using RuS.Application.Features.Clients.Queries;
+using RuS.Application.Features.Discussions.Commands.AddEdit;
+using RuS.Application.Features.Discussions.Queries;
 using RuS.Application.Features.Priorities.Queries;
 using RuS.Application.Features.Projects.Commands.AddEdit;
 using RuS.Application.Features.Projects.Queries;
@@ -15,13 +17,16 @@ using RuS.Application.Features.Teams.Queries;
 using RuS.Client.Infrastructure.Managers.Core.Site;
 using RuS.Client.Infrastructure.Managers.Project.Category;
 using RuS.Client.Infrastructure.Managers.Project.Client;
+using RuS.Client.Infrastructure.Managers.Project.Discussion;
 using RuS.Client.Infrastructure.Managers.Project.Priority;
 using RuS.Client.Infrastructure.Managers.Project.Project;
 using RuS.Client.Infrastructure.Managers.Project.Status;
 using RuS.Client.Infrastructure.Managers.Project.Task;
 using RuS.Client.Infrastructure.Managers.Project.Team;
 using RuS.Client.Pages.Project.Category;
+using RuS.Client.Pages.Project.Discussion;
 using RuS.Client.Pages.Project.Tasks;
+using RuS.Client.Shared.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +44,7 @@ namespace RuS.Client.Pages.Project.Project
         [Inject] public IStatusManager StatusManager { get; set; }
         [Inject] public ITaskManager TaskManager { get; set; }
         [Inject] public ITeamManager TeamManager { get; set; }
+        [Inject] public IDiscussionManager DiscussionManager { get; set; }
 
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
@@ -49,6 +55,7 @@ namespace RuS.Client.Pages.Project.Project
 
         private List<TaskResponse> _taskList = new();
         private List<TeamResponse> _teamkList = new();
+        private List<DiscussionResponse> _discussions { get; set; } = new();
 
         private List<SiteResponse> _sites = new();
         private List<ClientResponse> _clients = new();
@@ -105,21 +112,21 @@ namespace RuS.Client.Pages.Project.Project
 
         private async Task LoadDataAsync()
         {
-            await LoadTasks();
             await LoadTeams();
             await LoadSitesAsync();
             await LoadCategories();
             await LoadPriorities();
             await LoadStatuses();
             await LoadClients();
+            await LoadDiscussions();
         }
 
-        private async Task LoadTasks()
+        private async Task LoadDiscussions()
         {
-            var data = await TaskManager.GetAllForProjectAsync(Id);
+            var data = await DiscussionManager.GetAllForProjectAsync(Id);
             if (data.Succeeded)
             {
-                _taskList = data.Data;
+                _discussions = data.Data;
             }
         }
 
@@ -177,47 +184,72 @@ namespace RuS.Client.Pages.Project.Project
             }
         }
 
-        private async Task InvokeModal(int id = 0)
+        private async Task InvokeAdd(int projectId)
         {
             var parameters = new DialogParameters();
-            if (id != 0)
+            parameters.Add(nameof(AddEditDiscussionModal._command), new AddEditDiscussionCommand
             {
-                var task = _taskList.FirstOrDefault(t => t.Id == id);
-                if (task != null)
-                {
-                    parameters.Add(nameof(AddEditTaskModal._command), new AddEditTaskCommand
-                    {
-                        Id = task.Id,
-                        Name = task.Name,
-                        Description = task.Description,
-                        CategoryId = (int)task.CategoryId,
-                        PriorityId = (int)task.PriorityId,
-                        ProjectId = Id,
-                        StatusId = (int)task.StatusId,
-                        Start = task.Start,
-                        End = task.End
-                    });
-                }
-            }
-            else
-            {
-                parameters.Add(nameof(AddEditTaskModal._command), new AddEditTaskCommand
-                {
-                    ProjectId = Id
-                });
-            }
+                ProjectId = projectId
+            });
+
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<AddEditTaskModal>(id == 0 ? _localizer["Create"] : _localizer["Edit"], parameters, options);
+            var dialog = _dialogService.Show<AddEditDiscussionModal>(_localizer["Edit Comment"], parameters, options);
             var result = await dialog.Result;
             if (!result.Cancelled)
             {
-                await Reset();
+                await LoadDiscussions();
             }
         }
 
-        private async Task Reset()
+        private async Task InvokeEdit(int id)
         {
-            await LoadTasks();
+            var parameters = new DialogParameters();
+            var discussion = _discussions.FirstOrDefault(d => d.Id == id);
+            if (discussion != null)
+            {
+                parameters.Add(nameof(AddEditDiscussionModal._command), new AddEditDiscussionCommand
+                {
+                    Id = discussion.Id,
+                    ProjectId = discussion.ProjectId,
+                    Comment = discussion.Comment
+                });
+            }
+
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<AddEditDiscussionModal>(_localizer["Edit Comment"], parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                await LoadDiscussions();
+            }
+        }
+
+        private async Task InvokeDelete(int id)
+        {
+            string deleteContent = _localizer["Delete Project Comment"];
+            var parameters = new DialogParameters
+            {
+                {nameof(DeleteConfirmation.ContentText), string.Format(deleteContent, id)}
+            };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<DeleteConfirmation>(_localizer["Delete"], parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                var response = await DiscussionManager.DeleteAsync(id);
+                if (response.Succeeded)
+                {
+                    _snackBar.Add(response.Messages[0], Severity.Success);
+                    await LoadDiscussions();
+                }
+                else
+                {
+                    foreach (var message in response.Messages)
+                    {
+                        _snackBar.Add(message, Severity.Error);
+                    }
+                }
+            }
         }
 
         private async Task<IEnumerable<int>> SearchSites(string value)

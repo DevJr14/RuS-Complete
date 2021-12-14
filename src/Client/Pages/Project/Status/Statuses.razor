@@ -4,7 +4,7 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Statuses> _localizer
 @using RuS.Application.Features.Statuses.Queries;
 
-<HeroTitle Title="@_localizer["Status"]" Description="@_localizer["Manage Status"]" />
+<Header OnClose="Cancel" Title="@_localizer["Status"]" Description="@_localizer["Manage Status"]" />
 
 <style>
     .mud-table-container {

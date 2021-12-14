@@ -170,5 +170,10 @@ namespace RuS.Client.Pages.Misc
             }
             return false;
         }
+
+        private void Cancel()
+        {
+            _navigationManager.NavigateTo("/");
+        }
     }
 }

@@ -21,9 +21,14 @@ namespace RuS.Client.Pages.Project.Tasks
             await OnDeleteSelection.InvokeAsync(tastId);
         }
 
-        protected async Task EditProjectSelectionChanged(MouseEventArgs e, int id)
+        protected async Task EditTaskSelectionChanged(MouseEventArgs e, int id)
         {
             await OnEditSelection.InvokeAsync(id);
+        }
+
+        private void Details(int id)
+        {
+            _navigationManager.NavigateTo($"/tasks/details/{id}");
         }
     }
 }

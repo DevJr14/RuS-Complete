@@ -128,7 +128,7 @@ namespace RuS.Client.Pages.Project.Project
             }
         }
 
-        private void ReturnHome()
+        private void Cancel()
         {
             _navigationManager.NavigateTo("/");
         }

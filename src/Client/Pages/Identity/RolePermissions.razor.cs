@@ -135,5 +135,10 @@ namespace RuS.Client.Pages.Identity
 
             return Color.Info;
         }
+
+        private void Cancel()
+        {
+            _navigationManager.NavigateTo("/identity/roles");
+        }
     }
 }

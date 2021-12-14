@@ -31,5 +31,6 @@ namespace RuS.Domain.Entities.Projects
         public Status Status { get; set; }
         public Category Category { get; set; }
         public Priority Priority { get; set; }
+        public List<Discussion> Discussions { get; set; } = new();
     }
 }

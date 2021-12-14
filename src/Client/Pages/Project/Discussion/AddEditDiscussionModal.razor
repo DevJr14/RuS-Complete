@@ -1,0 +1,44 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditDiscussionModal> _localizer
+
+<EditForm Model="@_command" OnValidSubmit="@SaveAsync">
+    <FluentValidationValidator @ref="_fluentValidationValidator"/>
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (_command.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @_localizer["Add Comment"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        @_localizer["Update Comment"]
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" md="12">
+                    <MudTextField @bind-Value="@_command.Comment" For="@(() => _command.Comment)" Lines="3" DisableUnderLine="true" T="string" HelperText="Type your comment." Immediate="true" Label="Comment" Variant="Variant.Filled" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton Class="ms-4" DisableElevation Variant="Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
+            <MudSpacer />
+            @if (_command.Id != 0)
+            {
+                <MudButton Class="me-4" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">@_localizer["Update"]</MudButton>
+            }
+            else
+            {
+                <MudButton Class="me-4" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">@_localizer["Add"]</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

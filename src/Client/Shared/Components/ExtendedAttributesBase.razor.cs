@@ -315,5 +315,10 @@ namespace RuS.Client.Shared.Components
 
             return Color.Info;
         }
+
+        private void Cancel()
+        {
+            _navigationManager.NavigateTo("/document-store");
+        }
     }
 }

@@ -560,6 +560,43 @@ namespace RuS.Infrastructure.Migrations
                     b.ToTable("Clients");
                 });
 
+            modelBuilder.Entity("RuS.Domain.Entities.Projects.Discussion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TaskId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("TaskId");
+
+                    b.ToTable("Discussions");
+                });
+
             modelBuilder.Entity("RuS.Domain.Entities.Projects.Priority", b =>
                 {
                     b.Property<int>("Id")
@@ -1162,6 +1199,23 @@ namespace RuS.Infrastructure.Migrations
                     b.Navigation("DocumentType");
                 });
 
+            modelBuilder.Entity("RuS.Domain.Entities.Projects.Discussion", b =>
+                {
+                    b.HasOne("RuS.Domain.Entities.Projects.Project", "Project")
+                        .WithMany("Discussions")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RuS.Domain.Entities.Projects.Task", "Task")
+                        .WithMany("Discussions")
+                        .HasForeignKey("TaskId");
+
+                    b.Navigation("Project");
+
+                    b.Navigation("Task");
+                });
+
             modelBuilder.Entity("RuS.Domain.Entities.Projects.Project", b =>
                 {
                     b.HasOne("RuS.Domain.Entities.Projects.Category", "Category")
@@ -1286,9 +1340,16 @@ namespace RuS.Infrastructure.Migrations
 
             modelBuilder.Entity("RuS.Domain.Entities.Projects.Project", b =>
                 {
+                    b.Navigation("Discussions");
+
                     b.Navigation("Tasks");
 
                     b.Navigation("Teams");
+                });
+
+            modelBuilder.Entity("RuS.Domain.Entities.Projects.Task", b =>
+                {
+                    b.Navigation("Discussions");
                 });
 
             modelBuilder.Entity("RuS.Domain.Entities.Projects.Team", b =>

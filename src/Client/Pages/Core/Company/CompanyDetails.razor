@@ -9,48 +9,50 @@
     }
 </style>
 
-<HeroTitle Title="@_localizer["Company"]" Description="@_localizer["Company Details"]" />
+<Header OnClose="Cancel" Title="@_localizer["Company"]" Description="@_localizer["Company Details"]" />
 
-<MudPaper Elevation="25">
-    <MudGrid Class="ma-2">
-        <MudItem xs="12" sm="6" md="4" >
-            <MudTextField @bind-Value="@Name"
-                            Label="@_localizer["Company"]"
-                            Variant="Variant.Text"
-                            Adornment="Adornment.End"
-                            ReadOnly="true"
-                            Margin="Margin.Dense"
-                            AdornmentIcon="@Icons.Filled.Business"/>
-        </MudItem>
-        <MudItem xs="12" sm="6" md="4">
-            <MudTextField @bind-Value="@ShortTitle"
-                            Label="@_localizer["Short Title"]"
-                            Variant="Variant.Text"
-                            Adornment="Adornment.End"
-                            ReadOnly="true"
-                            Margin="Margin.Dense"
-                            AdornmentIcon="@Icons.Filled.Business"/>
-        </MudItem>
-        <MudItem xs="12" sm="6" md="4">
-            <MudTextField @bind-Value="@RegistrationNo"
-                            Label="@_localizer["Registration No."]"
-                            Variant="Variant.Text"
-                            Adornment="Adornment.End"
-                            ReadOnly="true"
-                            Margin="Margin.Dense"
-                            AdornmentIcon="@Icons.Filled.Watch"/>
-        </MudItem>
-        <MudItem xs="12" sm="6" md="4">
-            <MudTextField @bind-Value="@RegistrationDate" 
-                          Label="@_localizer["Registration Date."]"
-                          Variant="Variant.Text"
-                          Adornment="Adornment.End"
-                          ReadOnly="true"
-                          Margin="Margin.Dense"
-                          AdornmentIcon="@Icons.Filled.CalendarToday" />
-        </MudItem>
-    </MudGrid>
-</MudPaper>
+<MudCard Elevation="25" Class="mb-2">
+    <MudCardContent>
+        <MudGrid Class="py-2">
+            <MudItem xs="12" sm="6" md="4" >
+                <MudTextField @bind-Value="@Name"
+                                Label="@_localizer["Company"]"
+                                Variant="Variant.Text"
+                                Adornment="Adornment.End"
+                                ReadOnly="true"
+                                Margin="Margin.Dense"
+                                AdornmentIcon="@Icons.Filled.Business"/>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="@ShortTitle"
+                                Label="@_localizer["Short Title"]"
+                                Variant="Variant.Text"
+                                Adornment="Adornment.End"
+                                ReadOnly="true"
+                                Margin="Margin.Dense"
+                                AdornmentIcon="@Icons.Filled.Business"/>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="@RegistrationNo"
+                                Label="@_localizer["Registration No."]"
+                                Variant="Variant.Text"
+                                Adornment="Adornment.End"
+                                ReadOnly="true"
+                                Margin="Margin.Dense"
+                                AdornmentIcon="@Icons.Filled.Watch"/>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="@RegistrationDate" 
+                              Label="@_localizer["Registration Date."]"
+                              Variant="Variant.Text"
+                              Adornment="Adornment.End"
+                              ReadOnly="true"
+                              Margin="Margin.Dense"
+                              AdornmentIcon="@Icons.Filled.CalendarToday" />
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
 
 <MudGrid Spacing="1">
     <MudItem xs="12">

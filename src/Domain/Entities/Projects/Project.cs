@@ -43,5 +43,6 @@ namespace RuS.Domain.Entities.Projects
         public Client Client { get; set; }
         public List<Task> Tasks { get; set; } = new();
         public List<Team> Teams { get; set; } = new();
+        public List<Discussion> Discussions { get; set; } = new();
     }
 }

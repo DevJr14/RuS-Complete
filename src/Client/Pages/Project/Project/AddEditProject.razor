@@ -3,41 +3,46 @@
 @attribute [Authorize(Policy = Permissions.Projects.Edit)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditProject> _localizer
 
-<HeroTitle Title="@_localizer["Project"]" Description="@_localizer["Manage Details"]" />
+<Header OnClose="Cancel" Title="@_localizer["Project"]" Description="@_localizer["Manage Project"]" />
 
-
-<MudTabs Elevation="25" Rounded="true" Outlined="false" Color="@Color.Transparent" PrevIcon="@Icons.Filled.SkipPrevious" NextIcon="@Icons.Filled.SkipNext" PanelClass="mt-6">
-    <MudTabPanel Text="Details">
-        <MudGrid Spacing="1" Class="mt-1">
-            <MudItem xs="12" sm="12" md="12">
-                <EditForm Model="@_command" OnValidSubmit="SaveAsync">
-                    <FluentValidationValidator @ref="_fluentValidationValidator" />
-                    <MudCard Elevation="0" Outlined="false" Class="mb-1">
+<MudExpansionPanels DisableBorders="true" MultiExpansion="true" DisableGutters="true" Elevation="25" Class="mb-2">
+    <EditForm Model="_command" OnValidSubmit="SaveAsync">
+        <FluentValidationValidator @ref="_fluentValidationValidator" />
+        <MudExpansionPanel>
+            <TitleContent>
+                <div class="d-flex">
+                    <MudIcon Icon="@Icons.Material.Filled.Settings" class="mr-3"></MudIcon>
+                    <MudText>Details</MudText>
+                </div>
+            </TitleContent>
+            <ChildContent>
+                <MudItem xs="12" sm="12" md="12">
+                    <MudCard Elevation="0" Class="mb-2">
                         <MudCardHeader>
                             <CardHeaderAvatar>
                                 @if (Id == 0)
                                 {
-                                    <MudAvatar Size="Size.Small" Color="Color.Success"><b>+</b></MudAvatar>
+                                    <MudAvatar Size="Size.Medium" Color="Color.Success"><b>+</b></MudAvatar>
                                 }
                                 else
                                 {
-                                    <MudAvatar Size="Size.Small" Color="Color.Primary"><b>+</b></MudAvatar>
+                                    <MudAvatar Size="Size.Medium" Color="Color.Primary"><b>+</b></MudAvatar>
                                 }
                             </CardHeaderAvatar>
                             <CardHeaderContent>
                                 @if (Id != 0)
                                 {
 
-                                    <MudText Typo="Typo.body1">@_localizer["Update"]</MudText>
+                                    <MudText Typo="Typo.h6">@_localizer["Update"]</MudText>
                                 }
                                 else
                                 {
-                                    <MudText Typo="Typo.body1">@_localizer["Add"]</MudText>
+                                    <MudText Typo="Typo.h6">@_localizer["Add"]</MudText>
                                 }
                             </CardHeaderContent>
                         </MudCardHeader>
-                        <MudCardContent>
-                            <MudGrid>
+                        <MudCardContent Class="py-0">
+                            <MudGrid Class="px-2">
                                 <MudItem xs="12" sm="6" md="4">
                                     <MudAutocomplete T="int" Label="@_localizer["Site"]"
                                                      For="@(() => _command.SiteId)"
@@ -153,8 +158,7 @@
                                 </MudItem>
                             </MudGrid>
                         </MudCardContent>
-                        <MudCardActions>
-                            <MudButton DisableElevation OnClick="@(Cancel)" Style="margin-left:7px;" Variant="Variant.Filled">@_localizer["Cancel"]</MudButton>
+                        <MudCardActions Class="my-2">
                             <MudSpacer />
                             @if (Id != 0)
                             {
@@ -166,18 +170,61 @@
                             }
                         </MudCardActions>
                     </MudCard>
-                </EditForm>
-            </MudItem>
-        </MudGrid>
-    </MudTabPanel>
-    @if (_command.Id != 0)
-    {
-        <MudTabPanel Text="Tasks">
-            <ProjectTasks Id="@_command.Id" />
-        </MudTabPanel>
-        <MudTabPanel Text="Teams">
-            <ProjectTeams Id="@_command.Id" />
-        </MudTabPanel>
-    }
-</MudTabs>
-
+                </MudItem>
+            </ChildContent>
+        </MudExpansionPanel>
+        <MudExpansionPanel>
+            <TitleContent>
+                <div class="d-flex">
+                    <MudIcon Icon="@Icons.Material.Filled.GroupWork" class="mr-3"></MudIcon>
+                    <MudText>Tasks</MudText>
+                </div>
+            </TitleContent>
+            <ChildContent>
+                @if (_command.Id != 0)
+                {
+                    <ProjectTasks Id="@_command.Id" />
+                }
+            </ChildContent>
+        </MudExpansionPanel>
+        <MudExpansionPanel>
+            <TitleContent>
+                <div class="d-flex">
+                    <MudIcon Icon="@Icons.Material.Filled.HomeWork" class="mr-3"></MudIcon>
+                    <MudText>Teams</MudText>
+                </div>
+            </TitleContent>
+            <ChildContent>
+                @if (_command.Id != 0)
+                {
+                    <ProjectTeams Id="@_command.Id" />
+                }
+            </ChildContent>
+        </MudExpansionPanel>
+        <MudExpansionPanel>
+            <TitleContent>
+                <div class="d-flex">
+                    <MudIcon Icon="@Icons.Material.Filled.Message" class="mr-3"></MudIcon>
+                    <MudText>Discussions</MudText>
+                </div>
+            </TitleContent>
+            <ChildContent>
+                <MudCard Elevation="0" Outlined="false" Class="mb-1">
+                    <MudToolBar>
+                        <MudFab Color="Color.Success" Size="Size.Small" OnClick="@(() => InvokeAdd(Id))" IconSize="Size.Small" Icon="@Icons.Material.Filled.Add" aria-label="add" />
+                        <MudFab Color="Color.Secondary" Size="Size.Small" OnClick="@LoadDiscussions" IconSize="Size.Small" Icon="@Icons.Material.Filled.Refresh" Style="margin-left: 5px;" aria-label="refresh" />
+                        <MudFab Color="Color.Secondary" Size="Size.Small" IconSize="Size.Small" Icon="@Icons.Custom.FileFormats.FileExcel" Style="margin-left: 5px;" aria-label="export" />
+                        <MudSpacer />
+                    </MudToolBar>
+                </MudCard>
+                @if (_discussions.Count > 0)
+                {
+                    foreach (var discussion in _discussions)
+                    {
+                        <DiscussionCard Discussion="@discussion" OnEditSelection="@(() => InvokeEdit(discussion.Id))" OnDeleteSelection="@(() => InvokeDelete(discussion.Id))"/>
+                    }
+                }
+            </ChildContent>
+        </MudExpansionPanel>
+    </EditForm>
+</MudExpansionPanels>

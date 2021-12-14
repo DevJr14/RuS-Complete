@@ -150,5 +150,10 @@ namespace RuS.Client.Pages.Identity
         {
             _navigationManager.NavigateTo($"/identity/role-permissions/{roleId}");
         }
+
+        private void Cancel()
+        {
+            _navigationManager.NavigateTo("/");
+        }
     }
 }

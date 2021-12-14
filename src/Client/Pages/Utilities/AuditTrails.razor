@@ -9,7 +9,7 @@
     }
 </style>
 
-<HeroTitle Title="@_localizer["Audit Trails"]" Description="@_localizer["Your Recent Activities."]" />
+<Header OnClose="Cancel" Title="@_localizer["Audit Trails"]" Description="@_localizer["Your Recent Activities."]" />
 @if (!_loaded)
 {
     <MudProgressCircular Color="Color.Primary" Indeterminate="true" />

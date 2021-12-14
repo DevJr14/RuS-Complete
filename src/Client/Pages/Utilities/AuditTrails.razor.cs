@@ -151,5 +151,10 @@ namespace RuS.Client.Pages.Utilities
             public bool ShowDetails { get; set; } = false;
             public DateTime LocalTime { get; set; }
         }
+
+        private void Cancel()
+        {
+            _navigationManager.NavigateTo("/");
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace RuS.Infrastructure.Services
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using var p = new ExcelPackage();
             p.Workbook.Properties.Author = "RuS";
-            p.Workbook.Worksheets.Add(_localizer["Audit Trails"]);
+            p.Workbook.Worksheets.Add(_localizer["Worksheet"]);
             var ws = p.Workbook.Worksheets[0];
             ws.Name = sheetName;
             ws.Cells.Style.Font.Size = 11;

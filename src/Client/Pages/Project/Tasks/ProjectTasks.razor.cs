@@ -3,7 +3,6 @@ using Microsoft.JSInterop;
 using MudBlazor;
 using RuS.Application.Features.Tasks.Commands.AddEdit;
 using RuS.Application.Features.Tasks.Queries;
-using RuS.Client.Infrastructure.Managers.Project.Project;
 using RuS.Client.Infrastructure.Managers.Project.Task;
 using RuS.Shared.Constants.Application;
 using System;

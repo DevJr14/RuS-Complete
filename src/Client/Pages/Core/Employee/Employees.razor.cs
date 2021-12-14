@@ -164,5 +164,10 @@ namespace RuS.Client.Pages.Core.Employee
                 }
             }
         }
+
+        private void Cancel()
+        {
+            _navigationManager.NavigateTo("/");
+        }
     }
 }

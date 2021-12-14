@@ -71,5 +71,10 @@ namespace RuS.Client.Pages.Identity
 
             _loaded = true;
         }
+
+        private void Cancel()
+        {
+            _navigationManager.NavigateTo("/identity/users");
+        }
     }
 }

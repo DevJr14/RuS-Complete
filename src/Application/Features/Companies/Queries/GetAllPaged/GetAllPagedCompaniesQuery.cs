@@ -57,7 +57,7 @@ namespace RuS.Application.Features.Companies.Queries.GetAllPaged
             if (request.OrderBy?.Any() != true)
             {
                 var data = await _unitOfWork.Repository<Company>().Entities
-                   .Specify(companyFilterSpec)
+                   //.Specify(companyFilterSpec)
                    .Select(expression)
                    .ToPaginatedListAsync(request.PageNumber, request.PageSize);
                 return data;

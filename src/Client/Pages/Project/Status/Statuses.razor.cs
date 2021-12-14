@@ -184,5 +184,10 @@ namespace RuS.Client.Pages.Project.Status
             }
             return false;
         }
+
+        private void Cancel()
+        {
+            _navigationManager.NavigateTo("/");
+        }
     }
 }

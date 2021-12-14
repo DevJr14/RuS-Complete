@@ -184,5 +184,10 @@ namespace RuS.Client.Pages.Project.Priority
             }
             return false;
         }
+
+        private void Cancel()
+        {
+            _navigationManager.NavigateTo("/");
+        }
     }
 }
