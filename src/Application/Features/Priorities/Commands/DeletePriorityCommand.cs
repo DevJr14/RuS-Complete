@@ -20,16 +20,23 @@ namespace RuS.Application.Features.Priorities.Commands
     internal class DeletePriorityCommandHandler : IRequestHandler<DeletePriorityCommand, Result<int>>
     {
         private readonly IUnitOfWork<int> _unitOfWork;
+        private readonly IPriorityRepository _priorityRepository;
         private readonly IStringLocalizer<DeletePriorityCommandHandler> _localizer;
 
-        public DeletePriorityCommandHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<DeletePriorityCommandHandler> localizer)
+        public DeletePriorityCommandHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<DeletePriorityCommandHandler> localizer, IPriorityRepository priorityRepository)
         {
             _unitOfWork = unitOfWork;
             _localizer = localizer;
+            _priorityRepository = priorityRepository;
         }
 
         public async Task<Result<int>> Handle(DeletePriorityCommand command, CancellationToken cancellationToken)
         {
+            if (await _priorityRepository.IsInUse(command.Id))
+            {
+                return await Result<int>.FailAsync(_localizer["Cannot Delete Priority As Is In Use."]);
+            }
+
             var priority = await _unitOfWork.Repository<Priority>().GetByIdAsync(command.Id);
             if (priority != null)
             {

@@ -16,16 +16,23 @@ namespace RuS.Application.Features.Clients.Commands.Delete
     internal class DeleteClientCommandHandler : IRequestHandler<DeleteClientCommand, Result<int>>
     {
         private readonly IUnitOfWork<int> _unitOfWork;
+        private readonly IClientRepository _clientRepository;
         private readonly IStringLocalizer<DeleteClientCommandHandler> _localizer;
 
-        public DeleteClientCommandHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<DeleteClientCommandHandler> localizer)
+        public DeleteClientCommandHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<DeleteClientCommandHandler> localizer, IClientRepository clientRepository)
         {
             _unitOfWork = unitOfWork;
             _localizer = localizer;
+            _clientRepository = clientRepository;
         }
 
         public async Task<Result<int>> Handle(DeleteClientCommand command, CancellationToken cancellationToken)
         {
+            if (await _clientRepository.IsInUse(command.Id))
+            {
+                return await Result<int>.FailAsync(_localizer["Cannot Delete Client That Has Project(s) Linked."]);
+            }
+
             var client = await _unitOfWork.Repository<Client>().GetByIdAsync(command.Id);
             if (client != null)
             {

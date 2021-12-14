@@ -9,5 +9,6 @@ namespace RuS.Application.Interfaces.Repositories
     public interface ICategoryRepository
     {
         Task<bool> IsUniqueEntry(string name, int id = 0);
+        Task<bool> IsInUse(int id);
     }
 }

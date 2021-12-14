@@ -9,5 +9,6 @@ namespace RuS.Application.Interfaces.Repositories
     public interface IPriorityRepository
     {
         Task<bool> IsUnique(string name, int id = 0);
+        Task<bool> IsInUse(int id);
     }
 }

@@ -6,16 +6,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Task = RuS.Domain.Entities.Projects.Task;
 
 namespace RuS.Infrastructure.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
         private readonly IRepositoryAsync<Category, int> _repository;
-
-        public CategoryRepository(IRepositoryAsync<Category, int> repository)
+        private readonly IRepositoryAsync<Project, int> _projectRepo;
+        private readonly IRepositoryAsync<Task, int> _taskRepo;
+        public CategoryRepository(IRepositoryAsync<Category, int> repository, IRepositoryAsync<Project, int> projectRepo, IRepositoryAsync<Task, int> taskRepo)
         {
             _repository = repository;
+            _projectRepo = projectRepo;
+            _taskRepo = taskRepo;
+        }
+
+        public async Task<bool> IsInUse(int id)
+        {
+            if (await _projectRepo.Entities.AnyAsync(p => p.CategoryId == id)
+                || await _taskRepo.Entities.AnyAsync(t => t.CategoryId == id))
+            {
+                return true;
+            }
+            return false;
         }
 
         public async Task<bool> IsUniqueEntry(string name, int id = 0)
