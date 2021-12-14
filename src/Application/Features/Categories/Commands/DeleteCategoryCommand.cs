@@ -20,16 +20,23 @@ namespace RuS.Application.Features.Categories.Commands
     internal class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand, Result<int>>
     {
         private readonly IUnitOfWork<int> _unitOfWork;
+        private readonly ICategoryRepository _categoryRepository;
         private readonly IStringLocalizer<DeleteCategoryCommandHandler> _localizer;
 
-        public DeleteCategoryCommandHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<DeleteCategoryCommandHandler> localizer)
+        public DeleteCategoryCommandHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<DeleteCategoryCommandHandler> localizer, ICategoryRepository categoryRepository)
         {
             _unitOfWork = unitOfWork;
             _localizer = localizer;
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<Result<int>> Handle(DeleteCategoryCommand command, CancellationToken cancellationToken)
         {
+            if (await _categoryRepository.IsInUse(command.Id))
+            {
+                return await Result<int>.FailAsync(_localizer["Cannot Delete Category As Is In Use."]);
+            }
+
             var category = await _unitOfWork.Repository<Category>().GetByIdAsync(command.Id);
             if (category != null)
             {

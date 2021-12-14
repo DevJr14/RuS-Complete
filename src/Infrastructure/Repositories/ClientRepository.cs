@@ -12,10 +12,21 @@ namespace RuS.Infrastructure.Repositories
     public class ClientRepository : IClientRepository
     {
         private readonly IRepositoryAsync<Client, int> _repository;
+        private readonly IRepositoryAsync<Project, int> _projectRepo;
 
-        public ClientRepository(IRepositoryAsync<Client, int> repository)
+        public ClientRepository(IRepositoryAsync<Client, int> repository, IRepositoryAsync<Project, int> projectRepo)
         {
             _repository = repository;
+            _projectRepo = projectRepo;
+        }
+
+        public async Task<bool> IsInUse(int clientId)
+        {
+            if (await _projectRepo.Entities.AnyAsync(p => p.ClientId == clientId))
+            {
+                return true;
+            }
+            return false;
         }
 
         public async Task<bool> IsUniqueEntry(AddEditClientCommand command)

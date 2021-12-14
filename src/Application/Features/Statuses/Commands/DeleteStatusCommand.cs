@@ -20,16 +20,23 @@ namespace RuS.Application.Features.Statuses.Commands
     internal class DeleteStatusCommandHandler : IRequestHandler<DeleteStatusCommand, Result<int>>
     {
         private readonly IUnitOfWork<int> _unitOfWork;
+        private readonly IStatusRepository _statusRepository;
         private readonly IStringLocalizer<DeleteStatusCommandHandler> _localizer;
 
-        public DeleteStatusCommandHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<DeleteStatusCommandHandler> localizer)
+        public DeleteStatusCommandHandler(IUnitOfWork<int> unitOfWork, IStringLocalizer<DeleteStatusCommandHandler> localizer, IStatusRepository statusRepository)
         {
             _unitOfWork = unitOfWork;
             _localizer = localizer;
+            _statusRepository = statusRepository;
         }
 
         public async Task<Result<int>> Handle(DeleteStatusCommand command, CancellationToken cancellationToken)
         {
+            if (await _statusRepository.IsInUse(command.Id))
+            {
+                return await Result<int>.FailAsync(_localizer["Cannot Delete Status As Is In Use."]);
+            }
+
             var status = await _unitOfWork.Repository<Status>().GetByIdAsync(command.Id);
             if (status != null)
             {
