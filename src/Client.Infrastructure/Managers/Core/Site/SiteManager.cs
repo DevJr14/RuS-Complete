@@ -27,11 +27,11 @@ namespace RuS.Client.Infrastructure.Managers.Core.Site
             return await response.ToResult<int>();
         }
 
-        public async Task<IResult<string>> ExportToExcelAsync(string searchString = "")
+        public async Task<IResult<string>> ExportToExcelAsync(int companyId, string searchString = "")
         {
             var response = await _httpClient.GetAsync(string.IsNullOrWhiteSpace(searchString)
-                ? SiteEndpoints.Export
-                : SiteEndpoints.ExportFiltered(searchString));
+                ? SiteEndpoints.Export(companyId)
+                : SiteEndpoints.ExportFiltered(companyId, searchString));
             return await response.ToResult<string>();
         }
 
@@ -49,7 +49,7 @@ namespace RuS.Client.Infrastructure.Managers.Core.Site
 
         public async Task<PaginatedResult<GetAllPagedSitesResponse>> GetSitesPagedAsync(GetAllPagedSitesRequest request)
         {
-            var response = await _httpClient.GetAsync(SiteEndpoints.GetAllPaged(request.PageNumber, request.PageSize, request.SearchString, request.Orderby));
+            var response = await _httpClient.GetAsync(SiteEndpoints.GetAllPaged(request.CompanyId, request.PageNumber, request.PageSize, request.SearchString, request.Orderby));
             return await response.ToPaginatedResult<GetAllPagedSitesResponse>();
         }
 
