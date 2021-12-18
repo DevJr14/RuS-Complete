@@ -19,6 +19,7 @@ namespace RuS.Application.Features.Sites.Queries.Export
     public class ExportSitesQuery : IRequest<Result<string>>
     {
         public string SearchString { get; set; }
+        public int CompanyId { get; set; }
 
         public ExportSitesQuery(string searchString = "")
         {
@@ -41,7 +42,7 @@ namespace RuS.Application.Features.Sites.Queries.Export
 
         public async Task<Result<string>> Handle(ExportSitesQuery request, CancellationToken cancellationToken)
         {
-            var siteFilterSpec = new SiteFilterSpecification(request.SearchString);
+            var siteFilterSpec = new SiteFilterSpecification(request.SearchString, request.CompanyId);
             var sites = await _unitOfWork.Repository<Site>().Entities
                 .Include(s => s.Company)
                 .Specify(siteFilterSpec)

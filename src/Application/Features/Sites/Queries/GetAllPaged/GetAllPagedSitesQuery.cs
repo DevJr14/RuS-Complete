@@ -18,6 +18,7 @@ namespace RuS.Application.Features.Sites.Queries.GetAllPaged
 {
     public class GetAllPagedSitesQuery : IRequest<PaginatedResult<GetAllPagedSitesResponse>>
     {
+        public int CompanyId { get; set; }
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
         public string SearchString { get; set; }
@@ -53,7 +54,7 @@ namespace RuS.Application.Features.Sites.Queries.GetAllPaged
                 Description = s.Description,
                 CompanyId = s.CompanyId
             };
-            var steFilterSpec = new SiteFilterSpecification(request.SearchString);
+            var steFilterSpec = new SiteFilterSpecification(request.SearchString, request.CompanyId);
             if (request.OrderBy?.Any() != true)
             {
                 var data = await _unitOfWork.Repository<Site>().Entities

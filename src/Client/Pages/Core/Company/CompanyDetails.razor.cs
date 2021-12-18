@@ -154,7 +154,7 @@ namespace RuS.Client.Pages.Core.Company
 
         private async Task ExportToExcel()
         {
-            var response = await SiteManager.ExportToExcelAsync(_searchString);
+            var response = await SiteManager.ExportToExcelAsync(Id, _searchString);
             if (response.Succeeded)
             {
                 await _jsRuntime.InvokeVoidAsync("Download", new
