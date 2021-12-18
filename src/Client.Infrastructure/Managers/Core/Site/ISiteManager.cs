@@ -21,7 +21,7 @@ namespace RuS.Client.Infrastructure.Managers.Core.Site
 
         Task<IResult<int>> DeleteAsync(int id);
 
-        Task<IResult<string>> ExportToExcelAsync(string searchString = "");
+        Task<IResult<string>> ExportToExcelAsync(int companyId, string searchString = "");
 
         Task<IResult<SiteResponse>> GetByIdAsync(int id);
     }

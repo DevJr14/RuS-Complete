@@ -36,6 +36,7 @@ namespace RuS.Server.Controllers.v1.Core
         /// <summary>
         /// Get All Sites Paged. Data will be paged.
         /// </summary>
+        /// <param name="companyId"></param>
         /// <param name="pageNumber"></param>
         /// <param name="pageSize"></param>
         /// <param name="searchString"></param>
@@ -43,9 +44,9 @@ namespace RuS.Server.Controllers.v1.Core
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Sites.View)]
         [HttpGet("all-paged")]
-        public async Task<IActionResult> GetAll(int pageNumber, int pageSize, string searchString, string orderBy = null)
+        public async Task<IActionResult> GetAll(int companyId, int pageNumber, int pageSize, string searchString, string orderBy = null)
         {
-            var companies = await _mediator.Send(new GetAllPagedSitesQuery(pageNumber, pageSize, searchString, orderBy));
+            var companies = await _mediator.Send(new GetAllPagedSitesQuery(pageNumber, pageSize, searchString, orderBy) { CompanyId = companyId });
             return Ok(companies);
         }
 
@@ -89,13 +90,14 @@ namespace RuS.Server.Controllers.v1.Core
         /// <summary>
         /// Search Sites and Export to Excel
         /// </summary>
+        /// <param name="companyId"></param>
         /// <param name="searchString"></param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Sites.Export)]
         [HttpGet("export")]
-        public async Task<IActionResult> Export(string searchString = "")
+        public async Task<IActionResult> Export(int companyId, string searchString = "")
         {
-            return Ok(await _mediator.Send(new ExportSitesQuery(searchString)));
+            return Ok(await _mediator.Send(new ExportSitesQuery(searchString) { CompanyId = companyId }));
         }
     }
 }

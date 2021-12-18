@@ -9,5 +9,6 @@ namespace RuS.Application.Requests.Core
     public class GetAllPagedSitesRequest : PagedRequest
     {
         public string SearchString { get; set; }
+        public int CompanyId { get; set; }
     }
 }

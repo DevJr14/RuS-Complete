@@ -10,15 +10,15 @@ namespace RuS.Application.Specifications.Core
 {
     public class SiteFilterSpecification : BaseSpecification<Site>
     {
-        public SiteFilterSpecification(string searchString)
+        public SiteFilterSpecification(string searchString, int companyId)
         {
             if (!string.IsNullOrEmpty(searchString))
             {
-                Criteria = s => s.Name.Contains(searchString) || s.Description.Contains(searchString);
+                Criteria = s => (s.Name.Contains(searchString) || s.Description.Contains(searchString)) && s.CompanyId == companyId;
             }
             else
             {
-                Criteria = s => true;
+                Criteria = s => s.CompanyId == companyId;
             }
         }
     }

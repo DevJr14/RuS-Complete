@@ -8,9 +8,9 @@ namespace RuS.Client.Infrastructure.Routes
 {
     public class SiteEndpoints
     {
-        public static string GetAllPaged(int pageNumber, int pageSize, string searchString, string[] orderBy)
+        public static string GetAllPaged(int companyId, int pageNumber, int pageSize, string searchString, string[] orderBy)
         {
-            var url = $"api/v1/sites/all-paged?pageNumber={pageNumber}&pageSize={pageSize}&searchString={searchString}&orderBy=";
+            var url = $"api/v1/sites/all-paged?companyId={companyId}&pageNumber={pageNumber}&pageSize={pageSize}&searchString={searchString}&orderBy=";
             if (orderBy?.Any() == true)
             {
                 foreach (var orderByPart in orderBy)
@@ -22,9 +22,14 @@ namespace RuS.Client.Infrastructure.Routes
             return url;
         }
 
-        public static string ExportFiltered(string searchString)
+        public static string ExportFiltered(int comapnyId, string searchString)
         {
-            return $"{Export}?searchString={searchString}";
+            return $"{ExportLink}?companyid={comapnyId}&searchString={searchString}";
+        }
+
+        public static string Export(int companyId)
+        {
+            return $"{ExportLink}?companyid={companyId}";
         }
 
         public static string GetById(int id)
@@ -35,6 +40,6 @@ namespace RuS.Client.Infrastructure.Routes
         public static string Save = "api/v1/sites";
         public static string GetAll = "api/v1/sites/all";
         public static string Delete = "api/v1/sites";
-        public static string Export = "api/v1/sites/export";
+        public static string ExportLink = "api/v1/sites/export";
     }
 }

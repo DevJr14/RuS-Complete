@@ -517,10 +517,11 @@
             </param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:RuS.Server.Controllers.v1.Core.SitesController.GetAll(System.Int32,System.Int32,System.String,System.String)">
+        <member name="M:RuS.Server.Controllers.v1.Core.SitesController.GetAll(System.Int32,System.Int32,System.Int32,System.String,System.String)">
             <summary>
             Get All Sites Paged. Data will be paged.
             </summary>
+            <param name="companyId"></param>
             <param name="pageNumber"></param>
             <param name="pageSize"></param>
             <param name="searchString"></param>
@@ -547,10 +548,11 @@
             <param name="id"></param>
             <returns>Status 200 OK response</returns>
         </member>
-        <member name="M:RuS.Server.Controllers.v1.Core.SitesController.Export(System.String)">
+        <member name="M:RuS.Server.Controllers.v1.Core.SitesController.Export(System.Int32,System.String)">
             <summary>
             Search Sites and Export to Excel
             </summary>
+            <param name="companyId"></param>
             <param name="searchString"></param>
             <returns>Status 200 OK</returns>
         </member>
